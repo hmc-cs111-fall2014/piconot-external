@@ -27,6 +27,7 @@ discussed in class.
      - Include at least two example programs
        - [ ] `Empty.bot`
        - [ ] `RightHand.bot`
+     - [ ] Provide instructions for how to run piconot on a file in `build.txt`
      - [ ] Describe your implementation process in `evaluation.txt`
      - [ ] Formally specify your final syntax in `grammar-final.txt`
   - [ ] Critique another team's design and implementation
@@ -93,10 +94,23 @@ implement or it didn't match well with the library calls) You should also answer
 the following questions: On a scale of 1–10 (where 10 is "a lot"), how much did
 you have to change your syntax? 
 
-### Formalize your final syntax
+## Formalize your final syntax
 
 After you've finished implementing, formally specify the syntax of your internal
 DSL in `grammar-actual.txt`
+
+## Provide build and run instructions
+
+In the `build.txt` file provide instructions for how to build your software and
+how to run it on piconot file. A somewhat easy way to do is the following:
+
+  1. build a .jar file by running `sbt package`
+  2. run the software on a file by executing the command `path-to-jar-file name-
+  of-class-with-main-function bot-file`
+
+Note that for your users to run your language this way, you'll have to design
+your solution so that the `main` function takes and processes an argument that
+contains the filename of the picobot file to run.
 
 ## Peer-review another team's work
 
