@@ -4,6 +4,8 @@
 [ParserCombinatorAPI]: http://www.scala-lang.org/files/archive/api/2.11.2/scala-parser-combinators/#package
 
 # Piconot: The externaling
+###### _Submission deadline: Monday, Oct. 13 at 11:59pm_
+###### _Critique deadline: Wednesday, Oct. 15 at noon_
 
 Now that you've had a chance to push internal DSLs to the limit, let's try
 external DSLs!
