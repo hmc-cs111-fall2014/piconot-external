@@ -25,8 +25,8 @@ discussed in class.
      architecture we discussed in class (more details below), and use parser
      combinators to implement your parser.
      - Include at least two example programs
-       - [ ] `src/main/scala/piconot/Empty.bot`
-       - [ ] `src/main/scala/piconot/RightHand.bot`
+       - [ ] `Empty.bot`
+       - [ ] `RightHand.bot`
      - [ ] Describe your implementation process in `evaluation.txt`
      - [ ] Formally specify your final syntax in `grammar-final.txt`
   - [ ] Critique another team's design and implementation
