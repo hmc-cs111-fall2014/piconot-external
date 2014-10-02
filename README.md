@@ -6,7 +6,7 @@
 # Piconot: The externaling
 
 Now that you've had a chance to push internal DSLs to the limit, let's try
-external DSLs.
+external DSLs!
 
 Implement an external version of Piconot. You can choose to implement any
 version of Piconot you want (e.g., your original version from the previous
