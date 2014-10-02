@@ -126,9 +126,10 @@ questions:
   - How nice is their implementation? Is it understandable? Clean? Modular?
   Extensible? What do you like about their code? Are there any particularly
   elegant ways they overcame implementation challenges?
-  - Download their code and run their example programs. Modify the example
-  programs to introduce errors. How robust is their implementation? What do you
-  like about their error-handling? What can be improved?
+  - Download their code and run their example programs. How easy was it to run? 
+  Did the instructions work?
+  - Modify the example programs to introduce errors. How robust is their
+  implementation? What do you like about their error-handling? What can be improved?
   - Are there any implementation tricks that you can suggest to the team?
   Anything you see that might make the implementation easier or more like the
   original design?
