@@ -14,11 +14,6 @@ case class Mult(dir: Dir, rest: Rest) extends Rest
 
 case class State(n: Int) extends File
 
-class Surrounding extends File
-case class Blocked() extends Surrounding
-case class Open() extends Surrounding
-case class Any() extends Surrounding
-
 class Dir() extends File
 case class N() extends Dir
 case class E() extends Dir
