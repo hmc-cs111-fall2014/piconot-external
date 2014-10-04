@@ -1,0 +1,8 @@
+project/target
+target
+.cache
+.classpath
+.history
+.project
+.xml.*
+.xml

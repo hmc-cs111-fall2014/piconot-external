@@ -17,7 +17,7 @@ Proof = "Proof"
 Recall = "Recall";
 Consider = "Consider";
 QED = "QED";
-Rules = { Rule, ",", [ whitespace ] }, Rule, [ whitespace ], ;
+Rules = { Rule, ",", [ whitespace ] }, Rule, [ whitespace ];
 Maze = ? valid text file name ?;
 
 Rule = condition, implication, action;
