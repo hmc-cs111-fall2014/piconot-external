@@ -4,7 +4,7 @@ import scala.tools.nsc.EvalLoop
 import dsl.picobot.parser.PicoParser
 import dsl.picobot.semantics.eval
 
-object Calculator extends EvalLoop with App {
+object bot extends EvalLoop with App {
   override def prompt = "> "
 
   loop { line =>
