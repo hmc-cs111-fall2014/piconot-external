@@ -16,3 +16,12 @@ and `QED.` declarations from our grammar actual, but
 we went back to using `=` as our assignment symbol instead of
 `=>`. Also, we dropped quotation marks and parentheses where
 possible to make our syntax more like plain English.
+
+We had some difficulty figuring out how to structure our intermediate 
+representation. Though on the surface, our mathbot looks very similar to the
+language implemented in external-lab, there are a few differences that make
+it much more difficult to implement. For example, the operators on the lhs 
+function differently than the operators on the rhs, so we needed to have
+a way to show this difference in the ir. Also, each operator is only really
+concerned with the thing to the right of it, so that makes our AST more
+stick-like. 
