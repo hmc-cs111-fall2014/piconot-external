@@ -1,0 +1,35 @@
+Actual grammar
+Author: Emily Blatter, Nick Carter, Sisi Cheng
+
+================================================================================
+Grammar: MathBot
+================================================================================
+
+Program = Declaration, Givens, Logic, QED;
+
+Declaration = Proof, end, [ whitespace ];
+Givens = Recall, [ whitespace ], Maze, end, [ whitespace ];
+Logic = Consider, [ whitespace ], Rules, end [ whitespace ];
+
+Name = ? unicode string ?
+
+Proof = "Proof"
+Recall = "Recall";
+Consider = "Consider";
+QED = "QED";
+Rules = { Rule, ",", [ whitespace ] }, Rule, [ whitespace ], ;
+Maze = ? valid text file name ?;
+
+Rule = condition, implication, action;
+
+whitespace = ? all whitespace characters ?;
+end = ".";
+
+condition = state, { op, direction };
+implication = [ whitespace ], "=", [ whitespace ];
+action = state, [ op, direction ];
+
+op = [ whitespace ], ("+" | "-" | "*"), [ whitespace ];
+state = [ digit ], digit;
+digit = "0"| "1"| "2"| "3"| "4"| "5"| "6"| "7"| "8"| "9";
+direction = "n" | "e" | "w" | "s" | "η" | "ε" | "ω" | "ς";
