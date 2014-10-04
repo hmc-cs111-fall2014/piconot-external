@@ -1,0 +1,3 @@
+After generatring a jar with `sbt package`, the program can be executed by:
+
+scala -cp ./target/scala-2.11/external-piconot_2.11-1.0.jar bot <parameters>
