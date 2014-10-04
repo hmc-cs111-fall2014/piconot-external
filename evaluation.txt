@@ -1,0 +1,18 @@
+Evaluation
+Author: Emily Blatter, Nick Carter, Sisi Cheng
+
+================================================================================
+================================================================================
+
+TODO On a scale of 1-10, we had to change our ideal syntax by ___. TODO
+
+10/4
+
+We started by creating our project and setting up repos. We talked
+about what we wanted to do and decided to implement our own syntax.
+We took a look at our previous grammars and made a few edits to 
+create our new grammar ideal. In particular, we kept the `Proof.`
+and `QED.` declarations from our grammar actual, but
+we went back to using `=` as our assignment symbol instead of
+`=>`. Also, we dropped quotation marks and parentheses where
+possible to make our syntax more like plain English.
