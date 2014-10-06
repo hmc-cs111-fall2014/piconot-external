@@ -25,3 +25,7 @@ function differently than the operators on the rhs, so we needed to have
 a way to show this difference in the ir. Also, each operator is only really
 concerned with the thing to the right of it, so that makes our AST more
 stick-like. 
+
+== 10/6 ==
+
+We’ve been making some minor tweaks to the language during the class work time while constructing our parser. We’re representing it less as a two stick tree and adding more branching, so each operator has a direction and a rest, which is the rest of that side of the rule, which we recurse onto. We also made it so rest is now an Option, which allows us to have a base case when parsing a rule for when you get to just an operator and a direction with no rest.
