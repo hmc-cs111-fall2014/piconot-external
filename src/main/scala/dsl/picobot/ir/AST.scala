@@ -1,20 +1,24 @@
 package dsl.picobot.ir
 
 sealed abstract class AST
-sealed abstract class File extends AST
+sealed abstract class Program extends AST
 
-case class Equal(lhs: lhs, rhs: rhs) extends File
-case class lhs(state: State, surrounding: Rest) extends File
-case class rhs(state: State, nextDir: Dir) extends File
+case class Equal(lhs: lhs, rhs: rhs) extends Program
+case class lhs(state: State, surrounding: Rest) extends Program
+case class rhs(state: State, nextDir: Dir) extends Program
 
-class Rest extends File
-case class Plus(dir: Dir, rest: Rest) extends Rest
-case class Minus(dir: Dir, rest: Rest) extends Rest
-case class Mult(dir: Dir, rest: Rest) extends Rest
+class Rest extends Program
+case class Plus(dir: Dir, rest: Option[Rest]) extends Rest
+case class Minus(dir: Dir, rest: Option[Rest]) extends Rest
+case class Mult(dir: Dir, rest: Option[Rest]) extends Rest
 
-case class State(n: Int) extends File
+case class Action(state: State, dir: Dir) extends Program
 
-class Dir() extends File
+
+
+case class State(n: Int) extends Program
+
+class Dir() extends Program
 case class N() extends Dir
 case class E() extends Dir
 case class W() extends Dir
