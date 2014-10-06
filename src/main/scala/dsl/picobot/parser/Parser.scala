@@ -28,6 +28,7 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
       (   state~"+"~dir ^^ {case s~"+"~d ⇒ Rhs(s, d)}
         | state~"-"~dir ^^ {case s~"-"~d ⇒ Rhs(s, d)}
         | state~"*"~dir ^^ {case s~"*"~d ⇒ Rhs(s, d)}
+        | state ^^ {case s => Rhs(s, Stay())}
         )
       
     lazy val dir: PackratParser[Dir] =
