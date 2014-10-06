@@ -14,17 +14,23 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
 //    def state: Parser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)}
     
     
-    lazy val expr: PackratParser[Program] =
+    lazy val expr: PackratParser[Rule] =
       (lhs~"="~rhs ^^ {case l~"="~r ⇒ Equal(l, r)}
       // DO proper base case, give good error
           )
           
-    lazy val lhs: PackratParser[Program] =
-      (   state~rest ^^ {case s~r => Lhs(s, Some(r))}
-        | state ^^ {case s => Lhs(s, None)}
+    lazy val lhs: PackratParser[Rule] =
+      (   state~(surrounding*) ^^ {case s~r => Lhs(s, r)}
+//        | state ^^ {case s => Lhs(s, None)}
           )
+          
+    lazy val surrounding: PackratParser[Rule] =
+      (   "+"~dir ^^ {case "+"~d ⇒ Plus(d)}
+        | "-"~dir ^^ {case "-"~d ⇒ Minus(d)}
+        | "*"~dir ^^ {case "*"~d ⇒ Mult(d)}
+        )
       
-    lazy val rhs: PackratParser[Program] =
+    lazy val rhs: PackratParser[Rule] =
       (   state~"+"~dir ^^ {case s~"+"~d ⇒ Rhs(s, d)}
         | state~"-"~dir ^^ {case s~"-"~d ⇒ Rhs(s, d)}
         | state~"*"~dir ^^ {case s~"*"~d ⇒ Rhs(s, d)}
@@ -38,15 +44,15 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
         | "s" ^^ {case "s" => S()}
         // TODO: support greek
       )
-      
-    lazy val rest: PackratParser[Rest] =
-      (   "+"~dir~rest ^^ {case "+"~d~r ⇒ Plus(d, Some(r))}
-        | "-"~dir~rest ^^ {case "-"~d~r ⇒ Minus(d, Some(r))}
-        | "*"~dir~rest ^^ {case "*"~d~r ⇒ Mult(d, Some(r))}
-        | "+"~dir ^^ {case "+"~d ⇒ Plus(d, None)}
-        | "-"~dir ^^ {case "-"~d ⇒ Minus(d, None)}
-        | "*"~dir ^^ {case "*"~d ⇒ Mult(d, None)}
-        )
+//      
+//    lazy val rest: PackratParser[Rest] =
+//      (   "+"~dir~rest ^^ {case "+"~d~r ⇒ Plus(d, Some(r))}
+//        | "-"~dir~rest ^^ {case "-"~d~r ⇒ Minus(d, Some(r))}
+//        | "*"~dir~rest ^^ {case "*"~d~r ⇒ Mult(d, Some(r))}
+//        | "+"~dir ^^ {case "+"~d ⇒ Plus(d, None)}
+//        | "-"~dir ^^ {case "-"~d ⇒ Minus(d, None)}
+//        | "*"~dir ^^ {case "*"~d ⇒ Mult(d, None)}
+//        )
           
     lazy val state: PackratParser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)} 
           
