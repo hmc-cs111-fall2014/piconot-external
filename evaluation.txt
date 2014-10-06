@@ -1,0 +1,40 @@
+Team 4: Christine Schubert & Michael Culhane
+Piconot-External Work Diary
+
+--------------------------------------------
+
+Our original syntax idea was:
+
+# This state represents Picobot in situation A.
+STATE 0:
+	FREE DIRECTIONS: N, S
+	BLOCKED DIRECTIONS: E, W
+	MOVE DIRECTION: N
+	NEW STATE: 0
+
+	FREE DIRECTIONS: E
+	BLOCKED DIRECTIONS: W, N
+	MOVE DIRECTION: X
+	NEW STATE: 1
+
+This is our ideal syntax from the Piconot assignment.
+
+--------------------------------------------
+
+From our experience with the Piconot assignment, we realized that the user
+needs some way to specify which maze they would like to run their program on.
+To account for this, we decided to add a "RUN MAZE:" construct to a Piconot
+program. This produces the following syntax:
+
+STATE 0:
+	FREE DIRECTIONS: N, S
+	BLOCKED DIRECTIONS: E, W
+	MOVE DIRECTION: N
+	NEW STATE: 0
+
+	FREE DIRECTIONS: E
+	BLOCKED DIRECTIONS: W, N
+	MOVE DIRECTION: X
+	NEW STATE: 1
+
+RUN MAZE: maze.txt

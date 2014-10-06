@@ -2,7 +2,7 @@ package piconot.ir
 
 sealed abstract class AST
 
-case class Program(states: List[State]) extends AST
+case class Program(states: List[State], mazeName: String) extends AST
 case class State(number: StateNumber, rules: List[Rule]) extends AST
 case class Rule(freeDirections: List[CompassDirection],
 				blockedDirections: List[CompassDirection],
