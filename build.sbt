@@ -1,4 +1,4 @@
-name := "External Piconot"
+name := "piconot-external"
 
 version := "1.0"
 
