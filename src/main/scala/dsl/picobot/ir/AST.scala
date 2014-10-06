@@ -4,7 +4,7 @@ sealed abstract class AST
 sealed abstract class Program extends AST
 
 case class Equal(lhs: Program, rhs: Program) extends Program
-case class Lhs(state: State, surrounding: Rest) extends Program
+case class Lhs(state: State, surrounding: Option[Rest]) extends Program
 case class Rhs(state: State, nextDir: Dir) extends Program
 
 class Rest extends Program
