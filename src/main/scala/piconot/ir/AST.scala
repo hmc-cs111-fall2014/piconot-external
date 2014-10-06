@@ -3,7 +3,7 @@ package piconot.ir
 /*
  * "If you are on", space, street, [north option], [east option], [west option], [south option], ",", space, go, space, street, ".", new line
  *
- * p ∈ Program ::= c \n p | c
+ * p ∈ Program ::= c \n p | c (Not doing now) FIX ME
  * c ∈ Command ::= "If you are on " s o go
  * s ∈ Street ::= string m
  * m ∈ Modifier ::= "Rd." | "St." | "Pkwy." | "Ave." | "Blvd."
@@ -18,12 +18,13 @@ package piconot.ir
  *
  */
 
-class AST {
-  sealed abstract class AST
-  sealed abstract class Command extends AST
+sealed abstract class AST
+sealed abstract class Command extends AST
 
-  case class GetStreet(street: String, modifier: String) extends Command
-  case class GetSurroundings(ability: String, direction: String) extends Command
-  case class GetAction(direction: String, streetWithModifier: String) extends Command
+case class PicoString(string: String) extends Command
+case class PicoModifier(string: String) extends Command
 
-}
+case class MakeCommand(streetWithModifier: String, surroundings: String, go: String) extends Command
+case class GetStreet(street: Command, modifier: Command) extends Command
+case class GetSurroundings(ability: String, direction: String) extends Command
+case class GetAction(direction: String, streetWithModifier: String) extends Command
