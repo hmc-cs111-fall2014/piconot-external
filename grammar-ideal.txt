@@ -1,0 +1,31 @@
+(* Hayden Blauzvern and Sarah Gilkinson *)
+(* Team Seven *)
+
+direction to move = "Uptown" | "Outta town" | "Into town" | "Downtown"
+ability = "can" | "can't"
+go = "go", space, direction to move, space, "on" | "teleport", space, "to"
+
+north option = space, "and you", space, ability, space, "go", space, "Uptown";
+east option = space, "and you", space, ability, space, "go", space, "Outta town";
+west option = space, "and you", space, ability, space, "go", space, "Into town";
+south option = space, "and you", space, ability, space, "go", space, "Downtown";
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+number = {digit};
+
+uppercase = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
+lowercase = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+word = uppercase, {lowercase}
+
+street modifier = ("St" | "Ave" | "Blvd" | "Rd" | "Pkwy"), "."
+street = (number | word), space, street modifier 
+
+space = " ";
+new line = "\n";
+hash = "#";
+all characters = ? all visible characters ?;
+
+command = "If you are on", space, street, [north option], [east option], [west option], [south option], ",", space, go, space, street, ".", new line;
+comment =  hash, {all characters}, new line;
+
+program = {command | comment | new line};

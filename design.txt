@@ -1,16 +1,76 @@
+Hayden Blauzvern and Sarah Gilkinson
+Team Seven
+
+================================================================================
 Who is the target for this design, e.g., are you assuming any knowledge on the
 part of the language users?
+================================================================================
 
+We are assuming an English-speaking user group. This could be used by a 
+non-programmer who understands basic English syntax.
+
+================================================================================
 Why did you choose this design, i.e., why did you think it would be a good idea
 for users to express the maze-searching computation using this syntax?
+================================================================================
 
+We were originally choosing between using colors or these street names. We felt
+that the idea of turning in a car onto a different street was a good conceptual
+way of representing moving in a direction and being in a given state. Also,
+although it is not mandatory for a user to always go, for example, East on
+Second Street, this command structure leads users to think of changing
+directions as a state change and lends itself nicely to the rules of
+maze-searching. 
+
+We also considered using colors rather than streets, and believe that our 
+language could be easily changed to fit with that as well. 
+
+================================================================================
 What behaviors are easier to express in your design than in Picobot’s original
 design?  If there are no such behaviors, why not?
+================================================================================
 
+It is easier to specify what directions are open or not open as a user only
+needs to specify the relevant directions. In the original Picobot design, one
+has to think about all directions even when they don't matter. By removing
+irrelevant commands, the user can focus on exactly what they want to do. 
+
+Each instruction specifies the street you are currently on (state), the paths
+available or blocked around you (walls or empty space), the direction to go,
+and the street to move to (new state). We do not intend to require all
+instructions, but will treat any missing directional instruction as "*" in the 
+original Picobot commands. We believe this will make the language more natural,
+as one would normally say "if you can go north, go north" rather than "if you
+can go north and I don't care if you can go east, go north."
+
+This language design lends itself nicely to a visual representation. It also
+translates neatly to the original Picobot command structure, while being more 
+natural to write commands.
+
+================================================================================
 What behaviors are more difficult to express in your design than in Picobot’s
 original design? If there are no such behaviors, why not?
+================================================================================
 
+Our commands, while certainly easier to read and write, are more verbose. 
+If one were only aiming for efficiency in writing the commands, we would be 
+behind Picobot. Our language may also be deceptively simple, but one must 
+adhere to strict structural requirements using our current grammar. 
+
+================================================================================
 On a scale of 1–10 (where 10 is “very different”), how different is your syntax
 from PicoBot’s original design?
+================================================================================
 
+We think our design is about a "4" on the difference scale. We still have all
+the same information in the command unit, even if the character sequences look
+very different. 
+
+================================================================================
 Is there anything you don’t like about your design?
+================================================================================
+
+We're not sure how easy it will be to implement our design. As currently
+specified, it is somewhat overly strict. We would like to make it a bit more
+flexible, and will see how possible this is as we start implementing our
+design. 
