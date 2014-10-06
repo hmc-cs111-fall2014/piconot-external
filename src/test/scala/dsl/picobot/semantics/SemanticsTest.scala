@@ -1,4 +1,4 @@
-package picobot.semantics
+/*package picobot.semantics
 
 import org.scalatest._
 
@@ -12,4 +12,4 @@ class PicobotSemanticsTests extends FunSpec
 	//maybe helpful code stolen from external-lab
   //override val parser = CalcParser.apply _
   //override val interpreter = eval _
-}
+}*/
