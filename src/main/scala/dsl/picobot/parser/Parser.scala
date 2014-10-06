@@ -20,13 +20,13 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
           )
           
     lazy val lhs: PackratParser[Program] =
-      (   state~rest ^^ {case s~r => lhs(s, r)}
+      (   state~rest ^^ {case s~r => Lhs(s, r)}
           )
       
     lazy val rhs: PackratParser[Program] =
-      (   state~"+"~dir ^^ {case s~"+"~d ⇒ Action(s, d)}
-        | state~"-"~dir ^^ {case s~"-"~d ⇒ Action(s, d)}
-        | state~"*"~dir ^^ {case s~"*"~d ⇒ Action(s, d)}
+      (   state~"+"~dir ^^ {case s~"+"~d ⇒ Rhs(s, d)}
+        | state~"-"~dir ^^ {case s~"-"~d ⇒ Rhs(s, d)}
+        | state~"*"~dir ^^ {case s~"*"~d ⇒ Rhs(s, d)}
         )
       
     lazy val dir: PackratParser[Dir] =
