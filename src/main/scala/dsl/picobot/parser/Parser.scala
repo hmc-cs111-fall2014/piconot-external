@@ -14,23 +14,23 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
 //    def state: Parser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)}
     
     
-    lazy val expr: PackratParser[Rule] =
+    lazy val expr: PackratParser[AST] =
       (lhs~"="~rhs ^^ {case l~"="~r ⇒ Equal(l, r)}
       // DO proper base case, give good error
           )
           
-    lazy val lhs: PackratParser[Rule] =
+    lazy val lhs: PackratParser[Lhs] =
       (   state~(surrounding*) ^^ {case s~r => Lhs(s, r)}
 //        | state ^^ {case s => Lhs(s, None)}
           )
           
-    lazy val surrounding: PackratParser[Rule] =
+    lazy val surrounding: PackratParser[Surrounding] =
       (   "+"~dir ^^ {case "+"~d ⇒ Plus(d)}
         | "-"~dir ^^ {case "-"~d ⇒ Minus(d)}
         | "*"~dir ^^ {case "*"~d ⇒ Mult(d)}
         )
       
-    lazy val rhs: PackratParser[Rule] =
+    lazy val rhs: PackratParser[Rhs] =
       (   state~"+"~dir ^^ {case s~"+"~d ⇒ Rhs(s, d)}
         | state~"-"~dir ^^ {case s~"-"~d ⇒ Rhs(s, d)}
         | state~"*"~dir ^^ {case s~"*"~d ⇒ Rhs(s, d)}
