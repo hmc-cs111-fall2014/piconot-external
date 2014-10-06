@@ -15,10 +15,12 @@ case class Mult(dir: Dir) extends Surrounding
 
 case class State(n: Int) extends AST
 
-class Dir() extends AST
+sealed abstract class Dir() extends AST
 case class N() extends Dir
 case class E() extends Dir
 case class W() extends Dir
 case class S() extends Dir
 case class Stay() extends Dir
+
+
 

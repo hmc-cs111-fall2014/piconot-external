@@ -29,3 +29,7 @@ stick-like.
 == 10/6 ==
 
 We’ve been making some minor tweaks to the language during the class work time while constructing our parser. We’re representing it less as a two stick tree and adding more branching, so each operator has a direction and a rest, which is the rest of that side of the rule, which we recurse onto. We also made it so rest is now an Option, which allows us to have a base case when parsing a rule for when you get to just an operator and a direction with no rest.
+
+In our work session after class, we learned that we could pass a list of Surroundings instead of a long series of of things that take in a direction and a rest. This flattens our parse tree considerably and makes things much neater.
+
+We also changed a lot of the types of things. 
