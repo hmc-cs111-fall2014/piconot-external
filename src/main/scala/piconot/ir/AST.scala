@@ -4,18 +4,17 @@ sealed abstract class AST
 
 case class Program(states: List[State], mazeName: String) extends AST
 case class State(number: StateNumber, rules: List[Rule]) extends AST
-case class Rule(freeDirections: List[CompassDirection],
-				blockedDirections: List[CompassDirection],
+case class Rule(freeDirections: List[Surrounding],
+				blockedDirections: List[Surrounding],
 				moveDirection: MoveDirection,
 				newState: StateNumber) extends AST
 case class StateNumber(number: Int) extends AST
 
-sealed abstract class MoveDirection extends AST
-sealed abstract class CompassDirection extends MoveDirection
-case object North extends CompassDirection
-case object South extends CompassDirection
-case object East extends CompassDirection
-case object West extends CompassDirection
-case object StayPut extends MoveDirection
 
-				
+trait MoveDirection
+trait Surrounding
+case object North extends Surrounding with MoveDirection
+case object South extends Surrounding with MoveDirection
+case object East extends Surrounding with MoveDirection
+case object West extends Surrounding with MoveDirection
+case object StayPut extends MoveDirection
