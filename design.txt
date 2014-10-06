@@ -1,16 +1,65 @@
+Note: This is identical to our design.txt file from the Piconot assignment.
+We have chosen to implement our ideal grammar from that assignment.
+
+
 Who is the target for this design, e.g., are you assuming any knowledge on the
 part of the language users?
+
+Our target user for this design is someone who is generally unfamiliar with
+programming. In particular, we are targeting someone who is unfamiliar with
+the standard Picobot syntax.
+
 
 Why did you choose this design, i.e., why did you think it would be a good idea
 for users to express the maze-searching computation using this syntax?
 
+We chose this syntax because it clarifies the more symbol-based syntax of the
+original Picobot. While Picobot's syntax is more concise than ours, our
+syntax (hopefully) makes a Piconot program more or less intuitively obvious to
+someone who has never before been exposed to Picobot. Furthermore, by requiring
+all of the rules for a state to occur next to one another in a program, we
+hopefully encourage users to structure their programs in a way that will be
+easier to read and reason about.
+
+
 What behaviors are easier to express in your design than in Picobot’s original
 design?  If there are no such behaviors, why not?
+
+We think that it is easier to express wildcards in our syntax because our
+syntax eliminates them altogether. In other words, by requiring the user to
+specify only the directions they care about, the user need not think about
+wildcards.
+
 
 What behaviors are more difficult to express in your design than in Picobot’s
 original design? If there are no such behaviors, why not?
 
+Because our design is very closely related to the original design of Picobot
+(semantically, at least), everything that can be expressed in Picobot can be
+clearly expressed in our syntax. However, because our syntax is more verbose
+than the original syntax, every program in our syntax is longer than the
+corresponding program in the original Picobot. We thought this was a
+worthwhile tradeoff to make (especially given the advent of copy-paste
+functionality), but others may feel differently about that choice.
+
+
 On a scale of 1–10 (where 10 is “very different”), how different is your syntax
 from PicoBot’s original design?
 
+We think that our syntax is a 5. Our syntax is different from the original
+syntax in that a program in our syntax looks very different from a program
+in the original Picobot syntax. However, the semantics of our design and the
+original design are very similar and anyone familiar with both would likely
+be able to see the similarities between the two.
+
+
 Is there anything you don’t like about your design?
+
+In general, we are pretty happy with our design. That said, we feel we could
+have done a better job making the idea of a state clear, as the "STATE 0:"
+header is probably the least clear part of the syntax. Furthermore, our
+syntax (as described in grammar-ideal.txt) is not particularly forgiving
+with regard to whitespace and it doesn't allow for in-line comments. While
+we decided to forego those features in the interest of simplicity, users may
+expect those features and be upset upon realizing their absence.
+
