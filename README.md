@@ -18,10 +18,10 @@ combinators and with the language architecture and implementation process we
 discussed in class.
 
 ## Checklist
- - [ ] [Sign up for teams][Teams]. Team 1 will have three people; all other 
+ - [x] [Sign up for teams][Teams]. Team 1 will have three people; all other 
     teams will have two people
  - [ ] Describe your design in `design.txt` 
- - [ ] Formally specify the syntax you plan to implement in `grammar-ideal.txt`.
+ - [x] Formally specify the syntax you plan to implement in `grammar-ideal.txt`.
  - [ ] Implement the syntax
      - [ ] Add files, as needed, to implement your syntax. Use the language
      architecture we discussed in class (more details below), and use parser
