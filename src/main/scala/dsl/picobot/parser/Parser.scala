@@ -6,16 +6,26 @@ import dsl.picobot.ir._
 object PicoParser extends JavaTokenParsers with PackratParsers {
 
     // parsing interface
-    def apply(s: String): ParseResult[AST] = parseAll(expr, s)
+    def apply(s: String): ParseResult[AST] = parseAll(program, s)
     
 //    lazy val file: PackratParser[File] = 
 //      state
     
 //    def state: Parser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)}
     
+    lazy val program: PackratParser[Program] =
+      ("Proof."~"Recall "~mazename~"."~consider
+          )
     
-    lazy val expr: PackratParser[AST] =
-      (lhs~"="~rhs ^^ {case l~"="~r ⇒ Equal(l, r)}
+    lazy val consider: PackratParser[Consider] =
+      ("Consider"~((rule~",")*)~rule~"." ^^ {
+        case "Consider"~((rule~",")*)~rule~"." => Consider(rules++extrarule)
+        }
+      | "" ^^ {}
+          )
+    
+    lazy val rule: PackratParser[AST] =
+      (lhs~"="~rhs ^^ {case l~"="~r ⇒ Rule(l, r)}
       // DO proper base case, give good error
           )
           

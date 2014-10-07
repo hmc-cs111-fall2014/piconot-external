@@ -14,7 +14,7 @@ class PicoParserTests extends FunSpec with LangParseMatchers[AST] {
 
     it("can be two states and an equal sign") {
       program("1 = 2") should parseAs ( 
-          Equal(
+          Rule(
         		  	Lhs(
         		  	    State(1), List.empty
         		  	    ), 
@@ -28,12 +28,12 @@ class PicoParserTests extends FunSpec with LangParseMatchers[AST] {
     
     it ("can have directions in lhs") {
       program("1 + n = 2") should parseAs ( 
-          Equal(
+          Rule(
               Lhs(State(1), List(
                   Plus(N())
                   )
               ), Rhs(State(2), Stay())) )
-      program("1 + n - w * s = 2") should parseAs ( Equal(
+      program("1 + n - w * s = 2") should parseAs ( Rule(
           Lhs(
         		  State(1), 
         		  List(Plus(N()), Minus(W()), Mult(S()))
@@ -41,7 +41,7 @@ class PicoParserTests extends FunSpec with LangParseMatchers[AST] {
     }
     
     it ("can have directions in rhs") {
-      program("2 = 2 - w") should parseAs ( Equal(Lhs(State(2), List.empty), Rhs(State(2), W())))
+      program("2 = 2 - w") should parseAs ( Rule(Lhs(State(2), List.empty), Rhs(State(2), W())))
     }
 
   }
