@@ -33,8 +33,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
       | "and you"~ability~"go"~direction~option ^^ {case "and you"~a~"go"~d~o => GetSurroundings(a, d, o)})
 
   lazy val ability: PackratParser[Command] =
-    ("can" ^^ {case s => PicoAbility(s)}
-      | "cannot" ^^ {case s => PicoAbility(s)})
+    ("cannot" ^^ {case s => PicoAbility(s)}
+      |"can" ^^ {case s => PicoAbility(s)})
 
   lazy val go: PackratParser[Command] =
     ("go"~direction~"on"~street ^^ {case "go"~d~"on"~s => GetAction(d, s)}

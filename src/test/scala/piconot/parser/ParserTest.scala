@@ -18,12 +18,21 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
           GetAction(PicoDirection("uptown"),GetStreet(PicoString("a"), PicoModifier("St.")))))
     }
 
+    it("can parse a simple command with one other option") {
+      program("If you are on a St. and you cannot go downtown go uptown on a St.") should parseAs(
+        MakeCommand(
+          GetStreet(PicoString("a"), PicoModifier("St.")),
+          GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
+            PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null"))),
+          GetAction(PicoDirection("uptown"),GetStreet(PicoString("a"), PicoModifier("St.")))))
+    }
+
     it("can parse a command with two options") {
-      program("If you are on a St. and you can go uptown and you cannot go downtown go uptown on a St.") should parseAs(
+      program("If you are on a St. and you can go uptown and you can go downtown go uptown on a St.") should parseAs(
         MakeCommand(
           GetStreet(PicoString("a"), PicoModifier("St.")),
           GetSurroundings(PicoAbility("can"), PicoDirection("uptown"),
-            GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
+            GetSurroundings(PicoAbility("can"), PicoDirection("downtown"),
             PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))),
           GetAction(PicoDirection("uptown"),GetStreet(PicoString("a"), PicoModifier("St.")))))
     }
