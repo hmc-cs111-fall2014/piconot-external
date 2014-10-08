@@ -14,9 +14,17 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
           
     // left-hand side
     lazy val lhs: PackratParser[Rule] =
-      ( state~" "~surroundings )
+      ( state~" "~surroundings ^^ {case l~" "~r => LHS(l, r)} )
       
     // right-hand side
     lazy val rhs: PackratParser[Rule] =
-      ()    
+      ( movement~" "~state )
+      
+    // state
+    lazy val state: PackratParser[Rule] = 
+      ()
+      
+   // surroundings
+   lazy val surroundings: PackratParser[Rule] =
+     ()
  }
