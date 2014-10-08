@@ -23,8 +23,11 @@ sealed abstract class Command extends AST
 
 case class PicoString(string: String) extends Command
 case class PicoModifier(string: String) extends Command
+case class PicoAbility(string:String) extends Command
+case class PicoDirection(string:String) extends Command
+case class PicoSurroundings(north:Command, east:Command, west:Command, south:Command) extends Command
 
-case class MakeCommand(streetWithModifier: String, surroundings: String, go: String) extends Command
+case class MakeCommand(streetWithModifier: Command, surroundings: Command, go: Command) extends Command
 case class GetStreet(street: Command, modifier: Command) extends Command
-case class GetSurroundings(ability: String, direction: String) extends Command
-case class GetAction(direction: String, streetWithModifier: String) extends Command
+case class GetSurroundings(ability: Command, direction: Command, surroundings:Command) extends Command
+case class GetAction(direction: Command, streetWithModifier: Command) extends Command
