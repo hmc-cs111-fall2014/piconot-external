@@ -58,3 +58,9 @@ them in.
 
 We have decided that our base program will be
 `Proof. Recall. QED`.
+
+== 10/8 ==
+
+We are trying to match a rule. We first used a really ugly `*` based solution, but couldn't 
+figure out what to do with the result. So, we switched to a built-in
+function in the parser to handle the repetition. 
