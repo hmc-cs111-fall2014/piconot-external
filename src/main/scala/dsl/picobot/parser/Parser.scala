@@ -7,20 +7,14 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
 
     // parsing interface
     def apply(s: String): ParseResult[AST] = parseAll(program, s)
-    
-//    lazy val file: PackratParser[File] = 
-//      state
-    
-//    def state: Parser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)}
-    
+       
     lazy val filename: PackratParser[String] = """[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)""".r ^^ { _.toString }
     
     lazy val program: PackratParser[Program] =
-      ("Proof."~"Recall "~filename~"."~consider ^^ {case "Proof."~"Recall "~mazename~"."~consider => Program(Declaration(mazename), consider)}
+      ("Proof."~"Recall "~filename~"."~consider ^^ 
+          {case "Proof."~"Recall "~mazename~"."~consider => Program(Declaration(mazename), consider)}
           )
-    
-    //lazy val mazename: PackratParser[]
-          
+              
     lazy val consider: PackratParser[Consider] =
       (opt("Consider"~repsep(rule,",")~".") ^^ {
         case Some("Consider"~rules~".") => Consider(rules)
@@ -57,15 +51,6 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
         | "s" ^^ {case "s" => S()}
         // TODO: support greek
       )
-//      
-//    lazy val rest: PackratParser[Rest] =
-//      (   "+"~dir~rest ^^ {case "+"~d~r ⇒ Plus(d, Some(r))}
-//        | "-"~dir~rest ^^ {case "-"~d~r ⇒ Minus(d, Some(r))}
-//        | "*"~dir~rest ^^ {case "*"~d~r ⇒ Mult(d, Some(r))}
-//        | "+"~dir ^^ {case "+"~d ⇒ Plus(d, None)}
-//        | "-"~dir ^^ {case "-"~d ⇒ Minus(d, None)}
-//        | "*"~dir ^^ {case "*"~d ⇒ Mult(d, None)}
-//        )
           
     lazy val state: PackratParser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)} 
           
