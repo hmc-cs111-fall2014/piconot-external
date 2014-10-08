@@ -13,37 +13,43 @@ class PicoParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("A program") {
 
     it("can be two states and an equal sign") {
-      program("1 = 2") should parseAs ( 
-          Rule(
-        		  	Lhs(
-        		  	    State(1), List.empty
-        		  	    ), 
-        		  	Rhs(
-        		  	    State(2), 
-        		  	    Stay()
-        		  	    )
-        		  ) 
-          )
+      program("Proof. Recall empty.txt. Consider 1 = 2.") should parseAs ( 
+          Program(Declaration("empty.txt"), Consider(
+	         List(Rule(
+	        		  	Lhs(
+	        		  	    State(1), List.empty
+	        		  	    ), 
+	        		  	Rhs(
+	        		  	    State(2), 
+	        		  	    Stay()
+	        		  	    )
+	        		  ) 
+	          ))))
     }
     
-    it ("can have directions in lhs") {
-      program("1 + n = 2") should parseAs ( 
-          Rule(
+    it ("can have multiple rules") {
+      program("Proof. Recall empty.txt. Consider 1 + n = 2, 1 + n - w * s = 2, 2 = 2 - w.") should parseAs(
+          Program(Declaration("empty.txt"), Consider(List(
+              Rule(
               Lhs(State(1), List(
                   Plus(N())
                   )
-              ), Rhs(State(2), Stay())) )
-      program("1 + n - w * s = 2") should parseAs ( Rule(
-          Lhs(
+              ), Rhs(State(2), Stay())),
+              Rule(
+              Lhs(
         		  State(1), 
         		  List(Plus(N()), Minus(W()), Mult(S()))
-    		  ), Rhs(State(2), Stay()) ) )
+    		  ), Rhs(State(2), Stay()) ),
+    		Rule(Lhs(State(2), List.empty), Rhs(State(2), W()))
+      )))) 
     }
     
-    it ("can have directions in rhs") {
-      program("2 = 2 - w") should parseAs ( Rule(Lhs(State(2), List.empty), Rhs(State(2), W())))
+    it ("can have no rules") {
+      program("Proof. Recall empty.txt. Consider.") should parseAs(
+          Program(Declaration("empty.txt"), Consider(List.empty))
+      )
     }
-
+    
   }
 
 }
