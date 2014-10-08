@@ -5,65 +5,50 @@ import scala.util.parsing.combinator._
 import piconot.ir._
 
 object PiconotParser extends JavaTokenParsers with PackratParsers {
-  // FIXME this might have to change from partial to rules
-  def apply(s:String) :ParseResult[AST] = parseAll(partial, s)
+  def apply(s:String) :ParseResult[AST] = parseAll(listRules, s)
 
-  def rulesList: Parser[List[Single]] = rep(Single)
-  def stateRules: Parser[List[InState]] = rep(InState)
-
-  // the whole thing is a rep(inStateRules)
-  // an inStateRule is a rep(SingleRules)
-
-  lazy val single:PackratParser[Expr] =
+  lazy val listRules:PackratParser[Expr] =
     (
-      //FIXME totally not done 
-      surroundedBy~thenmove~newState ^^ {case _ => make rules}
+      rep(inState) ^^ {case rules => RulesList(rules)}
     )
 
-  /*
-  lazy val partial: PackratParser[Expr] =
+  lazy val inState:PackratParser[InState] =
     (
-      "surroundedBy"~news ^^ {case "surroundedBy"~news => SurroundedBy(news)}
-      | "then move"~dir ^^ {case "then move"~dir => ThenMove(dir)}
-      |"newState"~state ^^ {case "newState"~newState => NewState(newState)}
-      | _ ^^ {THROW AN ERROR}
+      "inState"~state~rep(single) ^^ {case "inState"~state~singles => InState(state, singles)}
     )
-  */
 
-  lazy val surroundedBy: PackratParser[Expr]=
+  lazy val single:PackratParser[Single] =
+    (
+      surroundedBy~thenMove~newState ^^ {case news~dir~state => Single(news, dir, state)}
+    )
+
+  lazy val surroundedBy: PackratParser[SurroundedBy]=
     (
       "surroundedBy"~news ^^ {case "surroundedBy"~news => SurroundedBy(news)}
     )
 
-  lazy val thenMove: PackratParser[Expr]=
+  lazy val thenMove: PackratParser[ThenMove]=
     (
       "then move"~dir ^^ {case "then move"~dir => ThenMove(dir)}
     )
 
-  lazy val newState: PackratParser[Expr]=
+  lazy val newState: PackratParser[NewState]=
     (
       "newState"~state ^^ {case "newState"~newState => NewState(newState)}
     )
 
-  // FIXME: the syntax here might be completely wrong
-  lazy val news: PackratParser[Expr] =
-  (
-    _ ^^ {case x => News(x)}
-  )
+  lazy val news: PackratParser[News] =
+    (
+      """[\\*\w]{4}""".r ^^ {News}
+    )
 
-  lazy val dir: PackratParser[Expr] =
-  (
-    _ ^^ {case x => MoveDir(x)}
-  )
+  lazy val dir: PackratParser[MoveDir] =
+    (
+      """[NEWS]""".r ^^ {case x => MoveDir(x.head)}
+    )
 
-  lazy val state: PackratParser[Expr] =
-  (
-    _ ^^ {case x => MyState(x)}
-  )
+  lazy val state: PackratParser[MyState] =
+    (
+       """\w+""".r ^^ {MyState}
+    )
 }
-
-/*
- inState oldState + Rule*
-
-
- */
