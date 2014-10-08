@@ -15,8 +15,8 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
     
     lazy val filename: PackratParser[String] = """[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)""".r ^^ { _.toString }
     
-    lazy val program: PackratParser[Declaration] =
-      ("Proof."~"Recall "~filename~"."~consider ^^ {case "Proof."~"Recall "~mazename~"."~consider => Declaration(mazename)}
+    lazy val program: PackratParser[Program] =
+      ("Proof."~"Recall "~filename~"."~consider ^^ {case "Proof."~"Recall "~mazename~"."~consider => Program(Declaration(mazename), consider)}
           )
     
     //lazy val mazename: PackratParser[]

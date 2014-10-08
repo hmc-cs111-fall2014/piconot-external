@@ -1,7 +1,7 @@
 package dsl.picobot.ir
 
 sealed abstract class AST
-sealed abstract class Program extends AST
+case class Program(declaration: Declaration, consider: Consider) extends AST
 
 case class Declaration(mazename: String) extends AST
 case class Consider(rules: List[Rule]) extends AST
