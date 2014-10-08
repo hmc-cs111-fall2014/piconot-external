@@ -13,25 +13,28 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
     
 //    def state: Parser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)}
     
-    lazy val program: PackratParser[Program] =
-      ("Proof."~"Recall "~mazename~"."~consider
+    lazy val filename: PackratParser[String] = """[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)""".r ^^ { _.toString }
+    
+    lazy val program: PackratParser[Declaration] =
+      ("Proof."~"Recall "~filename~"."~consider ^^ {case "Proof."~"Recall "~mazename~"."~consider => Declaration(mazename)}
           )
     
+    //lazy val mazename: PackratParser[]
+          
     lazy val consider: PackratParser[Consider] =
-      ("Consider"~((rule~",")*)~rule~"." ^^ {
-        case "Consider"~((rule~",")*)~rule~"." => Consider(rules++extrarule)
+      (opt("Consider"~repsep(rule,",")~".") ^^ {
+        case Some("Consider"~rules~".") => Consider(rules)
+        case None => Consider(List.empty)
         }
-      | "" ^^ {}
           )
     
-    lazy val rule: PackratParser[AST] =
+    lazy val rule: PackratParser[Rule] =
       (lhs~"="~rhs ^^ {case l~"="~r ⇒ Rule(l, r)}
       // DO proper base case, give good error
           )
           
     lazy val lhs: PackratParser[Lhs] =
       (   state~(surrounding*) ^^ {case s~r => Lhs(s, r)}
-//        | state ^^ {case s => Lhs(s, None)}
           )
           
     lazy val surrounding: PackratParser[Surrounding] =
