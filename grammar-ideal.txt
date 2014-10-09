@@ -1,8 +1,10 @@
-comment = ("#", { ? all characters ? - "#" }, "#" | ",", { ? all characters ? - "," }, ","), space char;
 new line = ? end of line character(s) ?;
+
 space char = " " | new line;
-space = ( comment, { space char }, { comment }, { space char } ) 
-      | ( space char, { space char }, { comment }, { space char } );
+comment = { space char }, "#", { ? all characters ? - "#" }, "#", space char, { space char }
+	    | { space char }, ",", { ? all characters ? - "," }, ",", space char, { space char };
+
+space = comment | space char, { space char }
 
 non-space char = ? all characters ? - space - ":" - "#" - "," - end command;
 char = non-space char | space;
