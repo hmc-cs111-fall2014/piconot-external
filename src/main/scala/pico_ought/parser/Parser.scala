@@ -1,6 +1,9 @@
-package pico_ought
+package pico_ought.parser
 
-object CalcParser extends JavaTokenParsers with PackratParsers {
+import scala.util.parsing.combinator._
+import pico_ought.ir._
+
+object PicoOughtParser extends JavaTokenParsers with PackratParsers {
 
     // parsing interface
     def apply(s: String): ParseResult[AST] = parseAll(face, s)
@@ -12,5 +15,5 @@ object CalcParser extends JavaTokenParsers with PackratParsers {
       | face_word~>"left"~"." ^^^ { Face(LEFT) }
         )
 
-    lazy val face_word: PackratParser[Command] = ("Face" | "face")
+    lazy val face_word: PackratParser[String] = ("Face" | "face")
 }
