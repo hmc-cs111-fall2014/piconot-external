@@ -27,4 +27,34 @@ class NumSemanticsTests extends FunSpec
     }
 
   }
+
+  describe("Turn in direction command") {
+
+    it("Generate rules for turning in a direction") {
+      program("Turn left.") should compute ( genTurn(L) )
+      program("Turn right.") should compute ( genTurn(R) )
+      program("Turn around.") should compute ( genTurn(AROUND) )
+    }
+
+  }
+
+  describe("Go in direction command") {
+
+    it("Generates rules for go once in a direction") {
+        program("Go forwards once.") should compute ( genGo(FORWARDS, None) )
+        program("Go right once.") should compute ( genGo(RIGHTWARDS, None) )
+        program("Go backwards once.") should compute ( genGo(BACKWARDS, None) )
+        program("Go left once.") should compute ( genGo(LEFTWARDS, None) )
+    }
+
+    
+  }
+
+  // describe("Do a section command") {
+
+  //   it("Generate rules for doing a section") {
+  //       program("Do 42.") should compute ( genDo("42", ) )
+  //   }
+
+  // }
 }

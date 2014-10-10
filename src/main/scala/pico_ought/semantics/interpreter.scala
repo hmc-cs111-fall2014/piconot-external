@@ -15,5 +15,10 @@ package object semantics {
              section_names: List[String]): List[Rule] = ast match {
 
         case Face(dir) => genFace(dir, section_number, line_number)
+
+        case Turn(dir) => genTurn(dir, section_number, line_number)
+
+        case Go(dir, conds) => genGo(dir, conds, section_number, line_number)
+        // case Do(label)
     }
 }

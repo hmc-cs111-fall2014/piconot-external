@@ -4,8 +4,17 @@ package pico_ought
 
 // internal DSL for creating ASTs
 package object ir {
-    def UP = 1
-    def RIGHT = 2
-    def DOWN = 3
-    def LEFT = 4
+    val UP = 1
+    val RIGHT = 2
+    val DOWN = 3
+    val LEFT = 4
+
+    val L = 3
+    val R = 1
+    val AROUND = 2
+
+    val FORWARDS = 0
+    val RIGHTWARDS = 1
+    val BACKWARDS = 2
+    val LEFTWARDS = 3
 }
