@@ -1,0 +1,11 @@
+# Monday 6th, in class
+We redefined the ideal grammar and pseudo-coded it to see what should be a case 
+class, and what should be a type.
+
+# Wednesday 8th, in class
+Started working on the Intermediate Representation and parser. We did not settle on a final IR, since the parsing step kept showing us that some things would work, and some wouldn't.
+
+# Thursday 9th
+Finished the parser. No major syntax changes yet. We realized we aren't taking 
+much advantage of the external language capabilities, since we have such a 
+simple type system.
