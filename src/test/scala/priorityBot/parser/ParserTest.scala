@@ -35,9 +35,13 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
 	    		  																	RelativeDirection("R"))))))
     }
 
-	  it("cannot be parsed") {
-	    program("blah") should not (parse)
-	  }
+    it("five rules CANNOT be parsed") {
+      program("maze = maze.txt\nN -> F L B R\nS -> F L B R\nS -> F L B R\nS -> F L B R\n* -> F L B R") should not (parse)    
+    }
+
+	it("cannot be parsed") {
+	  program("blah") should not (parse)
+	}
   }
 }
 
