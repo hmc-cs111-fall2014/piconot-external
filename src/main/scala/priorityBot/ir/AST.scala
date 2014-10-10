@@ -5,7 +5,7 @@ package priorityBot.ir
 
 sealed abstract class AST
 
-case class Program(mazeName: String, rules: Rules) extends AST
+case class Picobot(mazeName: String, rules: Rules) extends AST
 
 //case class CardinalDirection(direction: )
 
