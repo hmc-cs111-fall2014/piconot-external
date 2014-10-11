@@ -17,7 +17,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     string~modifier ^^ {case s~m => GetStreet(s,m)}
 
   lazy val string: PackratParser[Command] =
-     "a" ^^ {case _ => PicoString("a")}
+     "First" ^^ {case _ => PicoString("First")}
 
   lazy val modifier: PackratParser[Command] =
     (   "Rd." ^^ {case s => PicoModifier(s)}
@@ -27,10 +27,16 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
       | "Blvd." ^^ {case s => PicoModifier(s)}
     )
 
+  lazy val options: PackratParser[Command] =
+    (option ^^ {case o => o}
+      | option~option ^^ {case o~p => o}
+      | option~option~option ^^ {case o~p~q => o}
+      | option~option~option~option ^^ {case o~p~q~r => o})
+
   lazy val option: PackratParser[Command] =
-    ("and you"~ability~"go"~direction ^^ {case "and you"~a~"go"~d => GetSurroundings(a, d,
-      PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))}
-      | "and you"~ability~"go"~direction~option ^^ {case "and you"~a~"go"~d~o => GetSurroundings(a, d, o)})
+    ("and you"~ability~"go"~direction~option ^^ {case "and you"~a~"go"~d~o => GetSurroundings(a, d, o)}
+     | "and you"~ability~"go"~direction ^^ {case "and you"~a~"go"~d => GetSurroundings(a, d,
+      PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))})
 
   lazy val ability: PackratParser[Command] =
     ("cannot" ^^ {case s => PicoAbility(s)}
