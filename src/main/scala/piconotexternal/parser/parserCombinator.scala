@@ -1,8 +1,8 @@
 // TODO: Parser goes here!
-package piconot.parser
+package piconotexternal.parser
 
 import scala.util.parsing.combinator._
-import piconot.ir._
+import piconotexternal.ir._
 
 object PiconotParser extends JavaTokenParsers with PackratParsers {
   def apply(s:String) :ParseResult[AST] = parseAll(listRules, s)
@@ -44,7 +44,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
 
   lazy val dir: PackratParser[MoveDir] =
     (
-      """[NEWS]""".r ^^ {case x => MoveDir(x.head)}
+      """[NEWSX]""".r ^^ {case x => MoveDir(x.head)}
     )
 
   lazy val state: PackratParser[MyState] =
