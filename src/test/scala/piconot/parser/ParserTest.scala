@@ -18,10 +18,10 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
           GetAction(PicoDirection("uptown"),GetStreet(PicoString("First"), PicoModifier("St.")))))
     }
 
-    it("can parse a simple command with one other option") {
-      program("If you are on First St. and you cannot go downtown go uptown on First St.") should parseAs(
+    it("can parse a simple command with a cannot") {
+      program("If you are on Second St. and you cannot go downtown go uptown on First St.") should parseAs(
         MakeCommand(
-          GetStreet(PicoString("First"), PicoModifier("St.")),
+          GetStreet(PicoString("Second"), PicoModifier("St.")),
           GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
             PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null"))),
           GetAction(PicoDirection("uptown"),GetStreet(PicoString("First"), PicoModifier("St.")))))
@@ -45,6 +45,18 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
             GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
               GetSurroundings(PicoAbility("cannot"), PicoDirection("into_town"),
               PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null"))))),
+          GetAction(PicoDirection("uptown"),GetStreet(PicoString("First"), PicoModifier("St.")))))
+    }
+
+    it("can parse a command with four options") {
+      program("If you are on First St. and you can go uptown and you cannot go downtown and you cannot go into_town and you can go outta_town go uptown on First St.") should parseAs(
+        MakeCommand(
+          GetStreet(PicoString("First"), PicoModifier("St.")),
+          GetSurroundings(PicoAbility("can"), PicoDirection("uptown"),
+            GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
+              GetSurroundings(PicoAbility("cannot"), PicoDirection("into_town"),
+                GetSurroundings(PicoAbility("can"), PicoDirection("outta_town"),
+                PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))))),
           GetAction(PicoDirection("uptown"),GetStreet(PicoString("First"), PicoModifier("St.")))))
     }
 
