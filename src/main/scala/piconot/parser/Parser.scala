@@ -11,7 +11,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
   def apply(s: String): ParseResult[AST] = parseAll(command, s)
 
   lazy val command: PackratParser[Command] =
-    "If you are on"~street~option~go ^^ {case "If you are on"~s~o~g => MakeCommand(s,o,g)}
+    "If you are on"~street~option~goDirection~goState ^^ {case "If you are on"~s~o~gd~gs => MakeCommand(s,o,gd,gs)}
 
   lazy val street: PackratParser[Command] =
     string~modifier ^^ {case s~m => GetStreet(s,m)}
@@ -36,9 +36,12 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     ("cannot" ^^ {case s => PicoAbility(s)}
       |"can" ^^ {case s => PicoAbility(s)})
 
-  lazy val go: PackratParser[Command] =
-    ("go"~direction~"on"~street ^^ {case "go"~d~"on"~s => GetAction(d, s)}
-      | "teleport to"~street ^^ {case "teleport to"~s => GetAction(PicoDirection("stay"), s)})
+  lazy val goDirection: PackratParser[Command] =
+    ("go"~direction~"on" ^^ {case "go"~d~"on" => GetFinalDirection(d)}
+      | "teleport to" ^^ {case "teleport to" => GetFinalDirection(PicoDirection("stay"))})
+
+  lazy val goState: PackratParser[Command] =
+    (street ^^ {case s => GetFinalStreet(s)})
 
   lazy val direction: PackratParser[Command] =
     ("uptown" ^^ {case s => PicoDirection(s)}
