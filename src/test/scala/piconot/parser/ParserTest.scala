@@ -6,7 +6,7 @@ import piconot.ir._
 import piconot.parser._
 import edu.hmc.langtools._
 
-class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
+class PicobotParserTests extends FunSpec with LangParseMatchers[AST] {
 
   override val parser = PiconotParser.apply _
   
@@ -25,7 +25,7 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Complete Rule") {
 
     it("Should parse") {
-      program("0 x*** -> N 0") should parseAs(Rule(State(0), Surroundings('x', '*', '*', '*'), North, State(0)))
+      program("0") should parseAs(Rule(State(0)))
     }
 
   }

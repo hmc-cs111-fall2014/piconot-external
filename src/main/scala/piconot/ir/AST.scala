@@ -30,12 +30,13 @@ package piconot.ir
 sealed abstract class AST
 sealed abstract class PicobotProgram extends AST
 
-case class Rule(state1: State, surr: Surroundings, 
-				move: MoveDirection, state2: State) extends PicobotProgram
+case class Rule(state1: State/*, surr: Surroundings, 
+				move: MoveDirection, state2: State*/) extends PicobotProgram
 				
 case class State(n: Int) extends PicobotProgram {
   require(n <= 100, "State identifier is too large!")
 }
+
 case class Surroundings(char1: Char, char2: Char, 
 						char3: Char, char4: Char) extends PicobotProgram
 

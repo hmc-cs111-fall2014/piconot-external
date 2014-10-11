@@ -10,19 +10,24 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
 
     // rules
     lazy val rule: PackratParser[PicobotProgram] = 
-      (state~>" "<~surr~>" -> "<~mov~>" "<~state)
+      (
+          state ^^ {case s ⇒ Rule(s)}
+      )
                     
     // state
-    def state: Parser[State] = wholeNumber ^^ {s => State(s.toInt)}
+    lazy val state: Parser[State] = wholeNumber ^^ {s => State(s.toInt)}
     
     // surroundings
-    lazy val surr: PackratParser[PicobotProgram] = 
-      (surrComp~surrComp~surrComp~surrComp)
+    /*lazy val surr: PackratParser[PicobotProgram] = 
+      
+    lazy val mov: PackratParser[PicobotProgram] = 
+      
+      
       
    // surrounding components
    lazy val surrComp: PackratParser[PicobotProgram] = 
      ( Blocked | Free | Wildcard | North | South | East | West)
     
      
-   def blocked: Parser[Blocked] = wholeNumber ^^ {s => }
+   def blocked: Parser[Blocked] = wholeNumber ^^ {s => }*/
  }
