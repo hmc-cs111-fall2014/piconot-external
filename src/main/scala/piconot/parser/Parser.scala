@@ -8,7 +8,11 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
   // need to specify what whitespace is important (like new lines)
   // have main AST node that takes in program and holds total state
 
-  def apply(s: String): ParseResult[AST] = parseAll(command, s)
+  def apply(s: String): ParseResult[AST] = parseAll(program, s)
+
+  lazy val program: PackratParser[Command] =
+    (command~command ^^ {case c~d => c}
+      | command ^^ {case c => c})
 
   lazy val command: PackratParser[Command] =
     "If you are on"~street~option~goDirection~goState ^^ {case "If you are on"~s~o~gd~gs => MakeCommand(s,o,gd,gs)}
