@@ -30,7 +30,7 @@ package piconot.ir
 sealed abstract class AST
 sealed abstract class PicobotProgram extends AST
 
-case class Rule(state1: State/*, surr: Surroundings, 
+case class Rule(state1: State,  surr: Surroundings/*, state2: State, surr: Surroundings, 
 				move: MoveDirection, state2: State*/) extends PicobotProgram
 				
 case class State(n: Int) extends PicobotProgram {
@@ -40,15 +40,17 @@ case class State(n: Int) extends PicobotProgram {
 case class Surroundings(char1: Char, char2: Char, 
 						char3: Char, char4: Char) extends PicobotProgram
 
-trait SurroundingComponent extends PicobotProgram
-case object Blocked extends SurroundingComponent
-case object Free extends SurroundingComponent
-case object Wildcard extends SurroundingComponent
+case class SurroundingComponent(c: Char) 
+						
+trait SurroundingComponentType extends PicobotProgram
+case object Blocked extends SurroundingComponentType
+case object Free extends SurroundingComponentType
+case object Wildcard extends SurroundingComponentType
 
 trait MoveDirection extends PicobotProgram
-case object North extends MoveDirection with SurroundingComponent
-case object South extends MoveDirection with SurroundingComponent
-case object East extends MoveDirection with SurroundingComponent
-case object West extends MoveDirection with SurroundingComponent
+case object North extends MoveDirection with SurroundingComponentType
+case object South extends MoveDirection with SurroundingComponentType
+case object East extends MoveDirection with SurroundingComponentType
+case object West extends MoveDirection with SurroundingComponentType
 case object Halt extends MoveDirection
 

@@ -13,7 +13,7 @@ class PicobotParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Partial Rules") {
 
     it("Partial left-hand sides should not parse") {
-      program("0 x***") should not (parse)
+      program("0 x**") should not (parse)
     }
     
     it ("Partial right-hand sides should not parse") {
@@ -25,7 +25,7 @@ class PicobotParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Complete Rule") {
 
     it("Should parse") {
-      program("0") should parseAs(Rule(State(0)))
+      program("0 abcd") should parseAs(Rule(State(0), Surroundings('a', 'b', 'c', 'd')))
     }
 
   }
