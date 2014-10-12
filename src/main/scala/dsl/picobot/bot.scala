@@ -18,7 +18,7 @@ object bot extends JFXApp {
     
     val parsed = PicoParser(contents)
     val bot = eval(parsed.get)
-    var stage = bot.mainStage	
+    stage = bot.mainStage	
   }
 
 //  loop { line =>
