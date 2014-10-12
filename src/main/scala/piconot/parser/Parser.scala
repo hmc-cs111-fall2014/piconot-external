@@ -13,35 +13,45 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     // rules
     lazy val rule: PackratParser[PicobotProgram] = 
       (
-          state~" "~surr ^^ {case state1~" "~surr1 => Rule(state1,surr1)}
+          state~" "~surr~" -> "~mov~" "~state ^^ 
+          {case state1~" "~surr1~" -> "~movedir~" "~state2 => 
+  			Rule(state1, surr1, movedir, state2)}
       )
                     
     // state
     lazy val state: Parser[State] = 
-     ( 
-      wholeNumber ^^ {s ⇒ State(s.toInt)}
-     )
+     ( wholeNumber ^^ {s ⇒ State(s.toInt)} )
     
     // surroundings
     lazy val surr: Parser[Surroundings] =  
     (
-      surrComp~surrComp~surrComp~surrComp ^^ {case a~b~c~d => Surroundings(a, b, c, d)}
+      surrCompNorth~surrCompEast~surrCompWest~surrCompSouth ^^ {case a~b~c~d => Surroundings(a, b, c, d)}
     )
-          
+    
+    // surrounding components (with proper ordering enforced)
     lazy val surrComp: Parser[Char] = 
-      (
-          free
-          | wildcard
-          | blocked
-      )
+      ( free | wildcard )
       
      def free: Parser[Char] = 'x'
      def wildcard: Parser[Char] = '*'
-     def blocked: Parser[Char] = 'N' 
-  
-    // movement
+    
+    lazy val surrCompNorth: Parser[Char] = ( surrComp | north )
+    lazy val surrCompEast: Parser[Char] = ( surrComp | east )
+    lazy val surrCompWest: Parser[Char] = ( surrComp | west )
+    lazy val surrCompSouth: Parser[Char] = ( surrComp | south )
+            
+    def north: Parser[Char] = 'N'
+    def south: Parser[Char] = 'S'
+    def east: Parser[Char] = 'E'
+    def west: Parser[Char] = 'W'
+       
+    // movement directions
     lazy val mov: Parser[MoveDirection] =
     (
-      ident ^^ {a => MoveDirection(a.charAt(0))}
+      movComp ^^ {a => MoveDirection(a)}
     )
- }
+    
+    lazy val movComp: Parser[Char] = ( north | south | east | west | halt)
+    
+    def halt: Parser[Char] = 'X'
+}
