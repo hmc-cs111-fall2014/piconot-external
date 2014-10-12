@@ -10,25 +10,29 @@ class PicobotParserTests extends FunSpec with LangParseMatchers[AST] {
 
   override val parser = PiconotParser.apply _
   
-  describe("Partial Rules") {
+  describe("Partial Rules should not parse") {
 
 //    it("Partial left-hand sides should not parse") {
 //      program("0 x***") should not (parse)
 //    }
     
-    it ("Partial right-hand sides should not parse") {
-      program("-> N") should not (parse)
-    }
+//    it ("Partial right-hand sides should not parse") {
+//      program("-> N") should not (parse)
+//    }
 
   }
   
   describe("Complete Rule") {
 
-    it("Should parse") {
-      program("0 Nxxx -> N 0") should parseAs(Rule(State(0), 
-    		  								Surroundings('N', 'x', 'x', 'x'),
-    		  								MoveDirection('N'),
-    		  								State(0)))
+//    it("Should parse") {
+//      program("0 N*** -> N 0") should parseAs(Rule(State(0), 
+//    		  								Surroundings('N', '*', '*', '*'),
+//    		  								MoveDirection('N'),
+//    		  								State(0)))
+//    }
+    
+    it ("should parse") {
+      program("0 ****") should parseAs (Rule(State(0), Surroundings('*', '*', '*', '*')))
     }
 
   }
