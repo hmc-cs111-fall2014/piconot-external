@@ -84,7 +84,10 @@ the most specific instructions.
 We also experienced some difficulty with testing for semantics. We found that
 there was no equals method for Picobots besides doing it by reference,
 so we didn’t have a way to compare test Picobots to what our eval functions
-actually returned.
+actually returned. We tried to do testing by running the picobots and seeing
+if they functioned as expected, but we are having trouble getting them to
+run. We’ve posted something on Piazza and hope there is something helpful by
+tomorrow.
 
 
 
