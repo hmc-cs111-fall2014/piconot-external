@@ -46,8 +46,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
 
   lazy val direction: PackratParser[Command] =
     ("uptown" ^^ {case s => PicoDirection(s)}
-      | "outta_town" ^^ {case s => PicoDirection(s)}
-      | "into_town" ^^ {case s => PicoDirection(s)}
+      | "outta town" ^^ {case s => PicoDirection(s)}
+      | "into town" ^^ {case s => PicoDirection(s)}
       | "downtown" ^^ {case s => PicoDirection(s)})
   
 }

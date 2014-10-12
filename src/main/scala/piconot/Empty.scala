@@ -19,13 +19,13 @@ object Empty extends JFXApp {
 
   val emptyMaze = Maze("resources" + File.separator + "empty.txt")
 
-  val rules = "If you are on Main St. and you can go downtown go downtown on Main St." +
-    "If you are on Main St. and you cannot go downtown and you can go outta_town go outta_town on Main St." +
-    "If you are on Main St. and you cannot go downtown and you cannot go outta_town teleport to First Ave." +
-    "If you are on First Ave. and you can go uptown go uptown on First Ave." +
-    "If you are on First Ave. and you cannot go uptown and you can go into_town go into_town on Second St." +
-    "If you are on Second St. and you can go downtown go downtown on Second St." +
-    "If you are on Second St. and you cannot go downtown and you can go into_town go into_town on First Ave."
+  val rules = "If you are on Main St. and can go downtown, go downtown on Main St." +
+    "If you are on Main St. and cannot go downtown and can go outta town, go outta town on Main St." +
+    "If you are on Main St. and cannot go downtown and cannot go outta town, teleport to First Ave." +
+    "If you are on First Ave. and can go uptown, go uptown on First Ave." +
+    "If you are on First Ave. and cannot go uptown and can go into town, go into town on Second St." +
+    "If you are on Second St. and can go downtown, go downtown on Second St." +
+    "If you are on Second St. and cannot go downtown and can go into town, go into town on First Ave."
 
   PiconotParser(rules) match {
     case PiconotParser.Success(t, _) => println(eval(t))

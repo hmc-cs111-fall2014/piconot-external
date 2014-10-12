@@ -38,12 +38,12 @@ package object semantics {
           newSurroundings.east,
           newSurroundings.west,
           newSurroundings.south)
-      else if (direction == PicoDirection("outta_town"))
+      else if (direction == PicoDirection("outta town"))
         PicoSurroundings(newSurroundings.north,
           ability,
           newSurroundings.west,
           newSurroundings.south)
-      else if (direction == PicoDirection("into_town"))
+      else if (direction == PicoDirection("into town"))
         PicoSurroundings(newSurroundings.north,
           newSurroundings.east,
           ability,
@@ -83,8 +83,8 @@ package object semantics {
   def getDirection(direction: String): MoveDirection = {
     direction match {
       case "uptown" => North
-      case "outta_town" => East
-      case "into_town" => West
+      case "outta town" => East
+      case "into town" => West
       case "downtown" => South
       case _ => StayHere
     }

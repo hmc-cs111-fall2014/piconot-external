@@ -71,7 +71,7 @@ class SemanticsTest extends FunSpec with LangInterpretMatchers[AST,List[Rule]] {
     }
 
     it("can parse a command with four options") {
-      program("If you are on First St. and can go uptown and cannot go downtown and cannot go into_town and can go outta_town, go uptown on First St.") should compute(
+      program("If you are on First St. and can go uptown and cannot go downtown and cannot go into town and can go outta town, go uptown on First St.") should compute(
         List(Rule(State("0"),
           Surroundings(Open, Anything, Anything, Anything),
           North,
@@ -104,9 +104,9 @@ class SemanticsTestTwo extends FunSpec with LangInterpretMatchers[AST,List[Rule]
   describe("Programs") {
     it("can be parsed as multiple commands") {
       program("If you are on Second St. and can go downtown, go downtown on Fourth St." +
-        "If you are on Second St. and cannot go downtown and can go outta_town, go outta_town on Second St." +
-        "If you are on Second St. and cannot go downtown and cannot go outta_town and can go uptown, go uptown on Main St." +
-        "If you are on Second St. and cannot go downtown and cannot go outta_town and cannot go uptown and can go into_town, go into_town on Third St.") should compute(
+        "If you are on Second St. and cannot go downtown and can go outta town, go outta town on Second St." +
+        "If you are on Second St. and cannot go downtown and cannot go outta town and can go uptown, go uptown on Main St." +
+        "If you are on Second St. and cannot go downtown and cannot go outta town and cannot go uptown and can go into town, go into town on Third St.") should compute(
         List(Rule(State("0"),
           Surroundings(Anything, Anything, Anything, Open),
           South,
