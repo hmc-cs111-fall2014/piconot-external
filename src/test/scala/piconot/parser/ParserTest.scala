@@ -16,7 +16,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
           GetSurroundings(PicoAbility("can"), PicoDirection("uptown"),
            PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null"))),
           GetFinalDirection(PicoDirection("uptown")),
-          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St.")))))
+          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St."))), PicoString("null")))
     }
 
     it("can parse a simple command with a cannot") {
@@ -26,7 +26,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
           GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
             PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null"))),
           GetFinalDirection(PicoDirection("uptown")),
-          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St.")))))
+          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St."))), PicoString("null")))
     }
 
     it("can parse a simple command with two options") {
@@ -37,7 +37,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
           GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
             PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))),
           GetFinalDirection(PicoDirection("uptown")),
-          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St.")))))
+          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St."))), PicoString("null")))
     }
 
     it("can parse a command with three options") {
@@ -49,7 +49,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
               GetSurroundings(PicoAbility("cannot"), PicoDirection("into_town"),
               PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null"))))),
           GetFinalDirection(PicoDirection("uptown")),
-          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St.")))))
+          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St."))), PicoString("null")))
     }
 
     it("can parse a command with four options") {
@@ -62,7 +62,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
                 GetSurroundings(PicoAbility("can"), PicoDirection("outta_town"),
                 PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))))),
           GetFinalDirection(PicoDirection("uptown")),
-          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St.")))))
+          GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St."))), PicoString("null")))
     }
 
 

@@ -6,14 +6,15 @@ import piconot.ir._
 package object semantics {
   var mapState: Map[String, String] = Map()
   var listRules: List[Rule] = List()
-  def eval(ast: AST): Rule = ast match {
-    case MakeCommand(streetWithModifier, surroundings, goDirection, goState) =>
+  def eval(ast: AST): List[Rule] = ast match {
+    case MakeCommand(streetWithModifier, surroundings, goDirection, goState, nextCommand) =>
       val rule:Rule = Rule(State(extractString(streetWithModifier)),
           getSurroundings(extractSurroundings(surroundings)),
           getDirection(extractString(goDirection)),
           State(extractString(goState)))
       listRules = listRules :+ rule
-      rule
+      eval(nextCommand)
+    case _ => listRules
   }
 
   def extractString(ast: AST): String = ast match {
