@@ -13,8 +13,8 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
   describe("Simple Program") {
 
     it("one rule can be parsed") {
-      program("maze = maze.txt\n* -> F L B R") should parseAs ( Picobot("maze.txt", 
-	    		  													Rules(List(Rule(CardinalDirection("*"), 
+      program("maze = maze.txt\n* -> F L B R") should parseAs ( Priobot("maze.txt", 
+	    		  													Rules(List(PrioRule(CardinalDirection("*"), 
 	    		  																	RelativeDirection("F"), 
 	    		  																	RelativeDirection("L"), 
 	    		  																	RelativeDirection("B"), 
@@ -22,13 +22,13 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
     }
 
     it("two rules be parsed") {
-      program("maze = maze.txt\nN -> F L B R\nS -> F L B R") should parseAs ( Picobot("maze.txt", 
-	    		  													Rules(List(Rule(CardinalDirection("N"), 
+      program("maze = maze.txt\nN -> F L B R\nS -> F L B R") should parseAs ( Priobot("maze.txt", 
+	    		  													Rules(List(PrioRule(CardinalDirection("N"), 
 	    		  																	RelativeDirection("F"), 
 	    		  																	RelativeDirection("L"), 
 	    		  																	RelativeDirection("B"), 
 	    		  																	RelativeDirection("R"))) ++
-	    		  														  List(Rule(CardinalDirection("S"), 
+	    		  														  List(PrioRule(CardinalDirection("S"), 
 	    		  																	RelativeDirection("F"), 
 	    		  																	RelativeDirection("L"), 
 	    		  																	RelativeDirection("B"), 

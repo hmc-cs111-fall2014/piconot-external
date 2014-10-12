@@ -22,16 +22,36 @@ package object semantics {
 	  		
 	    stage = Bot.mainStage
       }
+      
     case Rules(ruleList) =>
-      // TAKE CARE OF *, keep track of previously used directions
-      ruleList map (eval)
-    case PrioRule(cardinal, d1, d2, d3, d4) =>
-      eval(cardinal) ->(eval(d1), eval(d2), eval(d3), eval(d4))  
+      ruleList.map(eval).asInstanceOf[List[List[Rule]]].flatten
+      
+    case PrioRule(cardinal, d1, d2, d3, d4) => {
+      // Evaluate all directions, 
+      val dir1 = eval(d1).asInstanceOf[RelativeDirection]
+      val dir2 = eval(d2).asInstanceOf[RelativeDirection]
+      val dir3 = eval(d3).asInstanceOf[RelativeDirection]
+      val dir4 = eval(d4).asInstanceOf[RelativeDirection]
+      val d = eval(cardinal).asInstanceOf[CardinalState]
+      
+      // Make a list of rules, either a singleton list with a single rule for
+      // the specified cardinal direction, or a list of all rules if 'AnyDir' 
+      // is given for a cardinal direction
+      d match {
+      case N|E|W|S => List(d ->(dir1, dir2, dir3, dir4))
+      case AnyDir  => List(N ->(dir1, dir2, dir3, dir4),
+    		  			   E ->(dir1, dir2, dir3, dir4),
+    		  			   W ->(dir1, dir2, dir3, dir4),
+    		  			   S ->(dir1, dir2, dir3, dir4)) 
+      }
+    }
+    
     case CardinalDirection(d) => d match {
       case "N" => N
       case "E" => E
       case "W" => W
       case "S" => S
+      case "*" => AnyDir
     }
       
     case RelativeDirection(d) => d match {

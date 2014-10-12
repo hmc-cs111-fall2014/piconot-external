@@ -114,6 +114,7 @@ object N extends CardinalState('N')
 object S extends CardinalState('S')
 object E extends CardinalState('E')
 object W extends CardinalState('W')
+object AnyDir extends CardinalState('*')
 
 // direction moving relative
 abstract class RelativeDirection(val name: Char)
