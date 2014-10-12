@@ -7,8 +7,6 @@ sealed abstract class AST
 
 case class Picobot(mazeName: String, rules: Rules) extends AST
 
-//case class CardinalDirection(direction: )
-
 case class Rules(rules: List[Rule]) extends AST
 
 case class Rule(cardinal: CardinalDirection,
