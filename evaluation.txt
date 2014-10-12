@@ -61,6 +61,26 @@ We have decided that our base program will be
 
 == 10/8 ==
 
-We are trying to match a rule. We first used a really ugly `*` based solution, but couldn't 
-figure out what to do with the result. So, we switched to a built-in
-function in the parser to handle the repetition. 
+We are trying to match a rule. We first used a really ugly `*` based solution, 
+but couldn't figure out what to do with the result. So, we switched to a
+built-in function in the parser to handle the repetition. 
+
+== 10/11 ==
+
+Today we started working on the semantics. We started by writing an eval
+function that returns a Picobot. However, we decided that when we are dealing
+with cases that are not as high-level as Program (for example, Declaration or
+Plus), it might be easier to return a piece of a Picobot, like just one rule,
+so we created extra eval functions to deal with these that could then be put
+together into one whole Picobot at the Program level.
+
+While writing the semantics, how we wanted to deal with users putting in multiple
+operators for the same direction on the lhs. We decided that the first 
+instruction is what would count unless it’s a *. Basically, as we add new
+information about the surroundings, it overwrites the surroundings for
+that direction if it is an ‘Anything’, so that way we’re only taking
+the most specific instructions.
+
+
+
+
