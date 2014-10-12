@@ -13,6 +13,7 @@ import picolib.semantics.Blocked
 import picolib.semantics.East
 import picolib.semantics.GUIDisplay
 import picolib.semantics.North
+import picolib.semantics.StayHere
 import picolib.semantics.Open
 import picolib.semantics.Picobot
 import picolib.semantics.Rule
@@ -34,7 +35,7 @@ class PicobotSemanticsTests extends FunSpec
     	    new Picobot(Maze("resources/empty.txt"), List(
     	        picolib.semantics.Rule(State("1"),
     	        	Surroundings(Anything, Anything, Anything, Anything),
-    	        	picolib.semantics.StayHere,
+    	        	StayHere,
     	        	State("2")))))
     }
 
@@ -43,15 +44,15 @@ class PicobotSemanticsTests extends FunSpec
     		new Picobot(Maze("resources/empty.txt"), List(
     		    picolib.semantics.Rule(State("1"),
     	        	Surroundings(Blocked, Anything, Anything, Anything),
-    	        	picolib.semantics.StayHere,
+    	        	StayHere,
     	        	State("2")),
     	        picolib.semantics.Rule(State("1"),
     	        	Surroundings(Blocked, Anything, Open, Anything),
-    	        	picolib.semantics.StayHere,
+    	        	StayHere,
     	        	State("2")),
     	        picolib.semantics.Rule(State("2"),
     	        	Surroundings(Anything, Anything, Anything, Anything),
-    	        	picolib.semantics.West,
+    	        	West,
     	        	State("2")))))
     }	
     
