@@ -1,5 +1,5 @@
 (* Hayden Blauzvern and Sarah Gilkinson *)
-(* Team Seven *)
+(* Team Three *)
 
 command = "If you are on ", street, option, ", ", goTo, streetTo | command command
 

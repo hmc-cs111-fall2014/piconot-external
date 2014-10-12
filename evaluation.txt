@@ -1,0 +1,12 @@
+Hayden Blauzvern and Sarah Gilkinson
+Team Three
+
+Throughout writing the external DSL, we realized we had to wrap many of our
+parsed strings in case classes in order to represent an AST. We also found
+that using an AST makes keep track of state difficult. We ended up recursively
+keeping track of state, using pattern matching to strip off layers from the AST
+and add to some accumulator.
+
+We feel that our syntax changed 2/10. We were able to stick to much of the
+original design, having only to clean up some of the more verbose rules
+in the grammar and figuring out how to keep track of state.
