@@ -81,6 +81,11 @@ information about the surroundings, it overwrites the surroundings for
 that direction if it is an ‘Anything’, so that way we’re only taking
 the most specific instructions.
 
+We also experienced some difficulty with testing for semantics. We found that
+there was no equals method for Picobots besides doing it by reference,
+so we didn’t have a way to compare test Picobots to what our eval functions
+actually returned.
+
 
 
 
