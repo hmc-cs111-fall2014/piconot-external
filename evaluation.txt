@@ -9,3 +9,6 @@ Started working on the Intermediate Representation and parser. We did not settle
 Finished the parser. No major syntax changes yet. We realized we aren't taking 
 much advantage of the external language capabilities, since we have such a 
 simple type system.
+
+# Saturday 11th
+Worked on the interpreter

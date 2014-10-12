@@ -1,23 +1,31 @@
 package priorityBot.semantics
 
 import priorityBot.ir._
-import picolib.maze.Maze
-import scalafx.application.JFXApp
 import java.io.File
-import piconot._
+import picolib.maze.Maze
+import priorityBot.semantics._
+import picolib.semantics._
+import scalafx.application.JFXApp
 
 package object semantics {
   def eval(ast: AST): Unit = ast match {
-    case Picobot(mazeName, rules: AST) => 
-      object Piconot extends JFXApp {
+    case Priobot(mazeName, ruleList: AST) => 
+      object PiconotWithMaze extends JFXApp {
         val maze = Maze("resources" + File.separator + mazeName)
         
-        val rules = makeRules( eval(rules) )
+        // Explicitly cast the evaluator's Unit return type to a list of rules
+        val rules = eval(ruleList).asInstanceOf[List[Rule]]
+        
+          
+	    object Bot extends picolib.semantics.Picobot(maze, rules)
+	  		with TextDisplay with GUIDisplay
+	  		
+	    stage = Bot.mainStage
       }
     case Rules(ruleList) =>
       // TAKE CARE OF *, keep track of previously used directions
       ruleList map (eval)
-    case Rule(cardinal, d1, d2, d3, d4) =>
+    case PrioRule(cardinal, d1, d2, d3, d4) =>
       eval(cardinal) ->(eval(d1), eval(d2), eval(d3), eval(d4))  
     case CardinalDirection(d) => d match {
       case "N" => N

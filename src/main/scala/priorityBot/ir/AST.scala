@@ -5,11 +5,11 @@ package priorityBot.ir
 
 sealed abstract class AST
 
-case class Picobot(mazeName: String, rules: Rules) extends AST
+case class Priobot(mazeName: String, rules: Rules) extends AST
 
-case class Rules(rules: List[Rule]) extends AST
+case class Rules(rules: List[PrioRule]) extends AST
 
-case class Rule(cardinal: CardinalDirection,
+case class PrioRule(cardinal: CardinalDirection,
     dir1: RelativeDirection, 
     dir2: RelativeDirection,
     dir3: RelativeDirection,

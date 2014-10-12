@@ -9,10 +9,10 @@ object BotParser extends JavaTokenParsers with Parsers {
   // parsing interface
   def apply(s: String): ParseResult[AST] = parseAll(picobot, s)
   
-  def picobot: Parser[Picobot] = 
+  def picobot: Parser[Priobot] = 
     (    "maze = " ~ "\\w*\\.txt".r~rules ^^ 
-    		{case "maze = "~mazeName~ruleList => Picobot(mazeName, ruleList)
-    		case _ => Picobot("fail", Rules(List()))}
+    		{case "maze = "~mazeName~ruleList => Priobot(mazeName, ruleList)
+    		case _ => Priobot("fail", Rules(List()))}
         )      
         
   def rules: Parser[Rules] = 
@@ -20,9 +20,9 @@ object BotParser extends JavaTokenParsers with Parsers {
     		{case rule~moreRules => Rules(List(rule) ++ moreRules.toList.flatten) }
         )     
                
-  def rule: Parser[Rule] = 
+  def rule: Parser[PrioRule] = 
     (   cardinalDirection~"->"~repN(4, relativeDirection)^^
-    		{case cardinal~"->"~dirs => Rule(cardinal, dirs(0), dirs(1), dirs(2), dirs(3))}
+    		{case cardinal~"->"~dirs => PrioRule(cardinal, dirs(0), dirs(1), dirs(2), dirs(3))}
         )
   
   def cardinalDirection: Parser[CardinalDirection] = (
