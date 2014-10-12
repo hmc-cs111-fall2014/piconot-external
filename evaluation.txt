@@ -10,5 +10,15 @@ Finished the parser. No major syntax changes yet. We realized we aren't taking
 much advantage of the external language capabilities, since we have such a 
 simple type system.
 
-# Saturday 11th
-Worked on the interpreter
+#Saturday 11th
+Implemented most of the semantics. We decided to implement using our internal 
+DSL so we don't have to redo all of the mappings of Cardinal directions to
+relative directions. One thing we do realize is that we now need to take care
+of the "Anything" case, as we could have anywhere from 1-4 rules, where if there
+are less than 4 rules the "Anything" has to take care of all of the remaining
+rules. We spent a fair amount of time figuring out eclipse project type stuff. 
+We ended up deciding to just include our internal DSL file rather than making
+a jar as that would be easier when someone needs to download our source to not
+need to get the jar too.
+
+#Sunday 12th
