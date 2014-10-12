@@ -1,0 +1,16 @@
+### 0 Nx*S -> W 1 ###
+
+CMP STAT, 0000000
+JMPNE
+MOV CDR, 00
+MOV EXT, 1000 #we want north blocked
+JMPNE
+MOV CDR, 01
+CMP EXT, 0000 #we want east free
+JMPNE
+MOV CDR, 11
+CMP EXT, 0001 #we want south blocked
+JMPNE
+MOV DIR, 10 #go west
+MOV STAT, 0000001 #move to state 1
+JMP

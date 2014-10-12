@@ -1,0 +1,28 @@
+program = {line}
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+bit = "0" | "1" ;
+binder = bit, { bit } ;
+number = digit, { digit } ;
+name = alphabetic character, { alphabetic character | digit } ;
+line = ((instruction, comment) | comment |
+	   white space), "\n" ;
+
+alphabetic character = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+                     | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+                     | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+                     | "V" | "W" | "X" | "Y" | "Z" ;
+
+instruction = MOVE, COMP, ANDE, JUNE, JUMP ;
+
+MOVE = 'MOV', white space, register, ",", white space, binder ;
+COMP = 'CMP', white space, register, ",", white space, binder ;
+ANDE = 'AND', white space, register, ",", white space, register, 
+	   ",", white space, binder ;
+JUNE = 'JNE', white space, number ;
+JUMP = 'JMP', white space, number ; 
+
+register = alphabetic character, { alphabetic character | digit} ;
+
+white space = ? white space characters ?
+comment = [{white space}], '#', ? all characters - "\n"? ;

@@ -1,16 +1,21 @@
-Who is the target for this design, e.g., are you assuming any knowledge on the
-part of the language users?
+1.
+The target audience includes people who know a bit of assembly and want to learn
+Picobot. It is also for people who want a deliberately tougher experience.
 
-Why did you choose this design, i.e., why did you think it would be a good idea
-for users to express the maze-searching computation using this syntax?
+2.
+We wanted to harken back to the days of yore, when real coders used assembly.
 
-What behaviors are easier to express in your design than in Picobot’s original
-design?  If there are no such behaviors, why not?
+3.
+It is easy to express the rule of not caring about a particular surrounding. If
+you do not care, you simply do not write the rule.
 
-What behaviors are more difficult to express in your design than in Picobot’s
-original design? If there are no such behaviors, why not?
+4.
+Every rule is expanded by, on average, a factor of 12. It is not more difficult,
+just much more verbose to write.
 
-On a scale of 1–10 (where 10 is “very different”), how different is your syntax
-from PicoBot’s original design?
+5.
+8: It has mirrored structure, but is written very differently.
 
-Is there anything you don’t like about your design?
+6.
+Because of its wordiness, it is very difficult to make minor changes to the
+Picobot rules to test out new ideas.
