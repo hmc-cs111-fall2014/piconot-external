@@ -6,23 +6,23 @@ import picolib.semantics._
 package object helpers {
     
     // Face (up | right | down | left)
-    def genFace(toFace: Int, 
+    def genFace(dir_face: Int, 
                 section_number: Int = 0, 
                 line_number: Int = 0): List[Rule] = {
         List.range(1,5).map(dir => makeRule(
             section_number, line_number, dir,
             anySurroundings, StayHere,
-            section_number, line_number + 1, toFace
+            section_number, line_number + 1, dir_face
             ))
     }
 
-    def genTurn(turnAmount: Int, 
+    def genTurn(turn_amount: Int, 
                 section_number: Int = 0, 
                 line_number: Int = 0): List[Rule] = {
         List.range(1,5).map(dir => makeRule(
             section_number, line_number, dir,
             anySurroundings, StayHere,
-            section_number, line_number + 1, toDir(dir + turnAmount)
+            section_number, line_number + 1, toDir(dir + turn_amount)
             ))
     }
 
@@ -40,7 +40,7 @@ package object helpers {
                 new_section, 1, dir) )
         }
 
-    def genGo(dirDiff: Int,
+    def genGo(dir_diff: Int,
               conds: Option[Map[Int, RelativeDescription]],
               section_number: Int = 0,
               line_number: Int = 0): List[Rule] = {
@@ -48,18 +48,28 @@ package object helpers {
         conds match {
             case None => List.range(1,5).map( dir => 
                             makeRule(section_number, line_number, dir,
-                                     anySurroundings, dirToMoveDirection(toDir(dir + dirDiff)),
+                                     anySurroundings, dirToMoveDirection(toDir(dir + dir_diff)),
                                      section_number, line_number + 1, dir))
 
             
             case Some(condsMap) => {
                 val condsList = condsToList(condsMap)
                 List.range(1,5).flatMap( dir =>
-                    rulesFromDirAndSurr(section_number, line_number, dir, toDir(dir + dirDiff), condsList(dir-1)))
+                    goRules(section_number, line_number, dir, toDir(dir + dir_diff), condsList(dir-1)))
             }
         }
         
     }
+
+    def genIf(conds: Map[Int, RelativeDescription],
+              section_number: Int,
+              line_number: Int) = {
+        val condsList = condsToList(conds)
+        List.range(1,5).flatMap( dir =>
+            ifRules(section_number, line_number, dir, condsList(dir-1)))
+
+    }
+
 
     private def condsToList(conds: Map[Int, RelativeDescription]): List[Surroundings] = {
         val m = conds.withDefaultValue(Anything)
@@ -69,36 +79,55 @@ package object helpers {
     }
                                
 
-    private def rulesFromDirAndSurr(section_number: Int,
-                                    line_number: Int,
-                                    dirFacing: Int,
-                                    moveDir: Int,
-                                    surr: Surroundings): List[Rule] = {
-            var someRules: List[Rule] = List(makeRule(section_number, line_number, dirFacing,
-                                             surr, dirToMoveDirection(moveDir),
-                                             section_number, line_number, dirFacing))
-            if(surr.north != Anything) {
-                someRules :+= makeRule(section_number, line_number, dirFacing,
-                                       Surroundings(opposite(surr.north), Anything, Anything, Anything), StayHere,
-                                       section_number, line_number + 1, dirFacing)
-            }
-            if(surr.east != Anything) {
-                someRules :+= makeRule(section_number, line_number, dirFacing,
-                                       Surroundings(Anything, opposite(surr.east), Anything, Anything), StayHere,
-                                       section_number, line_number + 1, dirFacing)
-            }
-            if(surr.south != Anything) {
-                someRules :+= makeRule(section_number, line_number, dirFacing,
-                                       Surroundings(Anything, Anything, Anything, opposite(surr.south)), StayHere,
-                                       section_number, line_number + 1, dirFacing)
-            }
-            if(surr.west != Anything) {
-                someRules :+= makeRule(section_number, line_number, dirFacing,
-                                       Surroundings(Anything, Anything, opposite(surr.west), Anything), StayHere,
-                                       section_number, line_number + 1, dirFacing)
-            }
-            someRules
+    private def goRules(section_number: Int,
+                        line_number: Int,
+                        dir_facing: Int,
+                        dir_move: Int,
+                        surr: Surroundings): List[Rule] = {
+        makeRule(section_number, line_number, dir_facing,
+                  surr, dirToMoveDirection(dir_move),
+                  section_number, line_number, dir_facing) +:
+        stopJumpRules(section_number, line_number, dir_facing, surr, 1)
+    }
+
+    private def ifRules(section_number: Int,
+                        line_number: Int,
+                        dir_facing: Int,
+                        surr: Surroundings): List[Rule] = {
+        makeRule(section_number, line_number, dir_facing,
+                  surr, StayHere,
+                  section_number, line_number + 1, dir_facing) +:
+        stopJumpRules(section_number, line_number, dir_facing, surr, 2)
+    }
+
+    private def stopJumpRules(section_number: Int,
+                              line_number: Int,
+                              dir_facing: Int,
+                              surr: Surroundings,
+                              jump_amount: Int): List[Rule] = {
+        var someRules = List[Rule]()
+        if(surr.north != Anything) {
+            someRules :+= makeRule(section_number, line_number, dir_facing,
+                                   Surroundings(opposite(surr.north), Anything, Anything, Anything), StayHere,
+                                   section_number, line_number + jump_amount, dir_facing)
         }
+        if(surr.east != Anything) {
+            someRules :+= makeRule(section_number, line_number, dir_facing,
+                                   Surroundings(Anything, opposite(surr.east), Anything, Anything), StayHere,
+                                   section_number, line_number + jump_amount, dir_facing)
+        }
+        if(surr.south != Anything) {
+            someRules :+= makeRule(section_number, line_number, dir_facing,
+                                   Surroundings(Anything, Anything, Anything, opposite(surr.south)), StayHere,
+                                   section_number, line_number + jump_amount, dir_facing)
+        }
+        if(surr.west != Anything) {
+            someRules :+= makeRule(section_number, line_number, dir_facing,
+                                   Surroundings(Anything, Anything, opposite(surr.west), Anything), StayHere,
+                                   section_number, line_number + jump_amount, dir_facing)
+        }
+        someRules
+    }
 
     // Helper functions for internal use only
     private def opposite(relDesc: RelativeDescription): RelativeDescription = relDesc match {

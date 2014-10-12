@@ -35,9 +35,12 @@ class PicoOughtParserTests extends FunSpec with LangParseMatchers[AST] {
             program("Do p$oop  y p!oop.") should parseAs ( Do("p$oop  y p!oop") )
         }
 
-        // it("Should not parse bad labels") {
-        //     program("Do #poop.") should not parse
-        // }
+        it("Should not parse bad labels") {
+            program("Do #poop.") should not (parse)
+            program("Do p.oop.") should not (parse)
+            program("Do p,oop.") should not (parse)
+            program("Do poo:p.") should not (parse)
+        }
     }
 
     describe("A Go command") {
@@ -48,7 +51,6 @@ class PicoOughtParserTests extends FunSpec with LangParseMatchers[AST] {
             program("Go left once.") should parseAs ( Go(LEFTWARDS, None) )
         }
 
-
         it("Should parse Go <dir> while <condition>") {
             program("Go left while open in front.") should parseAs ( Go(LEFTWARDS, Some(Map(FORWARDS -> Open))) )
 
@@ -57,5 +59,87 @@ class PicoOughtParserTests extends FunSpec with LangParseMatchers[AST] {
                                                 BACKWARDS -> Open,
                                                  RIGHTWARDS -> Blocked))))
         }
+
+        // TODO: decide on 'to the right/left' vs 'right/left'
+        // it("Should parse Go all the way <dir>") {
+        //     program("Go all the way forwards.") should parseAs ( Go(FORWARDS, Some(Map(FORWARDS -> Open))) )
+        //     program("Go all the way to the right.") should parseAs ( Go(RIGHTWARDS, Some(Map(RIGHTWARDS -> Open))) )
+        //     program("Go all the way backwards.") should parseAs ( Go(BACKWARDS, Some(Map(BACKWARDS -> Open))) )
+        //     program("Go all the way to the left.") should parseAs ( Go(LEFTWARDS, Some(Map(LEFTWARDS -> Open))) )
+        // }
     }
+
+    describe("A Program") {
+        it("Should parse empty sections") {
+            program("start:") should parseAs ( Program(List(Section("start", List()))) )
+            program("A simple section:") should parseAs ( Program(List(Section("A simple section", List()))) )
+            program("0!:") should parseAs ( Program(List(Section("0!", List()))) )
+            program("Turn right:") should parseAs ( Program(List(Section("Turn right", List()))) )
+        }
+
+        it("Should parse multiple empty sections") {
+            program("start: end:") should parseAs( (Program(List(Section("start", List()), Section("end", List())))) )
+            program("""
+                start: 
+                end:
+                """) should parseAs( (Program(List(Section("start", List()), Section("end", List())))) )
+        }
+
+        it("Should not parse bad section names") {
+            program(" :") should not (parse)
+            program("hey#there:") should not (parse)
+            program("hey,there:") should not (parse)
+            program("a.section:") should not (parse)
+        }
+
+        it("Should parse a single section with a single command") {
+            program("""
+                Face up:
+                    Face up.
+                """) should parseAs ( Program(List(Section("Face up", List( Face(UP) )))) )
+        }
+
+        it("Should parse multiple simple sections") {
+            program("""
+                start:
+                    Face up.
+                end:
+                    Face down.
+                """) should parseAs ( Program(List(Section("start", List( Face(UP) )),
+                                           Section("end", List( Face(DOWN))))) )
+        }
+
+        it("Should parse multiple sections with multiple lines") {
+            program("""
+                start:
+                    Turn right. Do end.
+                end:
+                    Go forwards once. Do start.
+                """) should parseAs (
+                  Program(List(Section("start", List( Turn(R), Do("end") )),
+                               Section("end", List( Go(FORWARDS, None), Do("start") )))) )
+        }
+    }
+
+    describe("Programs with If commands") {
+        it("Should parse a simple If command") {
+            program("start: If wall in front, then go forwards once.") should parseAs (
+                    Program(List(Section("start", List(If(Map(FORWARDS -> Blocked)), Go(FORWARDS, None)))))
+                )
+        }
+
+        it("Should parse a complex If command") {
+            program("start: If wall on right and open in front, then do your homework.") should parseAs (
+                    Program(List(Section("start", List(If(Map(RIGHTWARDS -> Blocked, FORWARDS -> Open)), Do("your homework")))))
+                )
+        }
+
+        it("Should not parse bad if statements") {
+            program("start: If, then.") should not (parse)
+            program("start: If, then do something.") should not (parse)
+            program("start: If wall on right, then.") should not (parse)
+            program("start: If wall on right then do nothing.") should not (parse)
+        }
+    }
+
 }

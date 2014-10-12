@@ -4,7 +4,7 @@ import scala.tools.nsc.EvalLoop
 import pico_ought.parser.PicoOughtParser
 import pico_ought.semantics.eval
 
-object PicoOughtExternal extends EvalLoop with App {
+object PicoOughtExternal extends JFXApp {
   override def prompt = "> "
 
   loop { line ⇒
