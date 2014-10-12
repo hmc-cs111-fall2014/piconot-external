@@ -22,3 +22,6 @@ a jar as that would be easier when someone needs to download our source to not
 need to get the jar too.
 
 #Sunday 12th
+As we are finishing up the semantics, we are realizing we used a lot of the same 
+names as the original picolib. A lot of explicit calls does not look great, so
+we decided to just rename some of our stuff in the AST.
