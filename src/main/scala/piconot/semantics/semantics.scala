@@ -4,10 +4,15 @@ import picolib.semantics._
 import piconot.ir._
 
 package object semantics {
+  // Maps a street to a state number
   var mapState: Map[String, String] = Map()
+  // Accumulates all rules for a program
   var listRules: List[Rule] = List()
+
   def eval(ast: AST): List[Rule] = ast match {
+    // Consumes commands until it reaches "null", which terminates the evaluation
     case MakeCommand(streetWithModifier, surroundings, goDirection, goState, nextCommand) =>
+      // Build rule from parts of the command
       val rule:Rule = Rule(State(extractString(streetWithModifier)),
           getSurroundings(extractSurroundings(surroundings)),
           getDirection(extractString(goDirection)),
@@ -17,6 +22,7 @@ package object semantics {
     case _ => listRules
   }
 
+  // Extract strings from parts of the AST
   def extractString(ast: AST): String = ast match {
     case PicoString(string) => string
     case PicoModifier(string) => string
@@ -29,6 +35,7 @@ package object semantics {
     case GetFinalStreet(streetWithModifier) => extractString(streetWithModifier)
   }
 
+  // Recursively determines the given surroundings
   def extractSurroundings(ast:AST): PicoSurroundings = ast match {
     case PicoSurroundings(north, east, west, south) => PicoSurroundings(north, east, west, south)
     case GetSurroundings(ability, direction, surroundings) =>
@@ -55,6 +62,7 @@ package object semantics {
           ability)
   }
 
+  // Fetches the state number from the mapping
   def getState(street: String): String = {
     mapState.get(street) match {
       case Some(stateNum: String) => stateNum
@@ -65,6 +73,7 @@ package object semantics {
     }
   }
 
+  // Returns if a direction is blocked or not
   def getRelDes(action: String): RelativeDescription = {
     action match {
       case "can" => Open // can
@@ -73,6 +82,7 @@ package object semantics {
     }
   }
 
+  // Transforms the AST representation of surroundings to the object Surroundings
   def getSurroundings(surroundings: PicoSurroundings): Surroundings = {
     Surroundings(getRelDes(extractString(surroundings.north)),
       getRelDes(extractString(surroundings.east)),
@@ -80,6 +90,7 @@ package object semantics {
       getRelDes(extractString(surroundings.south)))
   }
 
+  // Gets the direction based on the predefined strings
   def getDirection(direction: String): MoveDirection = {
     direction match {
       case "uptown" => North

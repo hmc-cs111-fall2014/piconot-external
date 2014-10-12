@@ -1,15 +1,16 @@
 package piconot.ir
 
 /*
- * "If you are on", space, street, [north option], [east option], [west option], [south option], ",", space, go, space, street, ".", new line
+ * "If you are on ", street, option, ", ", goTo, streetTo
  *
- * c ∈ Command ::= "If you are on " s o go | c c
+ * c ∈ Command ::= "If you are on " s o gT sT | c c
  * s ∈ Street ::= string m
  * m ∈ Modifier ::= "Rd." | "St." | "Pkwy." | "Ave." | "Blvd."
- * o ∈ option ::= "and " ability " go " Direction
+ * o ∈ option ::= " and " ability " go " Direction
  * a ∈ ability ::= "can" | "cannot"
- * go ∈ Go ::= ", go " d " on " s | "teleport to " s
- * d ∈ Direction ::= "uptown" | "outta_town" | "into_town" | "downtown"
+ * gT ∈ goTo ::= ", go " d " on "| "teleport to "
+ * sT ∈ streetTo ::= s
+ * d ∈ Direction ::= "uptown" | "outta town" | "into town" | "downtown"
  *
  */
 
