@@ -19,18 +19,16 @@ import picolib.semantics.RelativeDescription
 import picolib.semantics.TextDisplay
 import picolib.semantics.West
 import picolib.semantics.StayHere
-
-
-
-
+import scalafx.application.JFXApp
 
 package object semantics {
-  def eval(ast: AST): Picobot = ast match {
+  def eval(ast: AST): Picobot with TextDisplay with GUIDisplay = ast match {
     case Program(declaration, consider) => {
     	val dec = evalMaze(declaration)
     	val con = evalRules(consider)
     	
-    	new Picobot(dec, con)
+    	object bot extends Picobot(dec, con) with TextDisplay with GUIDisplay
+    	bot
     }
     
     case _ => {

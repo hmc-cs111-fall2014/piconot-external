@@ -4,10 +4,10 @@ package dsl.picobot
 //import scala.tools.nsc.EvalLoop
 import dsl.picobot.parser.PicoParser
 import dsl.picobot.semantics.eval
-//import scalafx.application.JFXApp
+import scalafx.application.JFXApp
 
 //object bot extends EvalLoop with App {
-object bot extends App {
+object bot extends JFXApp {
   override def main(args: Array[String]): Unit = {
     if (args.length != 1) {
       throw new IllegalArgumentException("Exactly one parameter expected")
@@ -18,8 +18,7 @@ object bot extends App {
     
     val parsed = PicoParser(contents)
     val bot = eval(parsed.get)
-    
-    bot.run()
+    var stage = bot.mainStage	
   }
 
 //  loop { line =>
