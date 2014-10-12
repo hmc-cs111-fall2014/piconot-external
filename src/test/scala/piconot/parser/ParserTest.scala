@@ -65,6 +65,44 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
           GetFinalStreet(GetStreet(PicoString("First"), PicoModifier("St."))), PicoString("null")))
     }
 
+    it("can parse multiple commands in the same program") {
+      program("If you are on Second St. and you can go downtown go downtown on Fourth St." +
+        "If you are on Second St. and you cannot go downtown and you can go outta_town go outta_town on Second St." +
+        "If you are on Second St. and you cannot go downtown and you cannot go outta_town and you can go uptown go uptown on Main St." +
+        "If you are on Second St. and you cannot go downtown and you cannot go outta_town and you cannot go uptown and you can go into_town go into_town on Third St.") should parseAs(
+        MakeCommand(
+          GetStreet(PicoString("Second"), PicoModifier("St.")),
+          GetSurroundings(PicoAbility("can"), PicoDirection("downtown"),
+            PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null"))),
+          GetFinalDirection(PicoDirection("downtown")),
+          GetFinalStreet(GetStreet(PicoString("Fourth"), PicoModifier("St."))),
+          MakeCommand(
+            GetStreet(PicoString("Second"), PicoModifier("St.")),
+            GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
+              GetSurroundings(PicoAbility("can"), PicoDirection("outta_town"),
+                PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))),
+            GetFinalDirection(PicoDirection("outta_town")),
+            GetFinalStreet(GetStreet(PicoString("Second"), PicoModifier("St."))),
+            MakeCommand(
+              GetStreet(PicoString("Second"), PicoModifier("St.")),
+              GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
+                GetSurroundings(PicoAbility("cannot"), PicoDirection("outta_town"),
+                  GetSurroundings(PicoAbility("can"), PicoDirection("uptown"),
+                    PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null"))))),
+              GetFinalDirection(PicoDirection("uptown")),
+              GetFinalStreet(GetStreet(PicoString("Main"), PicoModifier("St."))),
+              MakeCommand(
+                GetStreet(PicoString("Second"), PicoModifier("St.")),
+                GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
+                  GetSurroundings(PicoAbility("cannot"), PicoDirection("outta_town"),
+                    GetSurroundings(PicoAbility("cannot"), PicoDirection("uptown"),
+                      GetSurroundings(PicoAbility("can"), PicoDirection("into_town"),
+                        PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))))),
+                GetFinalDirection(PicoDirection("into_town")),
+                GetFinalStreet(GetStreet(PicoString("Third"), PicoModifier("St."))), PicoString("null")))))
+      )
+    }
+
 
   }
 }
