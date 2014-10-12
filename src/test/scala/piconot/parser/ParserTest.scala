@@ -25,8 +25,8 @@ class PicobotParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Complete Rule") {
 
     it("Should parse") {
-      program("0 abcd -> N 0") should parseAs(Rule(State(0), 
-    		  								Surroundings('a', 'b', 'c', 'd'),
+      program("0 Nxxx -> N 0") should parseAs(Rule(State(0), 
+    		  								Surroundings('N', 'x', 'x', 'x'),
     		  								MoveDirection('N'),
     		  								State(0)))
     }

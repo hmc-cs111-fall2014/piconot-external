@@ -11,7 +11,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     // rules
     lazy val rule: PackratParser[PicobotProgram] = 
       (
-          state~surr~"->"~mov~state ^^  {case state1~surr1~"->"~movedir~state2 => Rule(state1, surr1, movedir, state2)}
+          state~surr~"->"~mov~state ^^  
+          {case state1~surr1~"->"~movedir~state2 => Rule(state1, surr1, movedir, state2)}
       )
                     
     // state
@@ -23,7 +24,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     // surroundings
     lazy val surr: Parser[Surroundings] =  
     (
-      ident ^^ {a => Surroundings(a.charAt(0),a.charAt(1), a.charAt(2), a.charAt(3))}
+      starOrChar ^^ {a => Surroundings(a.charAt(0),a.charAt(1), a.charAt(2), a.charAt(3))}
     )
     
     // movement
@@ -31,4 +32,6 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     (
       ident ^^ {a => MoveDirection(a.charAt(0))}
     )
+    
+    def starOrChar: Parser[String] = ident
 }
