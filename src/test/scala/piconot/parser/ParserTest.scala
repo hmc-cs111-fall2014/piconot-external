@@ -10,7 +10,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
   describe("A command") {
 
     it("can parse a simple command with one option") {
-      program("If you are on First St. and you can go uptown go uptown on First St.") should parseAs(
+      program("If you are on First St. and can go uptown, go uptown on First St.") should parseAs(
         MakeCommand(
           GetStreet(PicoString("First"), PicoModifier("St.")),
           GetSurroundings(PicoAbility("can"), PicoDirection("uptown"),
@@ -20,7 +20,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
     }
 
     it("can parse a simple command with a cannot") {
-      program("If you are on Second St. and you cannot go downtown go uptown on First St.") should parseAs(
+      program("If you are on Second St. and cannot go downtown, go uptown on First St.") should parseAs(
         MakeCommand(
           GetStreet(PicoString("Second"), PicoModifier("St.")),
           GetSurroundings(PicoAbility("cannot"), PicoDirection("downtown"),
@@ -30,7 +30,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
     }
 
     it("can parse a simple command with two options") {
-      program("If you are on First St. and you can go uptown and you cannot go downtown go uptown on First St.") should parseAs(
+      program("If you are on First St. and can go uptown and cannot go downtown, go uptown on First St.") should parseAs(
         MakeCommand(
           GetStreet(PicoString("First"), PicoModifier("St.")),
           GetSurroundings(PicoAbility("can"), PicoDirection("uptown"),
@@ -41,7 +41,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
     }
 
     it("can parse a command with three options") {
-      program("If you are on First St. and you can go uptown and you cannot go downtown and you cannot go into_town go uptown on First St.") should parseAs(
+      program("If you are on First St. and can go uptown and cannot go downtown and cannot go into_town, go uptown on First St.") should parseAs(
         MakeCommand(
           GetStreet(PicoString("First"), PicoModifier("St.")),
           GetSurroundings(PicoAbility("can"), PicoDirection("uptown"),
@@ -53,7 +53,7 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
     }
 
     it("can parse a command with four options") {
-      program("If you are on First St. and you can go uptown and you cannot go downtown and you cannot go into_town and you can go outta_town go uptown on First St.") should parseAs(
+      program("If you are on First St. and can go uptown and cannot go downtown and cannot go into_town and can go outta_town, go uptown on First St.") should parseAs(
         MakeCommand(
           GetStreet(PicoString("First"), PicoModifier("St.")),
           GetSurroundings(PicoAbility("can"), PicoDirection("uptown"),
@@ -66,10 +66,10 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
     }
 
     it("can parse multiple commands in the same program") {
-      program("If you are on Second St. and you can go downtown go downtown on Fourth St." +
-        "If you are on Second St. and you cannot go downtown and you can go outta_town go outta_town on Second St." +
-        "If you are on Second St. and you cannot go downtown and you cannot go outta_town and you can go uptown go uptown on Main St." +
-        "If you are on Second St. and you cannot go downtown and you cannot go outta_town and you cannot go uptown and you can go into_town go into_town on Third St.") should parseAs(
+      program("If you are on Second St. and can go downtown, go downtown on Fourth St." +
+        "If you are on Second St. and cannot go downtown and can go outta_town, go outta_town on Second St." +
+        "If you are on Second St. and cannot go downtown and cannot go outta_town and can go uptown, go uptown on Main St." +
+        "If you are on Second St. and cannot go downtown and cannot go outta_town and cannot go uptown and can go into_town, go into_town on Third St.") should parseAs(
         MakeCommand(
           GetStreet(PicoString("Second"), PicoModifier("St.")),
           GetSurroundings(PicoAbility("can"), PicoDirection("downtown"),

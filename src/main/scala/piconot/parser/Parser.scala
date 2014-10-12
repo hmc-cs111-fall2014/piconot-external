@@ -29,8 +29,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     )
 
   lazy val option: PackratParser[Command] =
-    ("and you"~ability~"go"~direction~option ^^ {case "and you"~a~"go"~d~o => GetSurroundings(a, d, o)}
-     | "and you"~ability~"go"~direction ^^ {case "and you"~a~"go"~d => GetSurroundings(a, d,
+    ("and"~ability~"go"~direction~option ^^ {case "and"~a~"go"~d~o => GetSurroundings(a, d, o)}
+     | "and"~ability~"go"~direction ^^ {case "and"~a~"go"~d => GetSurroundings(a, d,
       PicoSurroundings(PicoAbility("null"), PicoAbility("null"), PicoAbility("null"), PicoAbility("null")))})
 
   lazy val ability: PackratParser[Command] =
@@ -38,8 +38,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
       |"can" ^^ {case s => PicoAbility(s)})
 
   lazy val goDirection: PackratParser[Command] =
-    ("go"~direction~"on" ^^ {case "go"~d~"on" => GetFinalDirection(d)}
-      | "teleport to" ^^ {case "teleport to" => GetFinalDirection(PicoDirection("stay"))})
+    (", go"~direction~"on" ^^ {case ", go"~d~"on" => GetFinalDirection(d)}
+      | ", teleport to" ^^ {case ", teleport to" => GetFinalDirection(PicoDirection("stay"))})
 
   lazy val goState: PackratParser[Command] =
     (street ^^ {case s => GetFinalStreet(s)})
