@@ -1,0 +1,5 @@
+maze = empty.txt
+N -> F R L B
+S -> F L B R
+E -> R L F B
+W -> F L R B

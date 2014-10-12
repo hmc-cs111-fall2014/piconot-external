@@ -1,4 +1,4 @@
-package priorityBot.semantics
+package priorityBot
 
 import priorityBot.ir._
 import java.io.File
@@ -17,7 +17,7 @@ package object semantics {
         val rules = eval(ruleList).asInstanceOf[List[Rule]]
         
           
-	    object Bot extends picolib.semantics.Picobot(maze, rules)
+	    object Bot extends Picobot(maze, rules)
 	  		with TextDisplay with GUIDisplay
 	  		
 	    stage = Bot.mainStage
