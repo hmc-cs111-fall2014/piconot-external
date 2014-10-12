@@ -19,7 +19,7 @@ import picolib.semantics.RelativeDescription
 import picolib.semantics.TextDisplay
 import picolib.semantics.West
 import picolib.semantics.StayHere
-//import scalafx.application.JFXApp
+
 
 
 

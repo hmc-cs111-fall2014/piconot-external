@@ -1,8 +1,10 @@
-//package dsl.picobot
+package dsl.picobot
+
 
 //import scala.tools.nsc.EvalLoop
-//import dsl.picobot.parser.PicoParser
-//import dsl.picobot.semantics.eval
+import dsl.picobot.parser.PicoParser
+import dsl.picobot.semantics.eval
+//import scalafx.application.JFXApp
 
 //object bot extends EvalLoop with App {
 object bot extends App {
@@ -14,7 +16,10 @@ object bot extends App {
     val contents = source.mkString
     source.close()
     
-    println(contents)
+    val parsed = PicoParser(contents)
+    val bot = eval(parsed.get)
+    
+    bot.run()
   }
 
 //  loop { line =>

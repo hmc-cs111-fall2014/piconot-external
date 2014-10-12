@@ -1,4 +1,4 @@
-package picobot.semantics
+package dsl.picobot.semantics
 
 import org.scalatest._
 
