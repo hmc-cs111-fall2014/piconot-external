@@ -18,17 +18,17 @@ combinators and with the language architecture and implementation process we
 discussed in class.
 
 ## Checklist
- - [ ] [Sign up for teams][Teams]. Team 1 will have three people; all other 
+ - [X] [Sign up for teams][Teams]. Team 1 will have three people; all other 
     teams will have two people
- - [ ] Describe your design in `design.txt` 
- - [ ] Formally specify the syntax you plan to implement in `grammar-ideal.txt`.
- - [ ] Implement the syntax
-     - [ ] Add files, as needed, to implement your syntax. Use the language
+ - [X] Describe your design in `design.txt` 
+ - [X] Formally specify the syntax you plan to implement in `grammar-ideal.txt`.
+ - [X] Implement the syntax
+     - [X] Add files, as needed, to implement your syntax. Use the language
      architecture we discussed in class (more details below), and use parser
      combinators to implement your parser.
      - Include at least two example programs
-       - [ ] `Empty.bot`
-       - [ ] `RightHand.bot`
+       - [X] `Empty.bot`
+       - [X] `RightHand.bot`
      - [ ] Provide instructions for how to run piconot on a file in `build.txt`
      - [ ] Describe your implementation process in `evaluation.txt`
      - [ ] Formally specify your final syntax in `grammar-final.txt`

@@ -1,0 +1,24 @@
+(* Hayden Blauzvern and Sarah Gilkinson *)
+(* Team Seven *)
+
+command = "If you are on ", street, option, ", ", goTo, streetTo | command command
+
+street = string, " ", street modifier
+street modifier = ("St" | "Ave" | "Blvd" | "Rd" | "Pkwy"), "."
+uppercase = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" |
+            "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z";
+lowercase = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" |
+            "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+string = {uppercase, lowercase}
+
+option =  " and ", ability, " go ", direction | option option
+ability = "can" | "cannot"
+direction = "uptown" | "outta town" | "into town" | "downtown"
+
+goTo = "go ", direction, " on " | "teleport to "
+streetTo = street
+
+
+
+
+
