@@ -1,0 +1,13 @@
+in state up
+  surrounded by xx** then move N next state up
+  surrounded by Nx** then move E next state down 
+
+in state down
+  surrounded by *x*x then move S next state down
+  surrounded by *x*S then move X next state up
+  surrounded by *Exx then move S next state down
+  surrounded by xExS then move W next state goingWest 
+
+in state goingWest
+  surrounded by **x* then move W next state goingWest
+  surrounded by **W* then move X next state up

@@ -1,0 +1,11 @@
+We started off using the same syntax as our internal piconot DSL, which had
+parentheses and curly braces to make it easier to implement.  We quickly
+realized that with an external DSL, these things actually made it harder, so we
+got rid of them.
+
+By the same logic, we got rid of semicolons and quotation marks (since
+everything is being parsed as a string anyways).
+
+After having implemented everything, we realized that there wasn't any reason to
+limit the number of keywords, so we split previously camelCased compound
+keywords into multiple words.
