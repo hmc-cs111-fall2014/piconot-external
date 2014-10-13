@@ -49,10 +49,11 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
         | "e" ^^ {case "e" => E()}
         | "w" ^^ {case "w" => W()}
         | "s" ^^ {case "s" => S()}
-        // TODO: support greek
+        | "η" ^^ {case "n" => N()}
+        | "ε" ^^ {case "e" => E()}
+        | "ω" ^^ {case "w" => W()}
+        | "ς" ^^ {case "s" => S()}
       )
           
     lazy val state: PackratParser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)} 
-          
-//    l~"="~r ^^ => state(l), actions(r)
 }
