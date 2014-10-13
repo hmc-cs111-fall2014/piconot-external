@@ -97,6 +97,12 @@ get it to run. We are still getting lots of errors because JFXApp is confusing.
 
 It’s been a while. Nothing is still working. We tried a lot of things.
 
+Picobot is now running correctly. We modified SemanticTests and now tests are
+also working. How to parse commandline arguments in a JFXApp was very un-
+intuitive. We never would have figured it out without Prof. Ben's help.
+
+We added support for QED as well as Greek letter to our parser.
+
 
 
 
