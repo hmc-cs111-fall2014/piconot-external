@@ -36,8 +36,8 @@ case class State(n: Int) extends PicobotProgram {
   require(n >= 0, "State identifier is too small!")
 }
 
-case class Surroundings(char1: Char, char2: Char, 
-						char3: Char, char4: Char) extends PicobotProgram
+case class Surroundings(north: SurroundingComponentType, east: SurroundingComponentType, 
+						west: SurroundingComponentType, south: SurroundingComponentType) extends PicobotProgram
 
 case class SurroundingComponent(c: Char)
 						
@@ -46,12 +46,12 @@ case object Blocked extends SurroundingComponentType
 case object Free extends SurroundingComponentType
 case object Wildcard extends SurroundingComponentType
 
-case class MoveDirection(char: Char) extends PicobotProgram
+case class MoveDirection(dir: MoveDirectionType) extends PicobotProgram
 
 trait MoveDirectionType extends PicobotProgram
-case object North extends MoveDirectionType with SurroundingComponentType
-case object South extends MoveDirectionType with SurroundingComponentType
-case object East extends MoveDirectionType with SurroundingComponentType
-case object West extends MoveDirectionType with SurroundingComponentType
+case object MoveNorth extends MoveDirectionType with SurroundingComponentType
+case object MoveSouth extends MoveDirectionType with SurroundingComponentType
+case object MoveEast extends MoveDirectionType with SurroundingComponentType
+case object MoveWest extends MoveDirectionType with SurroundingComponentType
 case object Halt extends MoveDirectionType
 

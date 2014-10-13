@@ -29,21 +29,22 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     )
     
     // surrounding components (with proper ordering enforced)
-    lazy val surrComp: Parser[Char] = 
+    lazy val surrComp: Parser[SurroundingComponentType] = 
       ( free | wildcard )
       
-     def free: Parser[Char] = 'x'
-     def wildcard: Parser[Char] = '*'
+     def free: Parser[SurroundingComponentType] = 'x' ^^^ Free
+     def wildcard: Parser[SurroundingComponentType] = '*' ^^^ Wildcard
     
-    lazy val surrCompNorth: Parser[Char] = ( surrComp | north )
-    lazy val surrCompEast: Parser[Char] = ( surrComp | east )
-    lazy val surrCompWest: Parser[Char] = ( surrComp | west )
-    lazy val surrCompSouth: Parser[Char] = ( surrComp | south )
-            
-    def north: Parser[Char] = 'N'
-    def south: Parser[Char] = 'S'
-    def east: Parser[Char] = 'E'
-    def west: Parser[Char] = 'W'
+    lazy val surrCompNorth: Parser[SurroundingComponentType] = ( surrComp | north )
+    lazy val surrCompEast: Parser[SurroundingComponentType] = ( surrComp | east )
+    lazy val surrCompWest: Parser[SurroundingComponentType] = ( surrComp | west )
+    lazy val surrCompSouth: Parser[SurroundingComponentType] = ( surrComp | south )
+    
+    lazy val surrComps = ( north | south | east | west )
+    def north: Parser[SurroundingComponentType] = 'N' ^^^ Blocked
+    def south: Parser[SurroundingComponentType] = 'S' ^^^ Blocked
+    def east: Parser[SurroundingComponentType] = 'E' ^^^ Blocked
+    def west: Parser[SurroundingComponentType] = 'W' ^^^ Blocked
        
     // movement directions
     lazy val mov: Parser[MoveDirection] =
@@ -51,7 +52,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
       movComp ^^ {a => MoveDirection(a)}
     )
     
-    lazy val movComp: Parser[Char] = ( north | south | east | west | halt)
+    lazy val movComp: Parser[MoveDirectionType] = ( surrComps | halt)
     
-    def halt: Parser[Char] = 'X'
+    def halt: Parser[MoveDirectionType] = 'X' ^^^ Halt
 }
