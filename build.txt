@@ -3,6 +3,4 @@
     sbt "run bot-path maze-path"
    where bot-path is a file containing a rule for Piconot on each line
    and maze-path is the maze file
-3. Press '3' once you execute the jar, which runs the main method in
-    piconot.Piconot
-4. Press 'Run'.
+3. Press 'Run'.
