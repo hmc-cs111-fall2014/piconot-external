@@ -1,16 +1,33 @@
 Who is the target for this design, e.g., are you assuming any knowledge on the
 part of the language users?
+We are assuming that users are already familiar with Picobot syntax, as we  re-use
+the wall definition style of *,_,X. The target audience is people who already use
+Picobot, but want a different way of organizing their rules.
 
 Why did you choose this design, i.e., why did you think it would be a good idea
 for users to express the maze-searching computation using this syntax?
+We thought it would be interesting to allow people to assign string names to states,
+as this helps organize thoughts (i.e. a state for “traveling north”). By then grouping
+all rules for that state, we help with organization even further to help people
+keep track of their programs.
 
 What behaviors are easier to express in your design than in Picobot’s original
 design?  If there are no such behaviors, why not?
+It is easier to express the purpose of various states, and to collect the behavior
+of the Picobot in a given state into one central location. Most of the behavior
+and/or functionality remains more or less the same.
 
 What behaviors are more difficult to express in your design than in Picobot’s
 original design? If there are no such behaviors, why not?
+Since states are not limited to 0-99, it is easier to accidentally transition to states
+that don’t exist (via typos, etc.) Other behaviors are pretty similar.
 
 On a scale of 1–10 (where 10 is “very different”), how different is your syntax
 from PicoBot’s original design?
+3
 
 Is there anything you don’t like about your design?
+It would have been nice to express the other parts of a Picobot rule, such as walls and
+state transitions, in a more elegant and expressive way as well. We decided to go for
+compactness, but a more wordy syntax might have made the rules more easily expressed and
+read.
