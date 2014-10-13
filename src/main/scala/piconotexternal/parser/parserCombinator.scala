@@ -1,4 +1,3 @@
-// TODO: Parser goes here!
 package piconotexternal.parser
 
 import scala.util.parsing.combinator._
