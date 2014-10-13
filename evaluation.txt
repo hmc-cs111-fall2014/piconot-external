@@ -103,6 +103,9 @@ intuitive. We never would have figured it out without Prof. Ben's help.
 
 We added support for QED as well as Greek letter to our parser.
 
+We added rudimentary error-checking: if the user enters an invalid direct, we
+return a helpful error message.
+
 
 
 
