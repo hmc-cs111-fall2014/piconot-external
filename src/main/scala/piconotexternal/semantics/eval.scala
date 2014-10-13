@@ -1,4 +1,4 @@
-package piconotexternal
+package piconotexternal.semantics
 
 import java.io.File
 import picolib.maze.Maze
@@ -22,21 +22,20 @@ import scalafx.application.JFXApp
 
 import piconotexternal.ir._
 
-package object semantics {
+package object DSLSemantics {
 
   var globalRules:List[Rule] = List();
   var numberOfStates = 0
   var stringToStateMap: Map[String, State] = Map[String, State]()
 
   // FIXME placeholder NUKE THIS LATER
-  val emptyMaze = Maze("resources" + File.separator + "empty.txt")
+  //val emptyMaze = Maze("resources" + File.separator + "empty.txt")
 
-  // FIXME this might want to return something else
-  //  for example Int -> error code?
-  def eval(ast: AST):Int = ast match {
+  def eval(ast: AST, mazefile:String):Int = ast match {
     case RulesList(rules) => {
       rules.foreach(x => evalRule(x))
-      object Bot extends Picobot(emptyMaze, globalRules) with TextDisplay with GUIDisplay
+      val maze = Maze("resources" + File.separator + mazefile)
+      object Bot extends Picobot(maze, globalRules) with TextDisplay with GUIDisplay
       val stage = Bot.mainStage;
       return 1;
     }
