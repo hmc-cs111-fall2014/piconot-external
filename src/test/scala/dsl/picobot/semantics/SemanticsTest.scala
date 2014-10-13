@@ -23,6 +23,17 @@ import picolib.semantics.Surroundings
 import picolib.semantics.TextDisplay
 import picolib.semantics.West
 
+/*
+ * Tests the semantics of our external picobot language.
+ * It only tests whether the rules are evaluated correctly.
+ * This is because they are the most complicated part of the
+ * program, and it's also deterministic. If we tested the semantics
+ * of an entire Picobot program, we would not be able to compare
+ * the results because the starting location of a Picobot
+ * is randomized, so two Picobots with the same rules might
+ * not be exactly equivalent.
+ */
+
 class PicobotSemanticsTests extends FunSpec
     with LangInterpretMatchers[AST, List[Rule]] {
   override val parser = PicoParser.tester _
@@ -60,10 +71,6 @@ class PicobotSemanticsTests extends FunSpec
       program("Consider.") should compute (
           List.empty
       )
-    }
-    
-    
+    }   
   }
-
-  
 }

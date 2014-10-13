@@ -38,7 +38,7 @@ package object semantics {
   
   def evalMaze(ast: AST): Maze = ast match {
     case Declaration(mazename) => {
-      Maze(mazename) // TODO: potentially path
+      Maze(mazename)
     }
     
     case _ => {
