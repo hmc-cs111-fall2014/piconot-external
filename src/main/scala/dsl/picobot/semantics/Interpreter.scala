@@ -106,8 +106,8 @@ package object semantics {
   
   def evalSurrounding(surrounding: Surrounding): Surroundings = surrounding match {
     case Plus(dir) => evalDir(dir, Blocked)
-    case Minus(dir) => evalDir(dir, Blocked)
-    case Mult(dir) => evalDir(dir, Blocked)
+    case Minus(dir) => evalDir(dir, Open)
+    case Mult(dir) => evalDir(dir, Anything)
   }
   
   def evalDir(dir: Dir, word: RelativeDescription): Surroundings = dir match {
