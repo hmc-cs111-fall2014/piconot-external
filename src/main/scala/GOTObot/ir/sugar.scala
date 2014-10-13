@@ -8,11 +8,7 @@ package object ir {
 
   implicit def int2Number(i: Int): Num = Num(i)
 
-  implicit class RuleBuilder(val g: GO) {
-    def ->(t: TO)(n: Num) = Rule(g, t, n)
-  }
-
-  implicit class MultiRuleBuilder(val r: Rule) {
-    def then(p: Prog) = MultiRule(r, p)
+  implicit class MultiRuleBuilder(val r: GOTORule) {
+    def followedBy(p: Prog) = MultiRule(r, p)
   }
 }

@@ -10,13 +10,13 @@ object GOTOParser extends JavaTokenParsers with PackratParsers {
 
     // program
     lazy val prog: PackratParser[Prog] = (
-      rule~"\n"~prog ^^ {case r~"\n"~p ⇒ r then p}
+      rule~prog ^^ {case r~p ⇒ r followedBy p}
       | rule
     )
-        
+
     // rule
-    lazy val rule: PackratParser[Rule] = (
-      go~" "~to~" "~number ^^ {case g~" "~t~" "~n ⇒ Rule(g,t,n)} // ->(t)(n)}
+    lazy val rule: PackratParser[GOTORule] = (
+      go~to~number ^^ {case g~t~n ⇒ GOTORule(g,t,n)}
     )
 
     // go
@@ -26,7 +26,7 @@ object GOTOParser extends JavaTokenParsers with PackratParsers {
       | "G0" ^^^ *
       | "Go" ^^^ x
     )
-    
+
     // to
     import TO._
     lazy val to: PackratParser[TO] = (
@@ -34,8 +34,8 @@ object GOTOParser extends JavaTokenParsers with PackratParsers {
       | "T0" ^^^ L
       | "To" ^^^ X
     )
-  
+
     // numbers
     def number: Parser[Num] = wholeNumber ^^ {s ⇒ Num(s.toInt)}
-    
+
  }

@@ -1,19 +1,56 @@
 package GOTObot.semantics
 
 import org.scalatest._
-
+import picolib.semantics._
 import GOTObot.ir._
 import GOTObot.parser._
 import GOTObot.semantics._
 import edu.hmc.langtools._
 
 class GOTOSemanticsTests extends FunSpec
-    with LangInterpretMatchers[AST, Int] {
+    with LangInterpretMatchers[AST, List[Rule]] {
 
   override val parser = GOTOParser.apply _
   override val interpreter = eval _
-/*
-  describe("A number") {
+
+  val GOs = Seq("GO", "Go", "G0")
+  val TOs = Seq("To", "TO", "T0")
+
+  def setOfRules(state: Int, front: RelativeDescription, move: Boolean, nextState: Int): List[Rule] = {
+    var rules: List[Rule] = List.empty
+    for(addition <- 0 to 3) {
+      rules = rules :+ ruleGen(state*4 + addition, front, move, nextState*4 + addition)
+    }
+
+    return rules
+  }
+
+  def ruleGen(state: Int, front: RelativeDescription, move: Boolean, nextState: Int): Rule = {
+    val dirs = state % 4 match {
+      case 0 => (Surroundings(front, Anything, Anything, Anything), North)
+      case 1 => (Surroundings(Anything, Anything, front, Anything), West)
+      case 2 => (Surroundings(Anything, Anything, Anything, front), South)
+      case 3 => (Surroundings(Anything, front, Anything, Anything), East)
+    }
+
+    Rule(State(state.toString), dirs._1, if(move) dirs._2 else StayHere, State(nextState.toString))
+  }
+
+  describe("A program") {
+    it("can be a single rule") {
+      val rules = setOfRules(0, Open, true, 0)
+       for(rule <- rules ::: setOfRules(0, Anything, false, 1)) {
+        println(rule)
+      }
+
+      program("GOTO 0") should compute(rules ::: setOfRules(0, Anything, false, 1))
+    }
+
+
+  }
+}
+
+/*  describe("A number") {
 
     it("should evaluate to an integer") {
       program("1") should compute (1)
@@ -61,7 +98,7 @@ class GOTOSemanticsTests extends FunSpec
     it("can multiply two numbers") {
       program("3*5") should compute ( 15 )
     }
- 
+
     it("can be chained (and is left-associative)") {
       program("2 * 4 * 100") should compute ( 800 )
     }
@@ -69,7 +106,7 @@ class GOTOSemanticsTests extends FunSpec
     it("can handle negative numbers") {
       program("1 * -1") should compute ( -1 )
     }
-    
+
   }
 
   describe("Division") {
@@ -81,7 +118,7 @@ class GOTOSemanticsTests extends FunSpec
     it("performs integer division") {
       program("6 / 5") should compute (1)
     }
- 
+
     it("can be chained (and is left-associative)") {
       program("100 / 10 / 5") should compute (2)
     }
@@ -89,11 +126,11 @@ class GOTOSemanticsTests extends FunSpec
     it("can handle negative numbers") {
       program("10 / -2") should compute ( -5 )
     }
-    
+
   }
 
   describe("Parenthetical Expressions") {
-    
+
     it("can put one number in parens") {
       program("(1)") should compute (1)
     }
@@ -116,7 +153,7 @@ class GOTOSemanticsTests extends FunSpec
   }
 
   describe("General") {
-   
+
     it("obeys order of operations") {
       program("3 + 4 * 5") should compute (23)
     }
@@ -125,5 +162,4 @@ class GOTOSemanticsTests extends FunSpec
       program("(3 + 4) * 5") should compute (35)
     }
   }
-*/
-}
+ */
