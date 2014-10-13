@@ -33,6 +33,18 @@ class PicoParserTests extends FunSpec with LangParseMatchers[AST] {
           )))) 
     }
     
+    it ("can have rules with greek letters") {
+      program("Proof. Recall empty.txt. Consider 1 + η = 2, 1 + n - ω * ς = 2, 2 = 2 - ε.") should parseAs(
+          Program(Declaration("empty.txt"), Consider(List(
+              Rule(Lhs(State(1), List(Plus(N()))),
+                   Rhs(State(2), Stay())),
+              Rule(Lhs(State(1), List(Plus(N()), Minus(W()), Mult(S()))),
+                   Rhs(State(2), Stay())),
+    		  Rule(Lhs(State(2), List.empty),
+    		       Rhs(State(2), E()))
+          )))) 
+    }
+    
     it ("can have no rules") {
       program("Proof. Recall empty.txt. Consider. QED") should parseAs(
           Program(Declaration("empty.txt"), Consider(List.empty))
