@@ -32,8 +32,8 @@ object Empty extends JFXApp {
     case e: PiconotParser.NoSuccess  => println(e)
   }
 
-  object RightHandBot extends Picobot(emptyMaze, listRules)
+  object EmptyBot extends Picobot(emptyMaze, listRules)
   with TextDisplay with GUIDisplay
 
-  stage = RightHandBot.mainStage
+  stage = EmptyBot.mainStage
 }

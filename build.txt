@@ -1,7 +1,8 @@
-In order to run the project, simply load up the project in your favorite editor
-and create a file to contain the instructions for your maze. Extend JFXApp and
-create a Maze object initialized with the path to your maze as a text file.
-Rules are a set of instructions concatenated together. No new lines are
-necessary. Then, run the PiconotParser on the rules, then running the evaluator
-on the result from the parser. Finally, use 'listRules' from the semantics
-library, passing that to the Picobot object.
+1. Run 'sbt package' to build the program.
+2. Run the following sbt command:
+    sbt "run bot-path maze-path"
+   where bot-path is a file containing a rule for Piconot on each line
+   and maze-path is the maze file
+3. Press '3' once you execute the jar, which runs the main method in
+    piconot.Piconot
+4. Press 'Run'.
