@@ -89,6 +89,13 @@ if they functioned as expected, but we are having trouble getting them to
 run. We’ve posted something on Piazza and hope there is something helpful by
 tomorrow.
 
+== 10/12 ==
+
+We have been trying different things based on Prof. Ben’s response to try and 
+get it to run. We are still getting lots of errors because JFXApp is confusing.
+
+It’s been a while. Nothing is still working. We tried a lot of things.
+
 
 
 
