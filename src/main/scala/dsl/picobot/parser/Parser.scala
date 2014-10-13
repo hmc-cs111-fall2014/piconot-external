@@ -19,13 +19,12 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
       (opt("Consider"~repsep(rule,",")~".") ^^ {
         case Some("Consider"~rules~".") => Consider(rules)
         case None => Consider(List.empty)
+        case Some(_) => throw new MatchError("Incorrectly formatted Consider statement")
         }
           )
     
     lazy val rule: PackratParser[Rule] =
-      (lhs~"="~rhs ^^ {case l~"="~r ⇒ Rule(l, r)}
-      // DO proper base case, give good error
-          )
+      (lhs~"="~rhs ^^ {case l~"="~r ⇒ Rule(l, r)})
           
     lazy val lhs: PackratParser[Lhs] =
       (   state~(surrounding*) ^^ {case s~r => Lhs(s, r)}
@@ -53,7 +52,11 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
         | "ε" ^^ {case _ => E()}
         | "ω" ^^ {case _ => W()}
         | "ς" ^^ {case _ => S()}
+        | """[a-zA-Z0-9]""".r ^^ {case s => throw new MatchError("Directions should be one of n,s,e,w. Found:" + s)}
       )
           
-    lazy val state: PackratParser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)} 
+    lazy val state: PackratParser[State] = ( 
+        """[0-9]+""".r ^^ {s ⇒ State(s.toInt)} 
+        | """[a-zA-Z0-9]+""".r ^^ {s => throw new MatchError("Invalid state detected. Use only positive integer values. Found:" + s)}
+        )
 }
