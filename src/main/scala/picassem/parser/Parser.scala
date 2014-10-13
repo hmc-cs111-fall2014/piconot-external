@@ -12,8 +12,8 @@ object PicParser extends JavaTokenParsers with PackratParsers {
       (  "JMPNE" ^^ {case "JMPNE" => JumpNext()}
 	     | "JMP" ^^ {case "JMP" => Jump()}
 	     | "MOV"~reg~","~bin ^^ {case "MOV"~l~","~r => Move(l, r)}
-	     | "CMP"~reg~","~bin ^^ {case "CMP"~l~","~r => Comp(l, r)}
-	     | "AND"~reg~","~reg~","~bin ^^ {case "AND"~l~","~m~","~r => And(l, m, r)}
+	     | "BEGIN"~reg ^^ {case "BEGIN"~l => Begin(l)}
+	     | "END" ^^ {case "END" => End()}
 	  )
     }
     

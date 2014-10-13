@@ -1,0 +1,4 @@
+We did not build our code as a class with a main method, so you must open our project in
+eclipse and run picassem.scala (path: piconot-external/src/main/scala/picassem/picassem.scala).
+It will ask for a string, which is the filename holding the picassem code. The file must be
+located in piconot-external/input. Sorry for the inconvenience.

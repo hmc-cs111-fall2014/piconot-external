@@ -31,15 +31,15 @@ class NumSemanticsTests extends FunSpec
     }
   }
   
-  describe("Comp") {
-    it("takes in two strings: a register and a binary number") {
-      program("CMP \"reg\", \"0001100\"") should compute ()
+  describe("Begin") {
+    it("should take in a filename") {
+      program("BEGIN \"empty.txt\"") should compute ()
     }
   }
   
-  describe("And") {
-    it("takes in two registers and a binary number") {
-      program("AND \"reg1\", \"reg2\", \"1100\"") should compute ()
+  describe("End") {
+    it("should be a valid line") {
+      program("END") should compute ()
     }
   }
   

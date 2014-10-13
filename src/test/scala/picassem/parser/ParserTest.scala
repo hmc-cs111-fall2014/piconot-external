@@ -34,18 +34,18 @@ class PicAssemblerTests extends FunSpec with LangParseMatchers[AST] {
     
   }
   
-  describe("Comp") {
-    
-    it("takes in two strings: a register and a binary number") {
-      program("CMP \"reg\", \"0001100\"") should parseAs(Comp("\"reg\"",12))
+  describe("Begin") {
+   
+    it("takes in a filename (string)") {
+      program("BEGIN \"empty.txt\"") should parseAs(Begin("\"empty.txt\""))
     }
     
   }
   
-  describe("And") {
-    
-    it("takes in two registers and a binary number") {
-      program("AND \"reg1\", \"reg2\", \"1010\"") should parseAs(And("\"reg1\"","\"reg2\"",10))
+  describe("End") {
+   
+    it("takes in nothing") {
+      program("END") should parseAs(End())
     }
     
   }

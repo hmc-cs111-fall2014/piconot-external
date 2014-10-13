@@ -1,0 +1,25 @@
+program = {line}
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+bit = "0" | "1" ;
+binder = bit, { bit } ;
+number = digit, { digit } ;
+name = alphabetic character, { alphabetic character | digit } ;
+line = (instruction), "\n" ;
+
+alphabetic character = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+                     | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+                     | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+                     | "V" | "W" | "X" | "Y" | "Z" ;
+
+instruction = MOVE, JUNE, JUMP, BEGIN, END ;
+
+MOVE = 'MOV', white space, register, ",", white space, binder ;
+JUNE = 'JMPNE' ;
+JUMP = 'JMP' ; 
+BEGIN = 'BEGIN', white space, ",", white space, name ;
+END = 'END' ;
+
+register = alphabetic character, { alphabetic character | digit} ;
+
+white space = ? white space characters ?
