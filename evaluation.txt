@@ -1,3 +1,5 @@
+PriorityBot - Chloe Calvarin and Matt Cook
+
 # Monday 6th, in class
 We redefined the ideal grammar and pseudo-coded it to see what should be a case 
 class, and what should be a type.
@@ -12,7 +14,7 @@ Finished the parser. No major syntax changes yet. We realized we aren't taking
 much advantage of the external language capabilities, since we have such a 
 simple type system.
 
-#Saturday 11th
+# Saturday 11th
 Implemented most of the semantics. We decided to implement using our internal 
 DSL so we don't have to redo all of the mappings of Cardinal directions to
 relative directions. One thing we do realize is that we now need to take care
@@ -23,7 +25,7 @@ We ended up deciding to just include our internal DSL file rather than making
 a jar as that would be easier when someone needs to download our source to not
 need to get the jar too.
 
-#Sunday 12th
+# Sunday 12th
 As we are finishing up the semantics, we are realizing we used a lot of the same 
 names as the original picolib. Having a lot of explicit calls to 
 library.package.type does not look great, so we decided to just rename some of 
@@ -34,3 +36,13 @@ when we realized that we could use our internal DSL syntax instead!
 
 Now we are having trouble running the JFX app object that we are creating
 in the evaluation step.
+
+# Later... on Sunday the 12th
+We fixed our problem with the JFX app after making specific eval methods that 
+will return the right type. This removed a lot of explicit casts, and allowed 
+us to return the Picobot extends TextDisplay extends GUIDisplay we needed. 
+Then, with Prof Ben's helpful Piazza post about parameters.raw, we realized 
+we didn't need to override main and impede any hope of running the JFXApp 
+properly.
+
+It now works! So excited. We still need to add some documentation.

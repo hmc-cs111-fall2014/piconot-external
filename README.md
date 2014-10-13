@@ -22,16 +22,16 @@ discussed in class.
     teams will have two people
  - [x] Describe your design in `design.txt` 
  - [x] Formally specify the syntax you plan to implement in `grammar-ideal.txt`.
- - [ ] Implement the syntax
+ - [x] Implement the syntax
      - [x] Add files, as needed, to implement your syntax. Use the language
      architecture we discussed in class (more details below), and use parser
      combinators to implement your parser.
      - Include at least two example programs
-       - [ ] `Empty.bot`
-       - [ ] `RightHand.bot`
-     - [ ] Provide instructions for how to run piconot on a file in `build.txt`
-     - [ ] Describe your implementation process in `evaluation.txt`
-     - [ ] Formally specify your final syntax in `grammar-final.txt`
+       - [x] `Empty.bot`
+       - [x] `RightHand.bot`
+     - [x] Provide instructions for how to run piconot on a file in `build.txt`
+     - [x] Describe your implementation process in `evaluation.txt`
+     - [x] Formally specify your final syntax in `grammar-final.txt`
   - [ ] Critique another team's design and implementation
 
 ## Design description and syntax specification
