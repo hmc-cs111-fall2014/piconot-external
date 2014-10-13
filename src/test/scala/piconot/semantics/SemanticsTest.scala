@@ -1,20 +1,28 @@
 package piconot.semantics
 
+// Boilerplate imports
 import org.scalatest._
+import edu.hmc.langtools._
 
+// Import our internal representation, parser, and semantics
 import piconot.ir._
 import piconot.parser._
 import piconot.semantics.semantics._
-import edu.hmc.langtools._
 
+// Grab and rename elements of the picolib
+// Basic Building Blocks
 import picolib.semantics.{State => PicoState}
 import picolib.semantics.{Rule => PicoRule}
 import picolib.semantics.{Surroundings => PicoSurroundings}
-import picolib.semantics.{Blocked => PicoBlocked}
+
+// Directions
 import picolib.semantics.{North => PicoNorth}
 import picolib.semantics.{East => PicoEast}
 import picolib.semantics.{West => PicoWest}
 import picolib.semantics.{South => PicoSouth}
+
+// Surrounding Components
+import picolib.semantics.{Blocked => PicoBlocked}
 import picolib.semantics.{Anything => PicoAnything};
 import picolib.semantics.{Open => PicoOpen};
 

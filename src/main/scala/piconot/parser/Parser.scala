@@ -10,13 +10,13 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     // parsing interface
     def apply(s: String): ParseResult[AST] = parseAll(rule, s)
 
-    
-    // rules
-    
+    // full program
     lazy val program: Parser[PicobotProgram] = 
       (
           repsep(rule, "\n") ^^ {case list1 => Rules(list1)}
       )
+    
+    // rule
     lazy val rule: PackratParser[Rule] = 
       (
           state~" "~surr~" -> "~mov~" "~state ^^ 
@@ -38,8 +38,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     lazy val surrComp: Parser[SurroundingComponentType] = 
       ( free | wildcard )
       
-     def free: Parser[SurroundingComponentType] = 'x' ^^^ Free
-     def wildcard: Parser[SurroundingComponentType] = '*' ^^^ Wildcard
+    def free: Parser[SurroundingComponentType] = 'x' ^^^ Free
+    def wildcard: Parser[SurroundingComponentType] = '*' ^^^ Wildcard
     
     lazy val surrCompNorth: Parser[SurroundingComponentType] = ( surrComp | north )
     lazy val surrCompEast: Parser[SurroundingComponentType] = ( surrComp | east )
@@ -63,8 +63,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     def movSouth: Parser[MoveDirectionType] = 'S' ^^^ MoveSouth
     def movEast: Parser[MoveDirectionType] = 'E' ^^^ MoveEast
     def movWest: Parser[MoveDirectionType] = 'W' ^^^ MoveWest
-    
+    def halt: Parser[MoveDirectionType] = 'X' ^^^ Halt
+
     lazy val movComp: Parser[MoveDirectionType] = ( moveDirs | halt)
     
-    def halt: Parser[MoveDirectionType] = 'X' ^^^ Halt
 }
