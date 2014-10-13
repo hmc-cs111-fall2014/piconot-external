@@ -24,7 +24,8 @@ This is our ideal syntax from the Piconot assignment.
 From our experience with the Piconot assignment, we realized that the user
 needs some way to specify which maze they would like to run their program on.
 To account for this, we decided to add a "RUN MAZE:" construct to a Piconot
-program. This produces the following syntax:
+program. We also decided (in the interest of not muddying up the parsing) to
+forego comments in our syntax. This produces the following syntax:
 
 STATE 0:
 	FREE DIRECTIONS: N, S
