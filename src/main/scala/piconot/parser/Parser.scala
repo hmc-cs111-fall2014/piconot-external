@@ -52,7 +52,13 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
       movComp ^^ {a => MoveDirection(a)}
     )
     
-    lazy val movComp: Parser[MoveDirectionType] = ( surrComps | halt)
+    lazy val moveDirs = ( movNor | movSouth | movEast | movWest )
+    def movNor: Parser[MoveDirectionType] = 'N' ^^^ MoveNorth
+    def movSouth: Parser[MoveDirectionType] = 'S' ^^^ MoveSouth
+    def movEast: Parser[MoveDirectionType] = 'E' ^^^ MoveEast
+    def movWest: Parser[MoveDirectionType] = 'W' ^^^ MoveWest
+    
+    lazy val movComp: Parser[MoveDirectionType] = ( moveDirs | halt)
     
     def halt: Parser[MoveDirectionType] = 'X' ^^^ Halt
 }

@@ -49,9 +49,9 @@ case object Wildcard extends SurroundingComponentType
 case class MoveDirection(dir: MoveDirectionType) extends PicobotProgram
 
 trait MoveDirectionType extends PicobotProgram
-case object MoveNorth extends MoveDirectionType with SurroundingComponentType
-case object MoveSouth extends MoveDirectionType with SurroundingComponentType
-case object MoveEast extends MoveDirectionType with SurroundingComponentType
-case object MoveWest extends MoveDirectionType with SurroundingComponentType
+case object MoveNorth extends MoveDirectionType
+case object MoveSouth extends MoveDirectionType
+case object MoveEast extends MoveDirectionType
+case object MoveWest extends MoveDirectionType
 case object Halt extends MoveDirectionType
 
