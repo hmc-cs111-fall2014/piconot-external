@@ -1,0 +1,19 @@
+inState goingNorth
+    surroundedBy xE** then move N newState goingNorth
+    surroundedBy *x** then move E newState goingEast
+    surroundedBy NE** then move X newState goingWest 
+
+inState goingEast
+    surroundedBy *x*S then move E newState goingEast
+    surroundedBy ***x then move S newState goingSouth
+    surroundedBy *E*S then move X newState goingNorth 
+
+inState goingSouth
+    surroundedBy **Wx then move S newState goingSouth
+    surroundedBy **x* then move W newState goingWest
+    surroundedBy **WS then move X newState goingEast 
+
+inState goingWest
+    surroundedBy N*x* then move W newState goingWest
+    surroundedBy x*** then move N newState goingNorth
+    surroundedBy N*W* then move X newState goingSouth
