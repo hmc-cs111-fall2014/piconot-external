@@ -1,4 +1,4 @@
-Actual grammar
+Ideal Grammar
 Author: Emily Blatter, Nick Carter, Sisi Cheng
 
 ================================================================================

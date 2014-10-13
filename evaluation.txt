@@ -4,7 +4,8 @@ Author: Emily Blatter, Nick Carter, Sisi Cheng
 ================================================================================
 ================================================================================
 
-TODO On a scale of 1-10, we had to change our ideal syntax by ___. TODO
+Our finished actual grammar is identical to our ideal grammar. On a scale from
+1~10, we changed our ideal grammar by 1.
 
 == 10/4 ==
 
@@ -88,6 +89,20 @@ actually returned. We tried to do testing by running the picobots and seeing
 if they functioned as expected, but we are having trouble getting them to
 run. We’ve posted something on Piazza and hope there is something helpful by
 tomorrow.
+
+== 10/12 ==
+
+We have been trying different things based on Prof. Ben’s response to try and 
+get it to run. We are still getting lots of errors because JFXApp is confusing.
+
+It’s been a while. Nothing is still working. We tried a lot of things.
+
+Picobot is now running correctly. We modified SemanticTests and now tests are
+also working. How to parse commandline arguments in a JFXApp was very un-
+intuitive. We never would have figured it out without Prof. Ben's help.
+
+We added support for QED as well as Greek letter to our parser.
+
 
 
 

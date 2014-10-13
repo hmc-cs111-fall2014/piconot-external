@@ -24,24 +24,24 @@ import picolib.semantics.TextDisplay
 import picolib.semantics.West
 
 class PicobotSemanticsTests extends FunSpec
-    with LangInterpretMatchers[AST, Picobot] {
-  override val parser = PicoParser.apply _
-  override val interpreter = eval _
+    with LangInterpretMatchers[AST, List[Rule]] {
+  override val parser = PicoParser.tester _
+  override val interpreter = evalRules _
   
   describe("A picobot program") {
 
     it("should be able to interpret a single rule") { 
-    	program("Proof. Recall empty.txt. Consider 1 = 2.") should compute (    	    
-    	    new Picobot(Maze("resources/empty.txt"), List(
+    	program("Consider 1 = 2.") should compute (    	    
+    	    List(
     	        picolib.semantics.Rule(State("1"),
     	        	Surroundings(Anything, Anything, Anything, Anything),
     	        	StayHere,
-    	        	State("2")))))
+    	        	State("2"))))
     }
 
     it("should be able to interpret multiple rules") {
-    	program("Proof. Recall empty.txt. Consider 1 + n = 2, 1 + n - w * s = 2, 2 = 2 - w.") should compute (
-    		new Picobot(Maze("resources/empty.txt"), List(
+    	program("Consider 1 + n = 2, 1 + n - w * s = 2, 2 = 2 - w.") should compute (
+    		List(
     		    picolib.semantics.Rule(State("1"),
     	        	Surroundings(Blocked, Anything, Anything, Anything),
     	        	StayHere,
@@ -53,12 +53,12 @@ class PicobotSemanticsTests extends FunSpec
     	        picolib.semantics.Rule(State("2"),
     	        	Surroundings(Anything, Anything, Anything, Anything),
     	        	West,
-    	        	State("2")))))
+    	        	State("2"))))
     }	
     
     it ("can have no rules") {
-      program("Proof. Recall empty.txt. Consider.") should compute (
-          new Picobot(Maze("resources/empty.txt"), List.empty)
+      program("Consider.") should compute (
+          List.empty
       )
     }
     

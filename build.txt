@@ -1,3 +1,11 @@
-After generatring a jar with `sbt package`, the program can be executed by:
+Build instructions
+Author: Emily Blatter, Nick Carter, Sisi Cheng
 
-scala -cp ./target/scala-2.11/external-piconot_2.11-1.0.jar bot <parameters>
+Store the picobot program file in the directory of the repository. We provide
+emptyRules.txt and rightHandRules.txt as example program files for the empty
+and maze environment, respectively.
+
+To build and run our program, run `sbt run <program-file-name>` in the repo
+directory.
+
+
