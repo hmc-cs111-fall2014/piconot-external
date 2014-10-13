@@ -37,7 +37,7 @@ package object semantics {
     case RulesList(rules) => {
       rules.foreach(x => evalRule(x))
       object Bot extends Picobot(emptyMaze, globalRules) with TextDisplay with GUIDisplay
-      stage = Bot.mainStage;
+      val stage = Bot.mainStage;
       return 1;
     }
 
