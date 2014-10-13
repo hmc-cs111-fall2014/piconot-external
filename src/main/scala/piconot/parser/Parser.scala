@@ -8,7 +8,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
 	override val skipWhitespace = false
 	
     // parsing interface
-    def apply(s: String): ParseResult[AST] = parseAll(rule, s)
+    def apply(s: String): ParseResult[AST] = parseAll(program, s)
 
     // full program
     lazy val program: Parser[PicobotProgram] = 
