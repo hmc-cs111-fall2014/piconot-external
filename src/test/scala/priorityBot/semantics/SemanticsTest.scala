@@ -10,7 +10,7 @@ import picolib.maze.Maze
 import java.io.File
 
 class SemanticsTests extends FunSpec
-    with LangInterpretMatchers[AST, Unit] {
+    with LangInterpretMatchers[AST, Picobot] {
 
   override val parser = BotParser.apply _
   override val interpreter = eval _
