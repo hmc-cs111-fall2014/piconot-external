@@ -45,4 +45,11 @@ Then, with Prof Ben's helpful Piazza post about parameters.raw, we realized
 we didn't need to override main and impede any hope of running the JFXApp 
 properly.
 
-It now works! So excited. We still need to add some documentation.
+It now works! So excited. We still need to add some documentation. We added
+the final working grammar. It's nearly identical, we only used the * as a 
+wildcard instead of typing out Anything, and we technically accept any number
+of rules, since any but the first rule gets ignored. We also did not add the 
+option to have both F and Front as relative direction inputs, since single
+characters actually looks cleaner.
+
+Finally, we added some nicer error messages to our parser.
