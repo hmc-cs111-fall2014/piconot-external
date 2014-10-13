@@ -8,7 +8,7 @@ import GOTObot.ir.TO._
 import GOTObot.parser._
 import edu.hmc.langtools._
 
-class GOTObotParserTests extends FunSpec with LangParseMatchers[AST] {
+class GOTOParserTests extends FunSpec with LangParseMatchers[AST] {
 
   override val parser = GOTOParser.apply _
 
