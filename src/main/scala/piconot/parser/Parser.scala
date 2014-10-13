@@ -10,16 +10,17 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
 
     // expressions
     lazy val program: PackratParser[Expr] = 
-      (  state 
-      	| state~program ^^ {case state~program => Program(state, program)})
+      (state~program ^^ {case state~program => Program(state, program)}
+      |state )
+      	 
    
     //terms
     lazy val state: PackratParser[Expr] =
       number~"{"~ruleset~"}" ^^ {case num~"{"~rules~"}" => State(num,rules)}
     // factors
     lazy val ruleset: PackratParser[Expr] =
-      (rule 
-          | rule~ruleset ^^ {case rul~rs => RuleSet(rul,rs)})
+      ( rule~ruleset ^^ {case rul~rs => RuleSet(rul,rs)}
+       | rule)
       
     lazy val rule: PackratParser[Expr] = 
       walls~"->"~direction~","~number ^^ {case w~"->"~d~","~n => Rule(w,d,n)}
