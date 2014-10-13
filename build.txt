@@ -1,0 +1,8 @@
+Our version of piconot-external will not have a GUI and only uses the command line output 
+maps. To run a piconot file:
+
+1.) Compile the program using SBT
+2.) run the program. A fishy promt ><//> should appear waiting for user input 
+3.) Input the name of the txt file containing the set of piconot rules 
+    followed by the name of txt file containing the maze.
+4.) That's all!
