@@ -11,8 +11,8 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
     lazy val filename: PackratParser[String] = """[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)""".r ^^ { _.toString }
     
     lazy val program: PackratParser[Program] =
-      ("Proof."~"Recall "~filename~"."~consider ^^ 
-          {case "Proof."~"Recall "~mazename~"."~consider => Program(Declaration(mazename), consider)}
+      ("Proof."~"Recall "~filename~"."~consider~"QED" ^^ 
+          {case "Proof."~"Recall "~mazename~"."~consider~"QED" => Program(Declaration(mazename), consider)}
           )
               
     lazy val consider: PackratParser[Consider] =
@@ -45,14 +45,14 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
         )
       
     lazy val dir: PackratParser[Dir] =
-      (   "n" ^^ {case "n" => N()}
-        | "e" ^^ {case "e" => E()}
-        | "w" ^^ {case "w" => W()}
-        | "s" ^^ {case "s" => S()}
-        | "η" ^^ {case "n" => N()}
-        | "ε" ^^ {case "e" => E()}
-        | "ω" ^^ {case "w" => W()}
-        | "ς" ^^ {case "s" => S()}
+      (   "n" ^^ {case _ => N()}
+        | "e" ^^ {case _ => E()}
+        | "w" ^^ {case _ => W()}
+        | "s" ^^ {case _ => S()}
+        | "η" ^^ {case _ => N()}
+        | "ε" ^^ {case _ => E()}
+        | "ω" ^^ {case _ => W()}
+        | "ς" ^^ {case _ => S()}
       )
           
     lazy val state: PackratParser[State] = wholeNumber ^^ {s ⇒ State(s.toInt)} 
