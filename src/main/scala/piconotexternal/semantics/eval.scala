@@ -28,19 +28,18 @@ package object DSLSemantics {
   var numberOfStates = 0
   var stringToStateMap: Map[String, State] = Map[String, State]()
 
-  // FIXME placeholder NUKE THIS LATER
-  //val emptyMaze = Maze("resources" + File.separator + "empty.txt")
-
-  def eval(ast: AST, mazefile:String):Int = ast match {
+  def eval(ast: AST, mazefile:String):Picobot = ast match {
     case RulesList(rules) => {
       rules.foreach(x => evalRule(x))
+
+      //println(globalRules);
+
       val maze = Maze("resources" + File.separator + mazefile)
-      object Bot extends Picobot(maze, globalRules) with TextDisplay with GUIDisplay
-      val stage = Bot.mainStage;
-      return 1;
+      object Bot extends Picobot(maze, globalRules) with TextDisplay
+
+      Bot
     }
 
-    case _ => throw new IllegalStateException("Malformed output from parser")
   }
 
   def evalRule(ast: AST)= ast match {
