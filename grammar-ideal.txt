@@ -1,0 +1,24 @@
+Names: Chloe Calvarin and Matt Cook
+CS111 - Domain-Specific Languages
+External Piconot - Priority Bot 2.0
+
+Ideal EBNF
+
+picobot = mazeSpec, '\n', rules;
+
+mazeSpec = 'maze = "', ?name of maze file, a txt file?, '"';
+
+rules = EOF | rule, rules;
+
+rule = cardinalDirection, whitespace, '->', whitespace, relativeDirections, '\n';
+
+relativeDirections = relativeDirection, 3 * (whitepace, relativeDirection);
+
+cardinalDirection = N | E | W | S | Anything;
+
+relativeDirection = F | B | L | R | Front | Back | Left | Right;
+
+opt whitespace = {' ', '\t'};
+
+whitespace = [' ', '\t'], opt whitespace;
+

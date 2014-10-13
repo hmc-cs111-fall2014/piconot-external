@@ -1,8 +1,21 @@
 Who is the target for this design, e.g., are you assuming any knowledge on the
 part of the language users?
 
+Our target audience is people beginning to learn programming concepts. They 
+will learn to express their solutions in a limited syntax, and be forced to 
+make some minimal translation of intuitive understanding of a path to a 
+slightly abstracted set of 4 prioritized rules. We are assuming relatively 
+little. We want them to be able to use a  restricted syntax, but it's a symple 
+syntax, with relatively few variabilities. The intuition they need is similar 
+to how a person would orient themselves. First, someone figures out where 
+they are facing, then they find which way they want to go. 
+
 Why did you choose this design, i.e., why did you think it would be a good idea
 for users to express the maze-searching computation using this syntax?
+
+We think that relative-direction is more intuitive for many potential 
+solutions, such as the right-hand rule, so this design simplifies the 
+complexity of figuring out the solution.
 
 What behaviors are easier to express in your design than in Picobot’s original
 design?  If there are no such behaviors, why not?

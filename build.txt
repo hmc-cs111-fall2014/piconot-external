@@ -1,0 +1,14 @@
+How to run priobot:
+
+1. Compile the prioBot.scala file
+2. Run the prioBot with the argument of the .bot file that has the rules in 
+ the external DSL.
+3. The GUI should open up and you can be amazed!
+
+Specifically in Eclipse (ScalaIDE):
+1. Open the External Piconot project
+2. Build the project
+3. Click on the "Run" tab, go to "Run Configurations", and then go to the 
+ "arguments" tab, and type in the name of the .bot file (e.g. Empty.bot).
+4. Run prioBot.scala as a Scala Application
+5. The GUI should open and you are good to go!

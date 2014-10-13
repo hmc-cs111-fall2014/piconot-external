@@ -1,0 +1,26 @@
+
+
+phrase (maze, rules)
+
+rules : rep(rule)
+
+rule : cardinal <~ "->" ~> relativeDirections  (newline??)
+
+case class cardinal
+	N
+	E
+	W
+	S
+	AnythingElse | * or Anything
+
+
+parsed  relativeDirection
+	F or Front
+	B or Back
+	L or Left
+	R or Right
+
+relativeDirections: repN(4, relativeDirection)
+	:: Need 4! otherwise, error.
+
+
