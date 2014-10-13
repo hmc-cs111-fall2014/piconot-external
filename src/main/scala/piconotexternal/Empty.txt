@@ -1,13 +1,13 @@
-inState up
-  surroundedBy xx** then move N newState up
-  surroundedBy Nx** then move E newState down 
+in state up
+  surrounded by xx** then move N next state up
+  surrounded by Nx** then move E next state down 
 
-inState down
-  surroundedBy *x*x then move S newState down
-  surroundedBy *x*S then move X newState up
-  surroundedBy *Exx then move S newState down
-  surroundedBy xExS then move W newState goingWest 
+in state down
+  surrounded by *x*x then move S next state down
+  surrounded by *x*S then move X next state up
+  surrounded by *Exx then move S next state down
+  surrounded by xExS then move W next state goingWest 
 
-inState goingWest
-  surroundedBy **x* then move W newState goingWest
-  surroundedBy **W* then move X newState up
+in state goingWest
+  surrounded by **x* then move W next state goingWest
+  surrounded by **W* then move X next state up

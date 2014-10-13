@@ -14,7 +14,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
 
   lazy val inState:PackratParser[InState] =
     (
-      "inState"~state~rep(single) ^^ {case "inState"~state~singles => InState(state, singles)}
+      "in state"~state~rep(single) ^^ {case "in state"~state~singles => InState(state, singles)}
       | failure("instate")
     )
 
@@ -26,20 +26,20 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
 
   lazy val surroundedBy: PackratParser[SurroundedBy]=
     (
-      "surroundedBy"~news ^^ {case "surroundedBy"~news => SurroundedBy(news)}
-      | failure("surroundedby")
+      "surrounded by"~news ^^ {case "surrounded by"~news => SurroundedBy(news)}
+      | failure("surrounded by")
     )
 
   lazy val thenMove: PackratParser[ThenMove]=
     (
       "then move"~dir ^^ {case "then move"~dir => ThenMove(dir)}
-      | failure("thenmove")
+      | failure("then move")
     )
 
   lazy val newState: PackratParser[NewState]=
     (
-      "newState"~state ^^ {case "newState"~newState => NewState(newState)}
-      | failure("newstate")
+      "next state"~state ^^ {case "next state"~newState => NewState(newState)}
+      | failure("next state")
     )
 
   lazy val news: PackratParser[News] =
