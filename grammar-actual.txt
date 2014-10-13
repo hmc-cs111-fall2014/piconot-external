@@ -1,0 +1,53 @@
+Names: Ellen Hui and Mauricio Molina
+Date: October 13, 2014
+Domain Specific Languages
+Professor Ben
+
+digit = "0" | nonzero_digit ;
+
+upper = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+       | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+       | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+       | "V" | "W" | "X" | "Y" | "Z" ;
+
+lower  = "a" | "b" | "c" | "d" | "e" | "f" | "g"
+       | "h" | "i" | "j" | "k" | "l" | "m" | "n"
+       | "o" | "p" | "q" | "r" | "s" | "t" | "u"
+       | "v" | "w" | "x" | "y" | "z" ;
+
+char = digit | upper | lower
+
+
+state = char, {char}
+
+(*
+    Each direction can be a wall, "x" for nothing there, or "*" for not there.
+    The full surroundings of the picobot is composed of all four directions.
+*)
+
+symbol = "x" | "*" ;
+north = "N" | symbol ;
+east = "E" | symbol ;
+west = "W" | symbol ;
+south = "S" | symbol ;
+surroundings = north, east, west, south
+
+(*
+    Direction to move in is one of NEWS or "X" for don't move.
+*)
+_move_direction = "N" | "E" | "W" | "S" | "X" ;
+move_direction =  _move_direction 
+
+(*
+    // what it would look like:
+
+    in state stuckOnLeft
+        surrounded by NExx then move W next state confused 
+        surrounded by Nxxx then move W next state confused 
+        surrounded by xxxx then move W next state notConfused 
+    
+
+*)
+case = "surrounded by", surroundings, "then move" , moveDirection, "next state ", state"\n"
+rule = "in state ", state, case, {case} 
+actual_grammar = {rule}
