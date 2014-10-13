@@ -12,7 +12,8 @@ import picolib.semantics.{Rule => PicoRule}
 import picolib.semantics.{Surroundings => PicoSurroundings}
 import picolib.semantics.{Blocked => PicoBlocked}
 import picolib.semantics.{North => PicoNorth}
-
+import picolib.semantics.Anything;
+import picolib.semantics.Open;
 
 class PicoSemanticsTests extends FunSpec
     with LangInterpretMatchers[AST, PicoRule] {
@@ -22,7 +23,7 @@ class PicoSemanticsTests extends FunSpec
 
   describe("Proper interpretation") {
     it("should work a little") {
-	  program("0 **** -> W 0") should compute (PicoRule(PicoState("0"), PicoSurroundings(PicoBlocked, PicoBlocked, PicoBlocked, PicoBlocked), PicoNorth, PicoState("0")))
+	  program("0 NE*x -> W 0") should compute (PicoRule(PicoState("0"), PicoSurroundings(PicoBlocked, PicoBlocked, Anything, Open), PicoNorth, PicoState("0")))
     }
   }
 

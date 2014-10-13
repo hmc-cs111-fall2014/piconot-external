@@ -78,6 +78,26 @@ class PiconotParserTests extends FunSpec with LangParseMatchers[AST] {
       parseAs (Rule(State(0), Surroundings(Free, Free, Free, Free), MoveDirection(MoveNorth), State(0)))
     }
     
+    it("should parse a program with multiple rules") {
+      program ("0 xxxx -> N 0\n1 NEWS -> N 1") should
+      parseAs (
+          Rules(
+              List(
+                  Rule(State(0), 
+                       Surroundings(Free, Free, Free, Free), 
+                       MoveDirection(MoveNorth), 
+                       State(0)) 
+                       /*,
+                  Rule(State(1), 
+                       Surroundings(Blocked, Blocked, Blocked, Blocked), 
+                       MoveDirection(MoveNorth), 
+                       State(1))
+                       */
+            	  )
+                )
+              )
+    }
+    
     /*it ("should parse a rule with mixed surroundings") {
       program("0 NE*x -> N 0") should
       parseAs (Rule(State(0), Surroundings('N', 'E', '*', 'x'), MoveDirection('N'), State(0)))
