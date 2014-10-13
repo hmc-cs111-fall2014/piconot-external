@@ -24,82 +24,81 @@ package object semantics {
 
   // Extract strings from parts of the AST
   def extractString(ast: AST): String =
-      ast match {
-        case PicoString(string) => string
-        case PicoModifier(string) => string
-        case PicoAbility(string) => string
-        case PicoDirection(string) => string
-        case PicoSurroundings(north, east, west, south) =>
-          extractString(north) + extractString(east) + extractString(west) + extractString(south)
-        case GetStreet(street: Command, modifier) => getState(extractString(street) + extractString(modifier))
-        case GetFinalDirection(direction) => extractString(direction)
-        case GetFinalStreet(streetWithModifier) => extractString(streetWithModifier)
-      }
-
-    // Recursively determines the given surroundings
-    def extractSurroundings(ast:AST): PicoSurroundings = ast match {
-      case PicoSurroundings(north, east, west, south) => PicoSurroundings(north, east, west, south)
-      case GetSurroundings(ability, direction, surroundings) =>
-        var newSurroundings = extractSurroundings(surroundings)
-        if (direction == PicoDirection("uptown"))
-          PicoSurroundings(ability,
-            newSurroundings.east,
-            newSurroundings.west,
-            newSurroundings.south)
-        else if (direction == PicoDirection("outta town"))
-          PicoSurroundings(newSurroundings.north,
-            ability,
-            newSurroundings.west,
-            newSurroundings.south)
-        else if (direction == PicoDirection("into town"))
-          PicoSurroundings(newSurroundings.north,
-            newSurroundings.east,
-            ability,
-            newSurroundings.south)
-        else
-          PicoSurroundings(newSurroundings.north,
-            newSurroundings.east,
-            newSurroundings.west,
-            ability)
+    ast match {
+      case PicoString(string) => string
+      case PicoModifier(string) => string
+      case PicoAbility(string) => string
+      case PicoDirection(string) => string
+      case PicoSurroundings(north, east, west, south) =>
+        extractString(north) + extractString(east) + extractString(west) + extractString(south)
+      case GetStreet(street: Command, modifier) => getState(extractString(street) + extractString(modifier))
+      case GetFinalDirection(direction) => extractString(direction)
+      case GetFinalStreet(streetWithModifier) => extractString(streetWithModifier)
     }
 
-    // Fetches the state number from the mapping
-    def getState(street: String): String = {
-      mapState.get(street) match {
-        case Some(stateNum: String) => stateNum
-        case None => {
-          mapState = mapState + (street -> mapState.size.toString)
-          getState(street)
-        }
-      }
-    }
+  // Recursively determines the given surroundings
+  def extractSurroundings(ast:AST): PicoSurroundings = ast match {
+    case PicoSurroundings(north, east, west, south) => PicoSurroundings(north, east, west, south)
+    case GetSurroundings(ability, direction, surroundings) =>
+      var newSurroundings = extractSurroundings(surroundings)
+      if (direction == PicoDirection("uptown"))
+        PicoSurroundings(ability,
+          newSurroundings.east,
+          newSurroundings.west,
+          newSurroundings.south)
+      else if (direction == PicoDirection("outta town"))
+        PicoSurroundings(newSurroundings.north,
+          ability,
+          newSurroundings.west,
+          newSurroundings.south)
+      else if (direction == PicoDirection("into town"))
+        PicoSurroundings(newSurroundings.north,
+          newSurroundings.east,
+          ability,
+          newSurroundings.south)
+      else
+        PicoSurroundings(newSurroundings.north,
+          newSurroundings.east,
+          newSurroundings.west,
+          ability)
+  }
 
-    // Returns if a direction is blocked or not
-    def getRelDes(action: String): RelativeDescription = {
-      action match {
-        case "can" => Open // can
-        case "cannot" => Blocked // can't
-        case "null" => Anything // default
+  // Fetches the state number from the mapping
+  def getState(street: String): String = {
+    mapState.get(street) match {
+      case Some(stateNum: String) => stateNum
+      case None => {
+        mapState = mapState + (street -> mapState.size.toString)
+        getState(street)
       }
     }
+  }
 
-    // Transforms the AST representation of surroundings to the object Surroundings
-    def getSurroundings(surroundings: PicoSurroundings): Surroundings = {
-      Surroundings(getRelDes(extractString(surroundings.north)),
-        getRelDes(extractString(surroundings.east)),
-        getRelDes(extractString(surroundings.west)),
-        getRelDes(extractString(surroundings.south)))
+  // Returns if a direction is blocked or not
+  def getRelDes(action: String): RelativeDescription = {
+    action match {
+      case "can" => Open // can
+      case "cannot" => Blocked // can't
+      case "null" => Anything // default
     }
+  }
 
-    // Gets the direction based on the predefined strings
-    def getDirection(direction: String): MoveDirection = {
-      direction match {
-        case "uptown" => North
-        case "outta town" => East
-        case "into town" => West
-        case "downtown" => South
-        case _ => StayHere
-      }
+  // Transforms the AST representation of surroundings to the object Surroundings
+  def getSurroundings(surroundings: PicoSurroundings): Surroundings = {
+    Surroundings(getRelDes(extractString(surroundings.north)),
+      getRelDes(extractString(surroundings.east)),
+      getRelDes(extractString(surroundings.west)),
+      getRelDes(extractString(surroundings.south)))
+  }
+
+  // Gets the direction based on the predefined strings
+  def getDirection(direction: String): MoveDirection = {
+    direction match {
+      case "uptown" => North
+      case "outta town" => East
+      case "into town" => West
+      case "downtown" => South
+      case _ => StayHere
     }
-
+  }
 }
