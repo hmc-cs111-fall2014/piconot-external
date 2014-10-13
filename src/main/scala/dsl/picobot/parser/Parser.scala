@@ -7,6 +7,7 @@ object PicoParser extends JavaTokenParsers with PackratParsers {
 
     // parsing interface
     def apply(s: String): ParseResult[AST] = parseAll(program, s)
+    def tester(s: String): ParseResult[AST] = parseAll(consider, s)
        
     lazy val filename: PackratParser[String] = """[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)""".r ^^ { _.toString }
     

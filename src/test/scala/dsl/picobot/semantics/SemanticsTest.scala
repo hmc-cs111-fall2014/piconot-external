@@ -25,7 +25,7 @@ import picolib.semantics.West
 
 class PicobotSemanticsTests extends FunSpec
     with LangInterpretMatchers[AST, List[Rule]] {
-  override val parser = PicoParser.apply _
+  override val parser = PicoParser.tester _
   override val interpreter = evalRules _
   
   describe("A picobot program") {
