@@ -8,6 +8,7 @@ import piconot._
 // Basic Building Blocks
 import picolib.maze.Maze
 import java.io.File
+import picolib.semantics.Picobot
 import picolib.semantics.{State => PicoState}
 import picolib.semantics.{Rule => PicoRule}
 import picolib.semantics.{Surroundings => PicoSurroundings}
@@ -21,7 +22,6 @@ import picolib.semantics.{South => PicoSouth}
 import picolib.semantics.{StayHere => PicoHalt}
 
 // Surrounding Components
-import picolib.semantics.Picobot
 import picolib.semantics.{RelativeDescription => PicoDescription}
 import picolib.semantics.{Blocked => PicoBlocked}
 import picolib.semantics.{Anything => PicoAnything};
@@ -36,6 +36,7 @@ package object semantics {
   
 //  def wrap(maze: Maze, l: List[PicoRule]): Picobot = object a extends Picbot(maze, l)
   
+
   def translateRulesList(rules: List[Rule]): List[PicoRule] = 
     rules map (r => translateRule(r)) // let's get functional, ^functional^
     
