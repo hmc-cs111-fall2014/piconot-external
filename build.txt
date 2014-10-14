@@ -1,0 +1,5 @@
+To run programs in our language you simply use sbt where
+the first argument is the text file describing the bot and the
+second argument describes the maze. For example,
+
+sbt "run rightHand.txt maze.txt"
