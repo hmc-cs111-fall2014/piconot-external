@@ -1,3 +1,6 @@
 We decided to start by simply making states integers, in order to simplify the approach.
 We plan to add back in the ability to name states using strings once the rest
 of the external DSL is functional.
+Our next issue was with whitespace. Since the parser seems happy to strip whitespace,
+we decided not to make it mandatory that users put whitespace into their programs.
+If they really want to stare at garbage, they can I suppose.
