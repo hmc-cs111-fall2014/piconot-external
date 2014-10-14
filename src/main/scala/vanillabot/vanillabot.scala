@@ -11,7 +11,6 @@ import semantics.checks._
 
 object VanillaBot extends JFXApp {
 
-  //def main(args: Array[String]) {
     val args = parameters.raw
     
     // Error handling: did the user pass two arguments?
