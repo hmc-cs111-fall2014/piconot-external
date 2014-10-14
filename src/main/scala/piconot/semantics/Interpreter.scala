@@ -1,17 +1,72 @@
 package piconot
-
 import piconot.ir._
+import picolib.maze.Maze
+import picolib.semantics.Anything
+import picolib.semantics.Blocked
+import picolib.semantics.East
+import picolib.semantics.GUIDisplay
+import picolib.semantics.North
+import picolib.semantics.Open
+import picolib.semantics.Picobot
+import picolib.semantics.Rule
+import picolib.semantics.South
+import picolib.semantics.State
+import picolib.semantics.Surroundings
+import picolib.semantics.TextDisplay
+import picolib.semantics.West
+import picolib.semantics.MoveDirection
+import scala.collection.mutable.MutableList
 
 package object semantics {
-  def eval(ast: AST): Unit = ast match {
-    case Num(i) ⇒ print(i)
-    case Program(first, rest) ⇒ {eval(first); eval(rest)}
-    case State(number, ruleset) => {eval(number); eval(ruleset)}
-    case RuleSet(first, rest) => {eval(first); eval(rest)}
-    // case Rule(w,d,n) => addRule(eval(w), eval(d), eval(n))
-    case Rule(w,d,n) => {eval(w); eval(d); eval(n)}
-    case Walls(n,e,w,s) => {eval(n); eval(e); eval(w); eval(s)}
-    case Wall(expr) => print(expr)
-    case Direction(expr) => print(expr)
+  
+  var returnList: List[Rule] = List();
+  
+  def eval(ast: AST, rules:MutableList[Rule], currentState: Int): Unit = ast match {
+    case extProgram(first, rest) ⇒ {eval(first,rules, 0); eval(rest,rules, 0)}
+    case extState(number, ruleset) => {eval(ruleset, rules, numEval(number))}
+    case extRuleSet(first, rest) => {eval(first,rules, 0); eval(rest,rules, 0)}
+    case extRule(w,d,n) => {rules += ruleEval(currentState,w,d,n)}
+    
+    
+    /*
+    case extWall(expr) => {expr match {
+      case "*" => Anything
+      case "X" => Blocked
+      case "_" => Open
+    }}
+    
+    case extDirection(expr) => {expr match {
+      case "N" => North
+      case "E" => East
+      case "W" => West
+      case "S" => South
+    }}
+    * 
+    */
+  }
+  
+  def ruleEval(currentState: Int, walls: AST, direction: AST, newState: AST): Rule = {
+    Rule(State(currentState.toString), wallsEval(walls), directionEval(direction), State(numEval(newState).toString))
+  }
+  def numEval(ast: AST): Int = ast match {
+     case extNum(i) ⇒ i
+  }
+  def wallEval(ast: AST): picolib.semantics.RelativeDescription = ast match {
+    case extWall(expr) => {expr match {
+      case "*" => Anything
+      case "X" => Blocked
+      case "_" => Open
+    }}
+  }
+  def wallsEval(ast: AST) : picolib.semantics.Surroundings = ast match {
+    case extWalls(n,e,w,s) => {Surroundings(wallEval(n),wallEval(e),wallEval(w),wallEval(s))}
+  }
+  def directionEval(ast: AST): picolib.semantics.MoveDirection = ast match {
+    case extDirection(expr) => {expr match {
+      case "N" => North
+      case "E" => East
+      case "W" => West
+      case "S" => South
+    }}
   }
 }
