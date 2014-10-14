@@ -9,6 +9,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
 	
     // parsing interface
     def apply(s: String): ParseResult[AST] = parseAll(program, s)
+    
+    def applyForRules(s: String): ParseResult[Rules] = parseAll(rulesList, s)
 
     // full program
     lazy val program: Parser[PicobotProgram] = 
@@ -16,10 +18,10 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
        filename~"\n"~rulesList ^^ {case f~"\n"~l => Program(f, l) }
       )
       
-      lazy val rulesList:Parser[Rules] =
-        (
-            repsep(rule, "\n") ^^ {case list1 => Rules(list1)}
-            )
+    lazy val rulesList:Parser[Rules] =
+      (
+       repsep(rule, "\n") ^^ {case list1 => Rules(list1)}
+      )
     
     lazy val filename: Parser[String] = (ident ^^ {s => s.toString + ".txt"} )
     // rule

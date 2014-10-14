@@ -29,16 +29,11 @@ import picolib.semantics.{Open => PicoOpen};
 
 package object semantics {
   def eval(ast: AST): Picobot = ast match {
-    case Program(filename, rules) ⇒ new Picobot(Maze("resources" + File.separator + filename), translateRulesList(rules.rulesList ))
-    //case _ => println("error")  	
-  }
-  
-  
-//  def wrap(maze: Maze, l: List[PicoRule]): Picobot = object a extends Picbot(maze, l)
-  
+    case Program(filename, rules) ⇒ new Picobot(Maze("resources" + File.separator + filename), translateRulesList(rules))
+  }  
 
-  def translateRulesList(rules: List[Rule]): List[PicoRule] = 
-    rules map (r => translateRule(r)) // let's get functional, ^functional^
+  def translateRulesList(rules: Rules): List[PicoRule] = 
+    rules.rulesList map (r => translateRule(r)) // let's get functional, ^functional^
     
   def translateRule(rule: Rule): PicoRule = rule match {
     case Rule(state1, surr, mov, state2) ⇒ 
