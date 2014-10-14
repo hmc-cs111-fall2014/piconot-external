@@ -22,17 +22,15 @@ import picolib.semantics.StayHere
 import picolib.semantics.RelativeDescription
 import scala.collection.mutable.MutableList
 
-package object semantics extends JFXApp {
-  def eval(ast: AST) = ast match {
+package object semantics {
+  def eval(program: Program): Picobot = program match {
     case Program(states, mazeName) => runProgram(states, mazeName)
   }
   
-  def runProgram(states: List[State], mazeName: String) = {
+  def runProgram(states: List[State], mazeName: String): Picobot = {
     val rules = generateRules(states)
     val maze = Maze("resources" + File.separator + mazeName)
-    object MazeBot extends Picobot(maze, rules)
-        with TextDisplay with GUIDisplay
-    val stage = MazeBot.mainStage
+    return new Picobot(maze, rules)
   }
   
   def generateRules(states: List[State]): List[PLRule] = {

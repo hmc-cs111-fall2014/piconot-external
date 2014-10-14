@@ -6,10 +6,10 @@ import piconot.ir._
 object PiconotParser extends JavaTokenParsers with PackratParsers {
 
     // parsing interface
-    def apply(s: String): ParseResult[AST] = parseAll(program, s)
+    def apply(s: String): ParseResult[Program] = parseAll(program, s)
 
     // expressions
-    lazy val program: PackratParser[AST] =
+    lazy val program: PackratParser[Program] =
       rep1(state)~"RUN MAZE:"~"""[a-zA-Z0-9\._]+""".r ^^ {case states~_~mazeName => Program(states, mazeName)}
     
     lazy val state: PackratParser[State] = 
