@@ -1,0 +1,13 @@
+# 
+Alejandro Frias and Tyler Marklyn
+10/13/2014
+solves empty.txt
+#
+
+get to corner:
+    Face up. Go all the way forwards. Go all the way left.
+    Do fill.
+
+fill:
+    Go all the way backwards. Go all the way forwards. Go right once. 
+    Do fill.

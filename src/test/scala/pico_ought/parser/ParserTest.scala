@@ -60,13 +60,12 @@ class PicoOughtParserTests extends FunSpec with LangParseMatchers[AST] {
                                                  RIGHTWARDS -> Blocked))))
         }
 
-        // TODO: decide on 'to the right/left' vs 'right/left'
-        // it("Should parse Go all the way <dir>") {
-        //     program("Go all the way forwards.") should parseAs ( Go(FORWARDS, Some(Map(FORWARDS -> Open))) )
-        //     program("Go all the way to the right.") should parseAs ( Go(RIGHTWARDS, Some(Map(RIGHTWARDS -> Open))) )
-        //     program("Go all the way backwards.") should parseAs ( Go(BACKWARDS, Some(Map(BACKWARDS -> Open))) )
-        //     program("Go all the way to the left.") should parseAs ( Go(LEFTWARDS, Some(Map(LEFTWARDS -> Open))) )
-        // }
+        it("Should parse Go all the way <dir>") {
+            program("Go all the way forwards.") should parseAs ( Go(FORWARDS, Some(Map(FORWARDS -> Open))) )
+            program("Go all the way right.") should parseAs ( Go(RIGHTWARDS, Some(Map(RIGHTWARDS -> Open))) )
+            program("Go all the way backwards.") should parseAs ( Go(BACKWARDS, Some(Map(BACKWARDS -> Open))) )
+            program("Go all the way left.") should parseAs ( Go(LEFTWARDS, Some(Map(LEFTWARDS -> Open))) )
+        }
     }
 
     describe("A Program") {
@@ -119,6 +118,8 @@ class PicoOughtParserTests extends FunSpec with LangParseMatchers[AST] {
                   Program(List(Section("start", List( Turn(R), Do("end") )),
                                Section("end", List( Go(FORWARDS, None), Do("start") )))) )
         }
+
+
     }
 
     describe("Programs with If commands") {
@@ -141,5 +142,22 @@ class PicoOughtParserTests extends FunSpec with LangParseMatchers[AST] {
             program("start: If wall on right then do nothing.") should not (parse)
         }
     }
+
+    describe("Programs with  comments") {
+        it("Should ignore comments (# <comment> #") {
+            program("""
+                # The start #
+                start:
+                    Turn right. # Do start. not! # Do end.
+                end:
+                    Go forwards once. Do start.
+                """) should parseAs (
+                  Program(List(Section("start", List( Turn(R), Do("end") )),
+                               Section("end", List( Go(FORWARDS, None), Do("start") )))) )
+
+        }
+
+    }
+
 
 }

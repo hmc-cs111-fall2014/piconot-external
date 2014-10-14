@@ -56,6 +56,11 @@ class NumSemanticsTests extends FunSpec
           genGo(LEFTWARDS, Some(Map(BACKWARDS -> Open, LEFTWARDS -> Blocked))))
     }
 
+    it("Generates rules for go all the way <dir>") {
+        program("Go all the way forwards.") should compute (
+          genGo(FORWARDS, Some(Map(FORWARDS -> Open))))
+    }
+
   }
 
   describe("If <condition>, then <command>") {

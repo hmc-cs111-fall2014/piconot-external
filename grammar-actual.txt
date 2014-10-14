@@ -1,0 +1,44 @@
+new line = ? end of line character(s) ?;
+
+space char = " " | new line;
+comment = "#", { ? all characters ? - "#" }, "#";
+
+space = { comment | space char }
+
+non-space char = ? all characters ? - space - ":" - "#" - end command;
+char = non-space char | space;
+
+end command = ".", space;
+
+face direction = "up" | "down" | "left" | "right";
+turn direction = "left" | "right" | "around";
+go direction = "forwards", "backwards", "left", "right";
+
+condition object = "open" | "wall";
+condition direction = "in front" | "behind" | "on left" | "on right";
+condition part = condition object, space, condition direction, {"and", space, condition part};
+go condition = ("while", space, condition part) | "once";
+
+label = non-space char { char };
+
+face word = "Face" | "face";
+turn word = "Turn" | "turn";
+go word = "Go" | "go";
+do word = "Do" | "do";
+
+face = face word, space, face direction;
+turn = turn word, space, turn direction;
+go = (go word, space, go direction, space, go condition) | 
+     (go word, space, "all the way", space, go direction);
+do = do word, space, label;
+
+command = (face | turn | go | do), end command;
+
+if word = "If" | "if"
+if = if word, space, condition part, space, ",", space, "then", space, command;
+
+statement = command | if;
+
+section = label, ":", space, { statement };
+
+program = { space }, { section };

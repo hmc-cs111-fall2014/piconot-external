@@ -1,0 +1,19 @@
+We didn't implement until conditional. It is completely syntactic sugar for while that we didn't allocate time to implement.
+
+We simplified how comments are done for ease of implementation and 
+to enforce prettier code. Comments are just text between two # and 
+count as a space (so that they can be placed anywhere except within 
+a key word).
+
+To make if's read better we put a comma before the then:
+  If <cond>, then <command>.
+Implementing if was interesting since an if command is actually two 
+separate commands at the AST level.
+
+Any invalid command is a valid label, so the only possible failure 
+message that we can give is that a : was expected because the 
+improper command looks like a section declaration that is missing a :. 
+
+Throughout we found our internal DSL to be very useful sugar for writing
+the interpreter (and tests).
+

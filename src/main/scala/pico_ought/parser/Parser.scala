@@ -7,12 +7,16 @@ import pico_ought.ir._
 
 object PicoOughtParser extends JavaTokenParsers with PackratParsers with RegexParsers {
 
+    // Ignores comments of the form: # <comment> #
+    override val whiteSpace = """([\s\n\t]|#[^#]*#)+""".r
+
     // parsing interface
     def apply(s: String): ParseResult[AST] = parseAll(program, s)
 
     lazy val program: PackratParser[AST] =
     (     (section*) ^^ {case s => Program(s.toList)}
       ||| non_if_command // Just for testing purposes, we allow parsing of a single command
+       | failure("Not valid program.") 
         )
 
     lazy val section: PackratParser[Section] = 
@@ -62,6 +66,11 @@ object PicoOughtParser extends JavaTokenParsers with PackratParsers with RegexPa
                     case "right"~"while"~cond     => Go(RIGHTWARDS, Some(cond))
                     case "backwards"~"while"~cond => Go(BACKWARDS,  Some(cond))
                     case "left"~"while"~cond      => Go(LEFTWARDS,  Some(cond)) }
+      | go_word~"all"~"the"~"way"~>go_dir ^^ {
+                    case "forwards"  => Go(FORWARDS,   Some(Map(FORWARDS -> Open)))
+                    case "right"     => Go(RIGHTWARDS, Some(Map(RIGHTWARDS -> Open)))
+                    case "backwards" => Go(BACKWARDS,  Some(Map(BACKWARDS -> Open)))
+                    case "left"      => Go(LEFTWARDS,  Some(Map(LEFTWARDS -> Open))) }
         )
     
     lazy val condition: PackratParser[Map[Int, RelativeDescription]] = 
@@ -93,5 +102,5 @@ object PicoOughtParser extends JavaTokenParsers with PackratParsers with RegexPa
     def go_dir: Parser[String] = ("forwards" | "right" | "backwards" | "left") 
     def do_word: Parser[String] = ("Do" | "do")
     def if_word: Parser[String] = ("If" | "if")
-    def label: Parser[String] = """[^#\.,:][^#\.,:\n]*""".r
+    def label: Parser[String] = """[^#\.:\n]+""".r
 }

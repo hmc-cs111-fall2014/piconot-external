@@ -30,7 +30,7 @@ do word = "Do" | "do";
 face = face word, space, face direction;
 turn = turn word, space, turn direction;
 go = (go word, space, go direction, space, go condition) | (go word, space, "all the way", space, go direction);
-do = "Do", space, label;
+do = do word, space, label;
 
 command = (face | turn | go | do), end command;
 

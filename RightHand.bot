@@ -1,0 +1,14 @@
+# 
+Alejandro Frias and Tyler Marklyn
+10/13/2014
+solves maze.txt
+#
+
+
+right hand rule:
+    Go forwards while open in front and wall on right. If open on right, 
+    then do turn right and go forwards once. Turn left. Do right hand rule.
+
+turn right and go forwards once:
+    Turn right. Go forwards once. Do right hand rule.
+    

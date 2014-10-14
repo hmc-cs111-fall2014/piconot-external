@@ -1,0 +1,4 @@
+To run:
+sbt "run <bot_file> <map_file>"
+
+e.g. sbt "run Empty.bot empty.txt"
