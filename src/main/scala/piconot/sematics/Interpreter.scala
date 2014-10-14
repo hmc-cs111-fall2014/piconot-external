@@ -62,7 +62,9 @@ package object semantics {
   def getRelativeDescription(direction: PLMoveDirection, 
 		  					 freeDirectionValues: List[PLMoveDirection],
 		  					 blockedDirectionValues: List[PLMoveDirection]): RelativeDescription = {
-    if (freeDirectionValues.contains(direction)) {
+    if (freeDirectionValues.contains(direction) && blockedDirectionValues.contains(direction)) {
+      throw new Exception("A direction cannot be both free and blocked.")
+    } else if (freeDirectionValues.contains(direction)) {
       Open
     } else if (blockedDirectionValues.contains(direction)) {
       Blocked
