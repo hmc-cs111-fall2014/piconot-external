@@ -36,7 +36,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
       ("*" ^^ {in => extWall(in)}
       |"_" ^^ {in => extWall(in)}
       |"X" ^^ {in => extWall(in)}
-      |error("Expected a wall character."))
+      |error("Expected a wall character"))
       
      lazy val direction: PackratParser[Expr] =
        ("N" ^^ {in => extDirection(in)}
