@@ -91,7 +91,7 @@ class PiconotParserTests extends FunSpec with LangParseMatchers[AST] {
     
     it("should parse a program with multiple rules") {
       program ("abc\n0 xxxx -> N 0\n1 NEWS -> N 1") should
-      parseAs (Program("abc", 
+       parseAs (Program("abc", 
           Rules(
               List(
                   Rule(State(0), 
@@ -108,7 +108,7 @@ class PiconotParserTests extends FunSpec with LangParseMatchers[AST] {
                 )
               )
               
-              )
+              ) 
     }
     
     /*it ("should parse a rule with mixed surroundings") {

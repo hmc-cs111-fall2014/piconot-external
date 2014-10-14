@@ -32,12 +32,12 @@ import picolib.semantics.{Open => PicoOpen};
 class PicoSemanticsTests extends FunSpec
     with LangInterpretMatchers[AST, Picobot] {
 
-  override val parser = PiconotParser.apply _
-  override val interpreter = eval _
+  override val parser = PiconotParser.apply _ // 
+  override val interpreter = eval _ // function that takes  List[Rule] and returns a List[Picobot]
 
   describe("Proper interpretation") {
     it("should compute rules with all surroundings blocked") {
-	  program("empty.txt\n0 NEWS -> W 0") should 
+	  program("empty\n0 NEWS -> W 0") should 
 	  compute ( new Picobot(
 	      Maze("resources" + File.separator + "empty.txt"),
 	      List(

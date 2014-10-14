@@ -21,7 +21,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
             repsep(rule, "\n") ^^ {case list1 => Rules(list1)}
             )
     
-    lazy val filename: Parser[String] = (ident ^^ {s => s.toString} )
+    lazy val filename: Parser[String] = (ident ^^ {s => s.toString + ".txt"} )
     // rule
     lazy val rule: PackratParser[Rule] = 
       (
