@@ -57,5 +57,41 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
     }
 
   }
+  
+  describe("A program") {
+    
+    it("Is multiple states") {
+      program("0{**** -> N, 1} 1{**** -> S, 0}") should parseAs(
+          extProgram(
+            extState(
+              extNum(0),
+              extRule(
+                extWalls(
+                  extWall("*"),
+                  extWall("*"),
+                  extWall("*"),
+                  extWall("*")
+                ),
+                extDirection("N"),
+                extNum(1)
+              )
+            ),
+            extState(
+              extNum(1),
+              extRule(
+                extWalls(
+                  extWall("*"),
+                  extWall("*"),
+                  extWall("*"),
+                  extWall("*")
+                ),
+                extDirection("S"),
+                extNum(0)
+              )
+            )
+          ))
+    }
+    
+  }
 
 }
