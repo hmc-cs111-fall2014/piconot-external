@@ -13,10 +13,11 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
   describe("A state") {
 
     it("can have just one rule") {
-      program("0{**** -> N, 0}") should parseAs (  extState(
+      program("0{**** -> N, 0}") should parseAs (extState(
     		  								       extNum(0),
     		  								         extRule(
-    		  								           extWalls(extWall("*"),
+    		  								           extWalls(
+    		  								             extWall("*"),
     		  								             extWall("*"),
     		  								             extWall("*"),
     		  								             extWall("*")
@@ -25,6 +26,34 @@ class ParserTest extends FunSpec with LangParseMatchers[AST] {
     		  								           extNum(0)
     		  								         )
     		  								       ))
+    }
+    
+    it("can have multiple rules") {
+      program("0{**** -> N, 0  X*** -> E, 0}") should parseAs( extState(
+    		  												     extNum(0),
+    		  												       extRuleSet(
+    		  												         extRule(
+    		  												           extWalls(
+    		  												             extWall("*"),
+    		  												             extWall("*"),
+    		  												             extWall("*"),
+    		  												             extWall("*")
+    		  												           ),
+    		  												           extDirection("N"),
+    		  												           extNum(0)
+    		  												         ),
+    		  												         extRule(
+    		  												           extWalls(
+    		  												             extWall("X"),
+    		  												             extWall("*"),
+    		  												             extWall("*"),
+    		  												             extWall("*")
+    		  												           ),
+    		  												           extDirection("E"),
+    		  												           extNum(0)
+    		  												         )
+    		  												       )
+    		  												       ))
     }
 
   }
