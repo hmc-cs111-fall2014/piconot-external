@@ -29,9 +29,10 @@ object Piconot extends App {
   var rules: MutableList[Rule] = MutableList(); 
   PiconotParser(Source.fromFile(picobot_file).mkString) match {
       case PiconotParser.Success(t, _) ⇒ 
-      {eval(t,rules, 0)}
+      {eval(t,rules, -1)}
       case e: PiconotParser.NoSuccess  ⇒ println(e)
 	}
+  print(rules.toList)
   val maze = Maze("resources" + File.separator + maze_file)
   val app = new Run(rules.toList, maze)
   app.main(Array())

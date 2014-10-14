@@ -22,9 +22,9 @@ package object semantics {
   var returnList: List[Rule] = List();
   
   def eval(ast: AST, rules:MutableList[Rule], currentState: Int): Unit = ast match {
-    case extProgram(first, rest) ⇒ {eval(first,rules, 0); eval(rest,rules, 0)}
+    case extProgram(first, rest) ⇒ {eval(first,rules, -1); eval(rest,rules, -1)}
     case extState(number, ruleset) => {eval(ruleset, rules, numEval(number))}
-    case extRuleSet(first, rest) => {eval(first,rules, 0); eval(rest,rules, 0)}
+    case extRuleSet(first, rest) => {eval(first,rules, currentState); eval(rest,rules, currentState)}
     case extRule(w,d,n) => {rules += ruleEval(currentState,w,d,n)}
     
     
