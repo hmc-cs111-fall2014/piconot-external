@@ -1,0 +1,28 @@
+Paul Dapolito & Jean Sung - Domain-Specific Languages
+Build and Run Instructions 
+
+In order to build and run our file, you must have sbt tools installed.
+1) Download the repository as a zip file
+2) Run "sbt eclipse" in the repository 
+3) Use sbut "run Empty.bot" and "run RightHand.bot" to run the sample programs
+that are provided.
+4) If you want to create new programs (e.g. example.bot)
+	a) specify the filename of the maze (assumed to be a txt file) at the top 
+	of the .bot file
+	b) rules are separated by newlines, in the original Picobot syntax 
+
+
+Experimental instructions. There is a jar file in directory of the repository. 
+
+Try: path-to-jar-file Main bot-file
+
+where 
+path-to-jar-file is /target/scala-2.11/external-piconot_2.11-1.0.jar
+bot-file is the name of the .bot file that holds the program 
+
+Main the name of the class with the main function that deals with command line 
+arguments. 
+
+We are only backing the Build and Run Instructions, try the Experimental 
+Instructions at your own risk! 
+
