@@ -40,9 +40,7 @@ class PicoSemanticsTests extends FunSpec
 	  program("empty.txt\n0 NEWS -> W 0") should 
 	  compute ( new Picobot(
 	      Maze("resources" + File.separator + "empty.txt"),
-	      List(
-	          PicoRule(PicoState("0"), PicoSurroundings(PicoBlocked, PicoBlocked, PicoBlocked, PicoBlocked), PicoWest, PicoState("0"))
-	          )
+	      List(PicoRule(PicoState("0"), PicoSurroundings(PicoBlocked, PicoBlocked, PicoBlocked, PicoBlocked), PicoWest, PicoState("0")))
 	          )
 	          )
 	          
