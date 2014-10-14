@@ -1,16 +1,28 @@
 Who is the target for this design, e.g., are you assuming any knowledge on the
 part of the language users?
 
+The target for our external piconot design are introductory computer science students. Given that we used the original piconot syntax, which doesn't assume any knowledge on the part of the language user, our design also does not assume any knowledge on the part of the language user.
+
 Why did you choose this design, i.e., why did you think it would be a good idea
 for users to express the maze-searching computation using this syntax?
+
+We chose this design because we were interested in seeing how the original Picobot may have been implement from end-to-end. We figured it'd be a good syntax for users to use given that it is indeed the syntax which is currently used in Harvey Mudd's CS5 class. We also find the syntax particularly easy to understand and express in a concise format (ie. in a browser window).
 
 What behaviors are easier to express in your design than in Picobot’s original
 design?  If there are no such behaviors, why not?
 
+There are no such behaviors because we used the original Picobot syntax. Thus, all behaviors that can be expressed in the original syntax can be expressed using our interpretor. 
+
 What behaviors are more difficult to express in your design than in Picobot’s
 original design? If there are no such behaviors, why not?
+
+See above answer.
 
 On a scale of 1–10 (where 10 is “very different”), how different is your syntax
 from PicoBot’s original design?
 
+In our implementation, given that we were no longer assuming that users would be working in a browser, we require that users specify the name of the maze file at the top of their Picobot programs. This is the only difference between the syntax we implemented and the original Picobot syntax. Thus, we would say that our syntax differs from Picobot's original design by 2 on a scale of 1 to 10.
+
 Is there anything you don’t like about your design?
+
+  

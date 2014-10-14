@@ -1,0 +1,12 @@
+empty
+0 *x** -> E 0
+0 xE** -> N 1
+0 NE*x -> S 4
+1 *Ex* -> W 2
+2 **x* -> W 2
+2 x*W* -> N 3
+2 NxWx -> S 4
+3 *xW* -> E 0
+4 ***x -> S 4
+4 *xWS -> E 0
+4 x*xS -> W 4
