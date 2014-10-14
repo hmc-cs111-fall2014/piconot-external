@@ -1,0 +1,3 @@
+We decided to start by simply making states integers, in order to simplify the approach.
+We plan to add back in the ability to name states using strings once the rest
+of the external DSL is functional.

@@ -2,7 +2,7 @@
 // Here, <string> means any legal text string
 
 program: state, [“\n”, [“\n”], state]
-state: <string>, “{\n”, ruleset, “\n}”
+state: <string>, “ {\n”, ruleset, “\n}”
 ruleset: rule, [“\n”, rule]
 rule: walls, “->”, “N”|”E”|”W”|”S”, “, “, <string>
 walls: {“*”|”_”|”X”}^4
