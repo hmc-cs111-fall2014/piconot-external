@@ -105,14 +105,19 @@ DSL in `grammar-actual.txt`
 
 In the `build.txt` file provide instructions for how to build your software and
 how to run it on piconot file. A somewhat easy way to do is the following:
-
-  1. build a .jar file by running `sbt package`
-  2. run the software on a file by executing the command `path-to-jar-file name-
-  of-class-with-main-function bot-file`
-
+```
+sbt run "maze-file bot-file"
+```
 Note that for your users to run your language this way, you'll have to design
 your solution so that the `main` function takes and processes an argument that
-contains the filename of the picobot file to run.
+contains the filename of the maze file and the filename of the picobot program.
+
+Alternatively, you can build a stand-alone jar file, which users can execute:
+  1. build the stand-alone .jar file by running `sbt assembly` (note the location of the jar file that sbt generates)
+  2. run the software on a file by executing the command 
+```
+scala -cp path-to-jar-file name-of-class-with-main-function maze-file bot-file
+```
 
 ## Peer-review another team's work
 
