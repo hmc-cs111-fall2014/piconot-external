@@ -115,9 +115,9 @@ contains the filename of the maze file and the filename of the picobot program.
 Alternatively, you can build a stand-alone jar file, which users can execute:
   1. build the stand-alone .jar file by running `sbt assembly` (note the location of the jar file that sbt generates)
   2. run the software on a file by executing the command 
-  ```
-  scala -cp path-to-jar-file name-of-class-with-main-function maze-file bot-file
-  ```
+```
+scala -cp path-to-jar-file name-of-class-with-main-function maze-file bot-file
+```
 
 ## Peer-review another team's work
 
