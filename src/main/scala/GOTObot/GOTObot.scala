@@ -32,6 +32,5 @@ object GOTORunner extends JFXApp {
 		    	
 		   	GOTOBot
    		}
-
    	}
 }

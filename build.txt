@@ -1,5 +1,5 @@
-To run GOTObot, load the project in sbt then run the command:
-  run <.bot file name> <maze file name>
+To run GOTObot (using sbt):
+  sbt "run <.bot file name> <maze file name>"
 This is running the GOTORunner, and will run the specified bot
 on the specified maze. The .bot file should be specified
 relative to where you're running sbt (e.g. examples/Empty.bot).

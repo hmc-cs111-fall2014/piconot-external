@@ -1,0 +1,38 @@
+We began with our parser, though admittedly we went straight for the full
+parsing instead of doing it one bit at a time, but this was because our
+syntax is pretty simple - just a bunch of GOTO # rules. (see our AST file).
+We encountered some issues with syntactic sugar (we were trying to get
+a picobot-like syntax working, so we could write our parsed code as something
+like "* -> F 1"), but couldn't get it working so just gave up on that.
+Another issue we encountered was mistakenly including whitespace explicitly
+in our parser, which confused it, so we removed that and it worked (later
+we talked with Prof. Ben about how to properly control whitespace, but
+decided we liked the "anything goes" whitespace better; that it fits within
+our design goals).
+
+We then moved on to semantics. This was pretty simple, mostly a copy-paste
+of our internal DSL, but some slight modifications, such as taking in the
+go and to as arguments instead of doing weird object/method things.
+We faced some troubles trying to figure out how to test our semantics,
+before Prof. Ben suggested just using our internal DSL. So we copied that
+over, and it worked great.
+
+We made a simple runner that parses and evaluates a file, and that worked
+great for our valid programs. Yay!
+
+We then spent a while struggling with getting parse errors. It took a long
+time to find the Success/NoSuccess model. Also, because that's happening
+within the JFXApp, the message gets a bit buried when a parse error is given,
+but our error message is in there at least. It's not ideal, but luckily it's
+pretty easy to figure out our syntax, so hopefully users would not encounter
+many errors.
+
+On a scale from 1-10, we changed our syntax 3.
+Changes:
+- Numbers are any number, not just 0-999. We tried to make the parser enforce
+this but decided it was taking too much effort for the value.
+- Whitespace within the program became optional. As discussed above, we 
+somewhat like this change and know how we could prevent it.
+- At least 1 whitespace char is required at the end. Something is going
+on with the parser that it fails if this isn't there, and we couldn't
+figure out why.
