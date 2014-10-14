@@ -1,0 +1,11 @@
+To run our Piconot, create a file in our new syntax and place it in the
+resources directory of the project. Then, from the command line, cd into
+the root of the project. From there, run the following command:
+	sbt "run FILE_NAME"
+
+So, for example, if you have placed an "Empty.bot" file in the resources
+directory, the command to run that program would be the following:
+	sbt "run Empty.bot"
+
+Once you run this command, a new window should pop up with the maze. Just
+click "Start" at the top to watch Piconot in action!
