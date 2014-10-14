@@ -29,9 +29,9 @@ discussed in class.
      - Include at least two example programs
        - [X] `Empty.bot`
        - [X] `RightHand.bot`
-     - [ ] Provide instructions for how to run piconot on a file in `build.txt`
-     - [ ] Describe your implementation process in `evaluation.txt`
-     - [ ] Formally specify your final syntax in `grammar-final.txt`
+     - [X] Provide instructions for how to run piconot on a file in `build.txt`
+     - [X] Describe your implementation process in `evaluation.txt`
+     - [X] Formally specify your final syntax in `grammar-final.txt`
   - [ ] Critique another team's design and implementation
 
 ## Design description and syntax specification
