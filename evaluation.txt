@@ -4,3 +4,8 @@ of the external DSL is functional.
 Our next issue was with whitespace. Since the parser seems happy to strip whitespace,
 we decided not to make it mandatory that users put whitespace into their programs.
 If they really want to stare at garbage, they can I suppose.
+Other than that, our time was filled with dealing with Parser-Combinators but not
+much actual changing of our original grammar. States being strings is not a likely
+prospect at this point.
+I would say we changed our original syntax at around a 3 out of 10, since the only major
+change was the names of the states, with a minor difference for whitespace.
