@@ -60,22 +60,22 @@ class PiconotParserTests extends FunSpec with LangParseMatchers[AST] {
     
     it ("should parse a rule with entirely wildcard surroundings") {
       program("abc\n0 **** -> S 0") should 
-      parseAs (Program("abc", Rules(List(Rule(State(0), Surroundings(Wildcard, Wildcard, Wildcard, Wildcard), MoveDirection(MoveSouth), State(0))))))
+      parseAs (Program("abc.txt", Rules(List(Rule(State(0), Surroundings(Wildcard, Wildcard, Wildcard, Wildcard), MoveDirection(MoveSouth), State(0))))))
     }
     
     it ("should parse a rule with a halt statement") {
       program("abc\n0 NE*x -> X 1") should
-      parseAs (Program("abc", Rules(List(Rule(State(0), Surroundings(Blocked, Blocked, Wildcard, Free), MoveDirection(Halt), State(1))))))
+      parseAs (Program("abc.txt", Rules(List(Rule(State(0), Surroundings(Blocked, Blocked, Wildcard, Free), MoveDirection(Halt), State(1))))))
     }
     
     it ("should parse a rule with all surroundings blocked") {
       program("abc\n0 NEWS -> S 1") should
-      parseAs (Program("abc", Rules(List(Rule(State(0), Surroundings(Blocked, Blocked, Blocked, Blocked), MoveDirection(MoveSouth), State(1))))))
+      parseAs (Program("abc.txt", Rules(List(Rule(State(0), Surroundings(Blocked, Blocked, Blocked, Blocked), MoveDirection(MoveSouth), State(1))))))
     }
     
     it ("should parse a rule with all surroundings free ") {
       program("abc\n0 xxxx -> N 0") should
-      parseAs (Program("abc", 
+      parseAs (Program("abc.txt", 
           Rules(
               List(
                   Rule(State(0), 
@@ -91,7 +91,7 @@ class PiconotParserTests extends FunSpec with LangParseMatchers[AST] {
     
     it("should parse a program with multiple rules") {
       program ("abc\n0 xxxx -> N 0\n1 NEWS -> N 1") should
-       parseAs (Program("abc", 
+       parseAs (Program("abc.txt", 
           Rules(
               List(
                   Rule(State(0), 

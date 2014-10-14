@@ -46,8 +46,8 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
     lazy val surrComp: Parser[SurroundingComponentType] = 
       ( free | wildcard )
       
-    def free: Parser[SurroundingComponentType] = 'x' ^^^ Free
-    def wildcard: Parser[SurroundingComponentType] = '*' ^^^ Wildcard
+    def free: Parser[SurroundingComponentType] = 'x' ^^^ Free | failure("Not valid")
+    def wildcard: Parser[SurroundingComponentType] = '*' ^^^ Wildcard | failure("Not valid")
     
     lazy val surrCompNorth: Parser[SurroundingComponentType] = ( surrComp | north )
     lazy val surrCompEast: Parser[SurroundingComponentType] = ( surrComp | east )
