@@ -1,0 +1,9 @@
+program = {command}, whitespace, {whitespace} ;
+wall_check = "Go" | "G0" | "GO" ;
+action = "To" | "T0" | "TO" ;
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+whitespace = "\n" | " " | "\t" | "\cr" | "\lf" ;
+command = {whitespace}, wall_check, {whitespace},  action, {whitespace}, {digit} ;
+
+Yes, whitespace is optional, with the exception that there must be at least one
+whitespace character at the end of the bot file (i.e. a trailing newline is ideal).
