@@ -1,0 +1,8 @@
+// We ignore whitespace entirely
+// {0-99} means any string representing a number 0 through 99
+
+program: state, [state]
+state: {0-99}, “{“, ruleset, “}”
+ruleset: rule, [rule]
+rule: walls, “->”, “N”|”E”|”W”|”S”, “,“, {0-99}
+walls: {“*”|”_”|”X”}^4
