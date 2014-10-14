@@ -11,3 +11,5 @@ libraryDependencies ++=
        "org.scalafx" % "scalafx_2.11" % "8.0.5-R5" )
 
 unmanagedClasspath in (Compile, runMain) += baseDirectory.value / "resources"
+
+scalacOptions += "-deprecation"

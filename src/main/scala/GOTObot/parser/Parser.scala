@@ -16,8 +16,8 @@ object GOTOParser extends JavaTokenParsers with PackratParsers {
 
     // rule
     lazy val rule: PackratParser[GOTORule] = (
-      go~to~number ^^ {case g~t~n ⇒ GOTORule(g,t,n)}
-      | failure("hi")
+      go~to~number ^^ {case g~t~n ⇒ GOTORule(g,t,n)} 
+      | err("Expected rules of form \"G[oO0]T[oO0] [#]\"")
     )
 
     // go
