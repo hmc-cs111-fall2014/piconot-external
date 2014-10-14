@@ -1,0 +1,50 @@
+Team 4: Christine Schubert & Michael Culhane
+Piconot-External Work Diary
+
+--------------------------------------------
+
+Our original syntax idea was:
+
+# This state represents Picobot in situation A.
+STATE 0:
+	FREE DIRECTIONS: N, S
+	BLOCKED DIRECTIONS: E, W
+	MOVE DIRECTION: N
+	NEW STATE: 0
+
+	FREE DIRECTIONS: E
+	BLOCKED DIRECTIONS: W, N
+	MOVE DIRECTION: X
+	NEW STATE: 1
+
+This is our ideal syntax from the Piconot assignment.
+
+--------------------------------------------
+
+From our experience with the Piconot assignment, we realized that the user
+needs some way to specify which maze they would like to run their program on.
+To account for this, we decided to add a "RUN MAZE:" construct to a Piconot
+program. We also decided (in the interest of not muddying up the parsing) to
+forego comments in our syntax. This produces the following syntax:
+
+STATE 0:
+	FREE DIRECTIONS: N, S
+	BLOCKED DIRECTIONS: E, W
+	MOVE DIRECTION: N
+	NEW STATE: 0
+
+	FREE DIRECTIONS: E
+	BLOCKED DIRECTIONS: W, N
+	MOVE DIRECTION: X
+	NEW STATE: 1
+
+RUN MAZE: maze.txt
+
+--------------------------------------------
+
+On a scale of 1 to 10, the amount by which we had to change our grammar is
+about a 3. We added the "RUN MAZE" command to allow the user to specify the
+maze of interest, and we also removed comments to simplify our implementation.
+Otherwise, though, our implementation is completely faithful to our original
+grammar (and, in fact, some of our tests use our initial examples of what a
+program in our language might look like).

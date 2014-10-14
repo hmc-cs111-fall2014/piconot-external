@@ -1,0 +1,68 @@
+Team 4: Michael Culhane and Christine Schubert
+
+Because we have chosen to implement our ideal grammar from the Piconot
+assignment, this grammar is identical to grammar-ideal.txt from that
+assignment.
+
+Formally specify the syntax for your design, using EBNF:
+
+letter = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+       | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+       | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+       | "V" | "W" | "X" | "Y" | "Z" | "a" | "b" 
+       | "c" | "d" | "e" | "f" | "g" | "h" | "i" 
+       | "j" | "k" | "l" | "m" | "n" | "o" | "p" 
+       | "q" | "r" | "s" | "t" | "u" | "v" | "w" 
+       | "x" | "y" | "z ;
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+
+symbol = "!" | "@" | "#" | "$" | "%" | "^" | "&" | "*" | "(" | ")" | "_" 
+       | "-" | "+" | "=" | "{" | "[" | "}" | "]" | "|" | "\" | ":" | ";" 
+       | "<" | "," | ">" | "." | "?" | "/" | "'" | """ | "`" | "~" | " " ;
+
+stateNumber = { "0" } , digit, [ digit ] ;
+
+direction = "N" | "E" | "W" | "S"  ;
+
+moveDirection = direction | "X" ;
+
+directions = whiteSpace | direction | [ direction, ", ", directions ];
+
+whiteSpace = { " " } ;
+
+rule = "\tFREE DIRECTIONS: ", directions,
+	   "\n\tBLOCKED DIRECTIONS: ", directions,
+	   "\n\tMOVE DIRECTION: ", whiteSpace, moveDirection,
+	   "\nt\tNEW STATE: ", stateNumber, "\n\n" ;
+
+stateRules = "STATE ", stateNumber, ":\n", { rule } ;
+
+program = { stateRules }, [ "\n", program ] ;
+
+
+-----------------------------------
+The grammar is designed to generate programs like the one below:
+-----------------------------------
+
+STATE 0:
+	FREE DIRECTIONS: N, S
+	BLOCKED DIRECTIONS: E, W
+	MOVE DIRECTION: N
+	NEW STATE: 0
+
+	FREE DIRECTIONS: E
+	BLOCKED DIRECTIONS: W, N
+	MOVE DIRECTION: X
+	NEW STATE: 1
+
+STATE 1:
+	FREE DIRECTIONS: N, S
+	BLOCKED DIRECTIONS: E, W
+	MOVE DIRECTION: N
+	NEW STATE: 0
+
+	FREE DIRECTIONS: E
+	BLOCKED DIRECTIONS: W, N
+	MOVE DIRECTION: E
+	NEW STATE: 1
