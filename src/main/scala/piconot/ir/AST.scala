@@ -31,8 +31,9 @@ package piconot.ir
 sealed abstract class AST
 sealed abstract class PicobotProgram extends AST
 
-// rule and rules
-case class Rules(abc: List[Rule]) extends PicobotProgram
+// top level program pieces
+case class Program(filename: String, rules: Rules) extends PicobotProgram
+case class Rules(rulesList: List[Rule]) extends PicobotProgram
 case class Rule(state1: State,  surr: Surroundings, mov: MoveDirection, state2: State) extends PicobotProgram
 
 // state class with error checking

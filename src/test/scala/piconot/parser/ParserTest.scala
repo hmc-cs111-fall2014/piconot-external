@@ -56,26 +56,26 @@ class PiconotParserTests extends FunSpec with LangParseMatchers[AST] {
     }
   }
   
-  describe("Complete Rule") {
+  describe("Complete Rule, using sample file name") {
     
     it ("should parse a rule with entirely wildcard surroundings") {
-      program("0 **** -> S 0") should 
-      parseAs (Rules(List(Rule(State(0), Surroundings(Wildcard, Wildcard, Wildcard, Wildcard), MoveDirection(MoveSouth), State(0)))))
+      program("abc\n0 **** -> S 0") should 
+      parseAs (Program("abc", Rules(List(Rule(State(0), Surroundings(Wildcard, Wildcard, Wildcard, Wildcard), MoveDirection(MoveSouth), State(0))))))
     }
     
     it ("should parse a rule with a halt statement") {
-      program("0 NE*x -> X 1") should
-      parseAs (Rules(List(Rule(State(0), Surroundings(Blocked, Blocked, Wildcard, Free), MoveDirection(Halt), State(1)))))
+      program("abc\n0 NE*x -> X 1") should
+      parseAs (Program("abc", Rules(List(Rule(State(0), Surroundings(Blocked, Blocked, Wildcard, Free), MoveDirection(Halt), State(1))))))
     }
     
     it ("should parse a rule with all surroundings blocked") {
-      program("0 NEWS -> S 1") should
-      parseAs (Rules(List(Rule(State(0), Surroundings(Blocked, Blocked, Blocked, Blocked), MoveDirection(MoveSouth), State(1)))))
+      program("abc\n0 NEWS -> S 1") should
+      parseAs (Program("abc", Rules(List(Rule(State(0), Surroundings(Blocked, Blocked, Blocked, Blocked), MoveDirection(MoveSouth), State(1))))))
     }
     
-    it ("should parse a rule with all surroundings free") {
-      program("0 xxxx -> N 0") should
-      parseAs (
+    it ("should parse a rule with all surroundings free ") {
+      program("abc\n0 xxxx -> N 0") should
+      parseAs (Program("abc", 
           Rules(
               List(
                   Rule(State(0), 
@@ -86,11 +86,12 @@ class PiconotParserTests extends FunSpec with LangParseMatchers[AST] {
                   )
               )
             )
+           )
     }
     
     it("should parse a program with multiple rules") {
-      program ("0 xxxx -> N 0\n1 NEWS -> N 1") should
-      parseAs (
+      program ("abc\n0 xxxx -> N 0\n1 NEWS -> N 1") should
+      parseAs (Program("abc", 
           Rules(
               List(
                   Rule(State(0), 
@@ -105,6 +106,8 @@ class PiconotParserTests extends FunSpec with LangParseMatchers[AST] {
                        
             	  )
                 )
+              )
+              
               )
     }
     

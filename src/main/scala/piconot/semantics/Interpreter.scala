@@ -29,8 +29,8 @@ import picolib.semantics.{Open => PicoOpen};
 
 package object semantics {
   def eval(ast: AST): Picobot = ast match {
-    case Rules(l) ⇒
-    	("hello", translateRulesList(l))
+    case Program(filename, rules) ⇒ new Picobot(Maze("resources" + File.separator + filename), translateRulesList(rules.rulesList ))
+    	
   }
   
   def translateRulesList(rules: List[Rule]): List[PicoRule] = 

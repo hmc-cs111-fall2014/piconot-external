@@ -11,12 +11,12 @@ import piconot.semantics.semantics._
 
 // Grab and rename elements of the picolib
 // Basic Building Blocks
-import picolib.semantics.Picobot
-import picolib.maze.Maze
-import java.io.File
 import picolib.semantics.{State => PicoState}
 import picolib.semantics.{Rule => PicoRule}
 import picolib.semantics.{Surroundings => PicoSurroundings}
+import picolib.semantics.Picobot
+import java.io.File
+import picolib.maze.Maze
 
 // Directions
 import picolib.semantics.{North => PicoNorth}
@@ -30,23 +30,31 @@ import picolib.semantics.{Anything => PicoAnything};
 import picolib.semantics.{Open => PicoOpen};
 
 class PicoSemanticsTests extends FunSpec
-    with LangInterpretMatchers[AST, (String, List[PicoRule])] {
+    with LangInterpretMatchers[AST, Picobot] {
 
   override val parser = PiconotParser.apply _
   override val interpreter = eval _
 
-  describe("Proper interpretation of single rules") {
-    it("should compute a rule with all surroundings blocked") {
-	  program("0 NEWS -> W 0") should compute (("hello", List(PicoRule(PicoState("0"), PicoSurroundings(PicoBlocked, PicoBlocked, PicoBlocked, PicoBlocked), PicoWest, PicoState("0")))))
+  describe("Proper interpretation") {
+    it("should compute rules with all surroundings blocked") {
+	  program("empty.txt\n0 NEWS -> W 0") should 
+	  compute ( new Picobot(
+	      Maze("resources" + File.separator + "empty.txt"),
+	      List(
+	          PicoRule(PicoState("0"), PicoSurroundings(PicoBlocked, PicoBlocked, PicoBlocked, PicoBlocked), PicoWest, PicoState("0"))
+	          )
+	          )
+	          )
+	          
     }
     
-    /*it("should compute a rule with all surroundings open") {
-      program("0 xxxx -> N 1") should compute (PicoRule(PicoState("0"), PicoSurroundings(PicoOpen, PicoOpen, PicoOpen, PicoOpen), PicoNorth, PicoState("1")))
-    }
-    
-    it("should compute a rule with mixed surroundings") {
-      program("2 xEx* -> S 1") should compute (PicoRule(PicoState("2"), PicoSurroundings(PicoOpen, PicoBlocked, PicoOpen, PicoAnything), PicoSouth, PicoState("1")))
-    }*/
+//    it("should compute rules with all surroundings open") {
+//      program("0 xxxx -> N 1") should compute (PicoRule(PicoState("0"), PicoSurroundings(PicoOpen, PicoOpen, PicoOpen, PicoOpen), PicoNorth, PicoState("1")))
+//    }
+//    
+//    it("should compute rules with mixed surroundings") {
+//      program("2 xEx* -> S 1") should compute (PicoRule(PicoState("2"), PicoSurroundings(PicoOpen, PicoBlocked, PicoOpen, PicoAnything), PicoSouth, PicoState("1")))
+//    }
   }
 
 }
