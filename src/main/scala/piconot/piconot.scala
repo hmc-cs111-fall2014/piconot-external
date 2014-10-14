@@ -23,17 +23,16 @@ import scala.collection.mutable.MutableList
 
 object Piconot extends App {
   //override def prompt = "> "
-  //val picobot_file = args(0)
-  //val maze_file = args(1)
-  //val parse_rules = PiconotParser(Source.fromFile(picobot_file).mkString)
+  val picobot_file = args(0)
+  val maze_file = args(1)
 
   var rules: MutableList[Rule] = MutableList(); 
-  PiconotParser("0 { **** -> N , 0}") match {
+  PiconotParser(Source.fromFile(picobot_file).mkString) match {
       case PiconotParser.Success(t, _) ⇒ 
       {eval(t,rules, 0)}
       case e: PiconotParser.NoSuccess  ⇒ println(e)
 	}
-  val maze = Maze("resources" + File.separator + "empty.txt")
+  val maze = Maze("resources" + File.separator + maze_file)
   val app = new Run(rules.toList, maze)
   app.main(Array())
 
