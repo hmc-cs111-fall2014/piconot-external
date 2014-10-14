@@ -1,0 +1,17 @@
+maze
+0 Nx** -> E 0
+0 x*** -> N 1
+0 NE*x -> S 3
+0 NExS -> W 2
+1 x*W* -> N 1
+1 **x* -> W 2
+1 NxW* -> E 0
+1 NEWx -> S 3
+2 **xS -> W 2
+2 ***x -> S 3
+2 x*WS -> N 1
+2 NxWS -> E 0
+3 *E*x -> S 3
+3 *x** -> E 0
+3 *ExS -> W 2
+3 xEWS -> N 1
