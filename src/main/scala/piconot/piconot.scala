@@ -18,8 +18,7 @@ object Piconot extends JFXApp {
 
   val args = parameters.raw
   if (args.length < 2) {
-    print("Too few arguments. Please include a bot file and a maze file.")
-    System.exit(1)
+    throw PiconotException("Too few arguments. Please include a bot file and a maze file.")
   }
   val botFile = args(0)
   val mazeFile = args(1)
