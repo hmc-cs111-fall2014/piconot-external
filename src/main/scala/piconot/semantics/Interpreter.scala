@@ -6,6 +6,8 @@ import piconot._
 
 // Import and rename picolib elements
 // Basic Building Blocks
+import picolib.maze.Maze
+import java.io.File
 import picolib.semantics.{State => PicoState}
 import picolib.semantics.{Rule => PicoRule}
 import picolib.semantics.{Surroundings => PicoSurroundings}
@@ -19,21 +21,30 @@ import picolib.semantics.{South => PicoSouth}
 import picolib.semantics.{StayHere => PicoHalt}
 
 // Surrounding Components
+import picolib.semantics.Picobot
 import picolib.semantics.{RelativeDescription => PicoDescription}
 import picolib.semantics.{Blocked => PicoBlocked}
 import picolib.semantics.{Anything => PicoAnything};
 import picolib.semantics.{Open => PicoOpen};
 
 package object semantics {
-  def eval(ast: AST): PicoRule = ast match {
+  def eval(ast: AST): (String, List[PicoRule]) = ast match {
+    case Rules(l) ⇒ 
+    	("hello", translateRulesList(l))
+  }
+  
+  def translateRulesList(rules: List[Rule]): List[PicoRule] = 
+    rules map (r => translateRule(r)) // let's get functional, functional
+    
+  def translateRule(rule: Rule): PicoRule = rule match {
     case Rule(state1, surr, mov, state2) ⇒ 
     new PicoRule(PicoState(state1.n.toString),
-    						   PicoSurroundings(translateSurrComp(surr.north), 
-    								   			translateSurrComp(surr.east), 
-    								   			translateSurrComp(surr.west), 
-    								   			translateSurrComp(surr.south)),
-    						   translateMovDir(mov.dir),
-    						   PicoState(state2.n.toString))
+        PicoSurroundings(translateSurrComp(surr.north),
+        translateSurrComp(surr.east),
+        translateSurrComp(surr.west),
+        translateSurrComp(surr.south)),
+        translateMovDir(mov.dir),
+        PicoState(state2.n.toString))
   }
   
   // translation function for surrounding components
