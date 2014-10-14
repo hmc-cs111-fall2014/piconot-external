@@ -43,6 +43,7 @@ object PiconotParser extends JavaTokenParsers with PackratParsers {
        |"E" ^^ {in => extDirection(in)} 
        |"W" ^^ {in => extDirection(in)}
        |"S" ^^ {in => extDirection(in)}
+       |"X" ^^ {in => extDirection(in)}
        |failure("Expected a direction."))
     
     // numbers

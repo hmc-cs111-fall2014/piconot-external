@@ -16,6 +16,7 @@ import picolib.semantics.TextDisplay
 import picolib.semantics.West
 import picolib.semantics.MoveDirection
 import scala.collection.mutable.MutableList
+import picolib.semantics.StayHere
 
 package object semantics {
   
@@ -67,6 +68,7 @@ package object semantics {
       case "E" => East
       case "W" => West
       case "S" => South
+      case "X" => StayHere
     }}
   }
 }
