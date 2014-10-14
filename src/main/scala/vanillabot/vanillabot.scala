@@ -70,7 +70,8 @@ object VanillaBot extends JFXApp {
    * Check for errors. If there are any print them and exit
    */
   def checkErrors(bot: Picobot): Unit = {
-    val checker = new ErrorCollector[Picobot]() with UndefinedStates with UreachableStates
+    val checker = new ErrorCollector[Picobot]() 
+        with MoveToWall with BoxedIn with UndefinedStates with UreachableStates
     checker.check(bot)
     if (!checker.errors.isEmpty) {
       checker.errors foreach println
