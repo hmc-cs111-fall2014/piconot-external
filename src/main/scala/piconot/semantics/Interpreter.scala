@@ -28,13 +28,13 @@ import picolib.semantics.{Anything => PicoAnything};
 import picolib.semantics.{Open => PicoOpen};
 
 package object semantics {
-  def eval(ast: AST): (String, List[PicoRule]) = ast match {
-    case Rules(l) ⇒ 
+  def eval(ast: AST): Picobot = ast match {
+    case Rules(l) ⇒
     	("hello", translateRulesList(l))
   }
   
   def translateRulesList(rules: List[Rule]): List[PicoRule] = 
-    rules map (r => translateRule(r)) // let's get functional, functional
+    rules map (r => translateRule(r)) // let's get functional, ^functional^
     
   def translateRule(rule: Rule): PicoRule = rule match {
     case Rule(state1, surr, mov, state2) ⇒ 
