@@ -1,0 +1,8 @@
+// A program is a series of states separated by at least one line break.
+// Here, <string> means any legal text string
+
+program: state, [“\n”, [“\n”], state]
+state: <string>, “ {\n”, ruleset, “\n}”
+ruleset: rule, [“\n”, rule]
+rule: walls, “->”, “N”|”E”|”W”|”S”, “, “, <string>
+walls: {“*”|”_”|”X”}^4
