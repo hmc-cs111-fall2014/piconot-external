@@ -31,7 +31,7 @@ discussed in class.
        - [ ] `RightHand.bot`
      - [ ] Provide instructions for how to run piconot on a file in `build.txt`
      - [ ] Describe your implementation process in `evaluation.txt`
-     - [ ] Formally specify your final syntax in `grammar-final.txt`
+     - [ ] Formally specify your final syntax in `grammar-actual.txt`
   - [ ] Critique another team's design and implementation
 
 ## Design description and syntax specification
